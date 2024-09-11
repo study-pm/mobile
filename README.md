@@ -1,6 +1,11 @@
 # Разработка мобильных приложений 2023-2024 (МДК 01.03)
 66d6b6e6d048d3735272200f
 
+- [Overview](#overview)
+  - [About this file](#about-this-file)
+  - [Project information](#project-information)
+  - [Project Structure](#project-structure)
+
 ## Overview
 
 ### About this file
