@@ -29,15 +29,17 @@ This section defines the general project's structure and provides a top-level fi
 ├──📁 assets             # Additional value files
 ├─*📁 img                # Binary graphics
 ├─*📁 res                # Static resources
+├──📁 samples            # Usage examples
 ├──📁 src                # Source code
 ├──📁 svg                # Vector graphics
 ├──📁 wiki               # Knowledge base
-├── 🗎 .gitignore          # VCS blob ignores
-├── 🗎 notes.md            # Subject information
-├── 🗎 README.md           # Project overview
-├── 🗎 related.md          # Related sources
-├─> 🗎 styles.css          # Custom stylesheet
-└─> 🗎 todos.md            # Task list
+├── 🗎 .gitignore         # VCS blob ignores
+├── 🗎 notes.md           # Subject information
+├── 🗎 README.md          # Project overview
+├── 🗎 related.md         # Related sources
+├── 🗎 SETUP.md           # Setup instructions
+├─> 🗎 styles.css         # Custom stylesheet
+└─> 🗎 todos.md           # Task list
 ```
 
 - `─` denotes an item
