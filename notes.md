@@ -10,6 +10,7 @@
   - [Примерные практические задания на экзамен](#примерные-практические-задания-на-экзамен)
 - [01. Введение](#01-введение)
   - [Коротко о GitHub](#коротко-о-github)
+  - [Подключение VCS к IntelliJ IDEA](#подключение-vcs-к-intellij-idea)
 
 ## Общее
 66df5d7ed048d373527220f7
@@ -213,3 +214,102 @@
 3 июня 2018 года Bloomberg сообщило, что Microsoft заключила соглашение о покупке GitHub. По словам одного из источников агентства, владельцы GitHub решили не выводить компанию на биржу, а продать её, так как их впечатлил глава корпорации Сатья Наделла.
 
 На следующий день Microsoft и GitHub подтвердили сделку. Её стоимость составила $7,5 млрд.
+
+### Подключение VCS к IntelliJ IDEA
+[66e1c090d048d3735272214a](https://rutube.ru/video/private/b9a41fbd9e87579966bb398b1c1e3baf/?p=hQYXvP2kkS5ONZM9CaDxHQ)
+
+1. Go *GitHub.com* and generate a new classical token with the following settings:
+
+   - [x] repo
+     - [x] repo:status
+     - [x] repo_deployment
+     - [x] public_repo
+     - [x] repo:invite
+     - [x] security_events
+   - [ ] admin:org
+     - [ ] write:org
+     - [x] read:org
+     - [ ] manage_runners:org
+   - [x] gist
+
+2. Copy and saved a newly generated token.
+2. IntelliJ IDEA: *File* > *Settings* > *Version Control* > *GitHub*. Press "+" and choose to "Log in with Token...".
+3. Add GitHub Account with the following settings:
+   - Server: *github.com*
+   - Token: *your generated GitHub token*
+4. Replace .gitignore contents with the [following](https://github.com/JetBrains/kotlin/blob/master/.gitignore):
+
+    <details>
+    <summary><b><i>.gitignore</i></b></summary>
+
+    ```
+    .DS_Store
+    .idea/shelf
+    /confluence/target
+    /dependencies/repo
+    /android.tests.dependencies
+    /dependencies/android.tests.dependencies
+    /dist
+    /local
+    /gh-pages
+    /ideaSDK
+    /clionSDK
+    /android-studio/sdk
+    out/
+    /tmp
+    /intellij
+    workspace.xml
+    *.versionsBackup
+    /idea/testData/debugger/tinyApp/classes*
+    /jps-plugin/testData/kannotator
+    /js/js.translator/testData/out/
+    /js/js.translator/testData/out-min/
+    /js/js.translator/testData/out-pir/
+    .gradle/
+    build/
+    !**/src/**/build
+    !**/test/**/build
+    *.iml
+    !**/testData/**/*.iml
+    .idea/artifacts
+    .idea/remote-targets.xml
+    .idea/libraries/Gradle*.xml
+    .idea/libraries/Maven*.xml
+    .idea/modules
+    .idea/runConfigurations/JPS_*.xml
+    .idea/runConfigurations/_JPS_*.xml
+    .idea/runConfigurations/PILL_*.xml
+    .idea/runConfigurations/_FP_*.xml
+    .idea/runConfigurations/_MT_*.xml
+    .idea/libraries
+    .idea/modules.xml
+    .idea/gradle.xml
+    .idea/compiler.xml
+    .idea/inspectionProfiles/profiles_settings.xml
+    .idea/.name
+    .idea/jarRepositories.xml
+    .idea/csv-plugin.xml
+    .idea/libraries-with-intellij-classes.xml
+    .idea/misc.xml
+    .idea/protoeditor.xml
+    .idea/uiDesigner.xml
+    node_modules/
+    .rpt2_cache/
+    local.properties
+    buildSrcTmp/
+    distTmp/
+    outTmp/
+    /test.output
+    /kotlin-native/dist
+    kotlin-ide/
+    .kotlin/
+    .teamcity/
+    ```
+
+    </details>
+
+5. Create new repository and branch from main.
+6. Do your work, commit and push to GitHub.
+7. Create pull request at GitHub.
+8. Attach GitHub pull request url at the colledge system.
+9. Merge branch to main after approval.
