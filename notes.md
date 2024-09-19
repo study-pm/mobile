@@ -11,6 +11,7 @@
 - [01. Введение](#01-введение)
   - [Коротко о GitHub](#коротко-о-github)
   - [Подключение VCS к IntelliJ IDEA](#подключение-vcs-к-intellij-idea)
+  - [Хекслет](#хекслет)
 
 ## Общее
 66df5d7ed048d373527220f7
@@ -313,3 +314,12 @@
 7. Create pull request at GitHub.
 8. Attach GitHub pull request url at the colledge system.
 9. Merge branch to main after approval.
+
+### Хекслет
+[66ec3c46d048d37352722213](https://e-learn.petrocollege.ru/mod/assign/view.php?id=345139)
+
+Зарегистрироваться при необходимости на сайте Хекслет
+
+Пройти курс [Введение в Git](https://ru.hexlet.io/courses/intro_to_git)
+
+В качестве отчета приложить архив скриншота экрана главной страницы курса с открытым меню для профиля (см. пример). Преподаватель может попросить войти на указанный ресурс с компьютера колледжа для проверки достоверности указанных сведений.
