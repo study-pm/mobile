@@ -13,6 +13,36 @@
   - [Подключение VCS к IntelliJ IDEA](#подключение-vcs-к-intellij-idea)
   - [Хекслет](#хекслет)
 - [02 Синтаксис языка. Управляющие конструкции - решение задач](#02-синтаксис-языка-управляющие-конструкции---решение-задач)
+  - [Основной синтаксис](#основной-синтаксис)
+    - [Определение имени пакета и импорт](#определение-имени-пакета-и-импорт)
+    - [Точка входа в программу](#точка-входа-в-программу)
+    - [Вывод в стандартный поток (с помощью `print()` и `println()`)](#вывод-в-стандартный-поток-с-помощью-print-и-println)
+    - [Чтение данных с консоли](#чтение-данных-с-консоли)
+    - [Переменные. Объявление переменных](#переменные-объявление-переменных)
+  - [Основные типы](#основные-типы)
+    - [Числа](#числа)
+      - [Целочисленные типы](#целочисленные-типы)
+      - [Типы с плавающей точкой](#типы-с-плавающей-точкой)
+      - [Представление чисел в JVM](#представление-чисел-в-jvm)
+      - [Символьные постоянные](#символьные-постоянные)
+      - [Явные преобразования](#явные-преобразования)
+      - [Арифметические операции](#арифметические-операции)
+        - [Деление целых чисел](#деление-целых-чисел)
+        - [Побитовые операции](#побитовые-операции)
+      - [Сравнение чисел с плавающей точкой](#сравнение-чисел-с-плавающей-точкой)
+      - [Целые беззнаковые числа](#целые-беззнаковые-числа)
+        - [Беззнаковые массивы и диапазоны](#беззнаковые-массивы-и-диапазоны)
+        - [Литералы](#литералы)
+    - [Логический тип](#логический-тип)
+    - [Символы](#символы)
+    - [Строки](#строки)
+      - [Строковые литералы](#строковые-литералы)
+      - [Строковые шаблоны](#строковые-шаблоны)
+    - [Массивы](#массивы)
+      - [Массивы примитивных типов](#массивы-примитивных-типов)
+  - [Условия и циклы](#условия-и-циклы)
+    - [Условное выражение `if`](#условное-выражение-if)
+    - [Условное выражение `when`](#условное-выражение-when)
 
 ## Общее
 66df5d7ed048d373527220f7
@@ -327,3 +357,1340 @@
 
 ## 02 Синтаксис языка. Управляющие конструкции - решение задач
 66ec3cb8d048d37352722215
+
+### Основной синтаксис
+[66ed9ed65040133e8429e165](https://e-learn.petrocollege.ru/mod/url/view.php?id=345141) https://kotlinlang.ru/docs/basic-syntax.html
+
+#### Определение имени пакета и импорт
+Имя пакета указывается в начале исходного файла, так же как и в Java.
+```kotlin
+package my.demo
+
+import java.util.*
+
+// ...
+```
+
+Но в отличие от Java, нет необходимости, чтобы структура пакетов совпадала со структурой папок: исходные файлы могут располагаться в произвольном месте на диске.
+
+См. [Пакеты](https://kotlinlang.ru/docs/packages.html).
+
+#### Точка входа в программу
+В Kotlin точкой входа в программу является функция `main`.
+```kotlin
+fun main() {
+    println("Hello world!")
+}
+```
+
+Другая форма `main` может принимать массив строк `String`.
+```kotlin
+fun main(args: Array<String>) {
+    println(args.contentToString())
+}
+```
+
+#### Вывод в стандартный поток (с помощью `print()` и `println()`)
+`print` выводит свой аргумент в стандартный поток вывода.
+```kotlin
+print("Hello ")
+print("world!")
+```
+
+`println` выводит свой аргумент и добавляет перевод строки, так что следующее, что вы выведите, появится на следующей строке.
+```kotlin
+println("Hello world!")
+println(42)
+```
+
+!!! example [Example](samples\02_Syntax\02_Output\src\Main.kt)
+```kotlin
+fun main() {
+    val testF = "1234567"
+    for (i in 0..testF.length - 1) {
+        println(testF[i])
+    }
+    println("====================")
+    for (i in 0..testF.length - 1) {
+        print(testF[i])
+    }
+}
+
+```
+
+<details>
+<summary>Output</summary>
+
+```
+1
+2
+3
+4
+5
+6
+7
+====================
+1234567
+
+Process finished with exit code 0
+```
+
+</details>
+
+
+!!! example [Example](samples\02_Syntax\03_Output\src\Main.kt)
+```kotlin
+fun main() {
+    print("Введите трехзначное число: ")
+    val testF = readln()
+    println("==============")
+    println("Простой вывод значения переменной")
+    println(testF)
+    println("Вывод переменной как части строки")
+    println("Мы ввели число - $testF")
+    println("Некорректное обращение к части строки")
+    println("Первый символ введенного числа - $testF[0]")
+    println("Обратите внимание на фигурные скобки")
+    println("Первый символ введенного числа - ${testF[0]}")
+}
+
+```
+
+<details>
+<summary>Output</summary>
+
+```
+Введите трехзначное число: 987
+==============
+Простой вывод значения переменной
+987
+Вывод переменной как части строки
+Мы ввели число - 987
+Некорректное обращение к части строки
+Первый символ введенного числа - 987[0]
+Обратите внимание на фигурные скобки
+Первый символ введенного числа - 9
+
+Process finished with exit code 0
+```
+
+</details>
+
+#### Чтение данных с консоли
+
+!!! example [Example](samples\02_Syntax\04_ConsoleInput\src\Main.kt)
+```kotlin
+fun main() {
+    print("Введите строку символов: ")
+    val testF = readln()
+    println()
+
+    for (i in 0..testF.length - 1) {
+        print(testF[i])
+    }
+}
+```
+
+<details>
+<summary>Output</summary>
+
+```
+Введите строку символов: Это строка символов
+
+Это строка символов
+Process finished with exit code 0
+
+```
+
+</details>
+
+!!! example [Example](samples\02_Syntax\05_ConsoleIO\src\Main.kt)
+```kotlin
+fun main() {
+    print("Введите строку символов: ")
+    val testF = readln()
+    println()
+
+    for (i in testF) {
+        print(i)
+    }
+}
+
+```
+
+<details>
+<summary>Output</summary>
+
+```
+Введите строку символов: Чтение символов из строки
+
+Чтение символов из строки
+Process finished with exit code 0
+
+```
+
+</details>
+
+#### Переменные. Объявление переменных
+Неизменяемые (только для чтения) локальные переменные определяются с помощью ключевого слова `val`. Присвоить им значение можно только один раз.
+```kotlin
+val a: Int = 1   // Инициализация при объявлении
+val b = 1        // Тип `Int` определен автоматически
+val c: Int       // Указывать тип обязательно, если переменная не инициализирована сразу
+c = 1            // Последующее присвоение
+```
+
+Изменяемые переменные объявляются с помощью ключевого слова `var`.
+```kotlin
+var x = 5 // Тип `Int` определен автоматически
+x += 1
+```
+
+Вы можете объявлять глобальные переменные.
+```kotlin
+val PI = 3.14
+var x = 0
+
+fun incrementX() { 
+    x += 1 
+}
+```
+
+!!! example [Example](samples\02_Syntax\01_VariableDeclaration\src\Main.kt)
+```kotlin
+fun main() {
+    // Неизменяемые (только для чтения)
+    // локальные переменные определяются
+    // с помощью ключевого слова val.
+    // Присвоить им значение можно только один раз.
+    val testC = 7
+    println(testC) // => 7
+
+    // testC = 9 // => Kotlin: Val cannot be reassigned
+
+    // Изменяемые переменные объявляются
+    // с помощью ключевого слова var.
+    var testD = "строка символов"
+    println(testD) // => строка символов
+
+    testD = "новая строка символов"
+    println(testD) // => новая строка символов
+}
+```
+
+<details>
+<summary>Output</summary>
+
+```
+7
+строка символов
+новая строка символов
+
+Process finished with exit code 0
+```
+
+</details>
+
+!!! error Error
+```kotlin
+testC = 9 // => Kotlin: Val cannot be reassigned
+```
+
+<details>
+<summary>Output</summary>
+
+```
+Kotlin: Val cannot be reassigned
+
+Process finished with exit code 0
+```
+
+</details>
+
+### Основные типы
+https://kotlinlang.ru/docs/basic-types.html
+
+В Kotlin всё является объектом, в том смысле, что пользователь может вызвать функцию или получить доступ к свойству любой переменной. Некоторые типы являются встроенными, т.к. их реализация оптимизирована, хотя для пользователя они выглядят как обычные классы. В данном разделе описываются основные типы: числа, логические переменные, символы, строки и массивы.
+
+#### Числа
+
+##### Целочисленные типы
+В Kotlin есть набор встроенных типов, которые представляют числа. Для целых чисел существует четыре типа с разными размерами и, следовательно, разными диапазонами значений.
+
+| Тип |	Размер (биты) |	Минимальное значение |	Максимальное значение |
+| --- | :--: | --: | -----------: |
+| `Byte` |	8 |	-128 |	127 |
+| `Short` |	16 |	-32768 |	32767 |
+| `Int` |	32 |	-2,147,483,648 (-2^31^) |	2,147,483,647 (2^31^ - 1) |
+| `Long` |	64 |	-9,223,372,036,854,775,808 (-2^63^) |	9,223,372,036,854,775,807 (2^63^ - 1) |
+
+Все переменные, инициализированные целыми значениями, не превышающими максимальное значение `Int`, имеют предполагаемый тип `Int`. Если начальное значение превышает это значение, то тип `Long`. Чтобы явно указать тип `Long`, добавьте после значения `L`.
+```kotlin
+val one = 1 // Int
+val threeBillion = 3000000000 // Long
+val oneLong = 1L // Long
+val oneByte: Byte = 1
+```
+
+!!! example [Example](samples\02_Syntax\06_IntegerTypes\src\Main.kt)
+```kotlin
+fun main() {
+    var testByte: Byte = 120
+    var testShort: Short = 32000
+    var testInt: Int = 957_235_455
+    var testLong: Long = 873_554_554_545_525
+    var testLongTwo: Long = 934_347_523_555L
+}
+
+```
+
+##### Типы с плавающей точкой
+Для действительных чисел в Kotlin есть типы с плавающей точкой `Float` и `Double`. Согласно стандарту IEEE 754, типы с плавающей точкой различаются своим десятичным разрядом, то есть количеством десятичных цифр, которые они могут хранить. С точки зрения IEEE 754 `Float` является одинарно точным, а `Double` обеспечивает двойную точность.
+
+| Тип    | Размер (биты) | Значимые биты | Биты экспоненты | Разряды |
+| ------ | :-----------: | :-----------: | :-------------: | :-----: |
+| `Float`  | 32            | 24            | 8               | 6-7     |
+| `Double` | 64            | 53            | 11              | 15-16   |
+
+Вы можете инициализировать переменные `Double` и `Float` числами, имеющими дробную часть. Она должна быть отделена от целой части точкой (`.`). Для переменных, инициализированных дробными числами, компилятор автоматически определяет тип `Double`.
+```kotlin
+val pi = 3.14 // Double
+// val one: Double = 1 // Ошибка: несоответствие типов
+val oneDouble = 1.0 // Double
+```
+
+Чтобы явно указать тип `Float`, добавьте после значения `f` или `F`. Если такое значение содержит более 6-7 разрядов, оно будет округлено.
+```kotlin
+val e = 2.7182818284 // Double
+val eFloat = 2.7182818284f // Float, фактическое значение 2.7182817
+```
+
+Обратите внимание, что в отличие от некоторых других языков, в Kotlin нет неявных преобразований для чисел. Например, функция с `Double` параметром может вызываться только для `Double`, но не для `Float`, `Int` или других числовых значений.
+```kotlin
+fun main() {
+    fun printDouble(d: Double) { print(d) }
+
+    val i = 1    
+    val d = 1.0
+    val f = 1.0f 
+
+    printDouble(d)
+//  printDouble(i) // Ошибка: несоответствие типов
+//  printDouble(f) // Ошибка: несоответствие типов
+}
+```
+
+Чтобы преобразовать числовые значения в различные типы, используйте [Явные преобразования](#явные-преобразования).
+
+
+!!! example [Example](samples\02_Syntax\07_Floats\src\Main.kt)
+```kotlin
+fun main() {
+    var testDouble: Double = 120.0
+    // val one: Double = 1 // Ошибка: несоответствие типов
+    // var testDoubleTwo: Double = 120 // => Kotlin: Initializer type mismatch: expected 'kotlin/Double', actual 'kotlin/Int'
+    printDouble(testDouble) // => 120.0
+
+    var testFloat: Float = 32000F
+    // var testFloatTwo: Float = 32000.7 // => Kotlin: Initializer type mismatch: expected 'kotlin/Float', actual 'kotlin/Double'
+    printDouble(testFloat) // => 32000.0
+
+    val i = 1
+    // printDouble(i) // Ошибка: несоответствие типов
+}
+
+fun printDouble(testPar: Float) {
+    println(testPar)
+}
+
+fun printDouble(testPar: Double) {
+    println(testPar)
+}
+```
+
+<details>
+<summary>Output</summary>
+
+```
+120.0
+32000.0
+
+Process finished with exit code 0
+
+```
+
+</details>
+
+##### Представление чисел в JVM
+Обычно платформа JVM хранит числа в виде примитивных типов: `int`, `double` и так далее. Если же вам необходима ссылка, которая может принимать значение `null` (например, `Int?`), то используйте обёртки. В этих случаях числа помещаются в Java классы как `Integer`, `Double` и так далее.
+
+Обратите внимание, что использование обёрток для одного и того же числа не гарантирует равенства ссылок на них.
+```kotlin
+val a: Int = 100
+val boxedA: Int? = a
+val anotherBoxedA: Int? = a
+
+val b: Int = 10000
+val boxedB: Int? = b
+val anotherBoxedB: Int? = b
+
+println(boxedA === anotherBoxedA) // true
+println(boxedB === anotherBoxedB) // false
+```
+
+Все nullable-ссылки на `a` на самом деле являются одним и тем же объектом из-за оптимизации памяти, которую JVM применяет к `Integer` между “-128” и “127”. Но `b` больше этих значений, поэтому ссылки на `b` являются разными объектами.
+
+Однако, равенство по значению сохраняется.
+```kotlin
+val b: Int = 10000
+println(b == b) // Prints 'true'
+val boxedB: Int? = b
+val anotherBoxedB: Int? = b
+println(boxedB == anotherBoxedB) // Prints 'true'
+```
+
+##### Символьные постоянные
+В языке Kotlin присутствуют следующие виды символьных постоянных (констант) для целых значений:
+
+- Десятичные числа: `123`
+  - Тип `Long` обозначается заглавной `L`: `123L`
+- Шестнадцатеричные числа: `0x0F`
+- Двоичные числа: `0b00001011`
+
+> ВНИМАНИЕ: Восьмеричные литералы не поддерживаются.
+
+Также Kotlin поддерживает числа с плавающей запятой:
+
+- Тип `Double` по умолчанию: `123.5`, `123.5e10`
+- Тип `Float` обозначается с помощью `f` или `F`: `123.5f`
+
+Вы можете использовать нижние подчеркивания, чтобы сделать числовые константы более читаемыми:
+```kotlin
+val oneMillion = 1_000_000
+val creditCardNumber = 1234_5678_9012_3456L
+val socialSecurityNumber = 999_99_9999L
+val hexBytes = 0xFF_EC_DE_5E
+val bytes = 0b11010010_01101001_10010100_10010010
+```
+
+!!! error [Error](samples\02_Syntax\08_NumericLiterals\src\Main.kt)
+```kotlin
+fun main() {
+    var testInt = 123
+    var testLong = 120L
+
+    var testHex = 0x0F
+    var testBinary = 0b00001011
+    printDouble(testBinary) // => // Ошибка: несоответствие типов
+
+    var testDoublePoint = 123.5
+    var testDoubleE = 123.5e12
+
+    var testFloat_f = 481.78f
+    var testFloat_F = 346.49F
+
+    val oneMillion = 1_000_000
+    val creditCardNumber = 1234_5678_9012_3456L
+    val socialSecurityNumber = 999_99_9999L
+    val hexBytes = 0xFF_EC_DE_5E
+    val bytes = 0b11010010_01101001_10010100_10010010
+}
+
+fun printDouble(testPar: Double) {
+    println(testPar)
+}
+```
+
+<details>
+<summary>Output</summary>
+
+```
+Kotlin: Argument type mismatch: actual type is 'kotlin/Int' but 'kotlin/Double' was expected
+
+```
+
+</details>
+
+##### Явные преобразования
+Из-за разницы в представлениях меньшие типы не являются подтипами бОльших типов. В противном случае возникли бы сложности.
+```kotlin
+// Возможный код, который на самом деле не скомпилируется:
+val a: Int? = 1 // "Обёрнутый" Int (java.lang.Integer)
+val b: Long? = a // неявное преобразование возвращает "обёрнутый" Long (java.lang.Long)
+print(b == a) // Внимание! Данное выражение выведет "false" т. к. метод equals() типа Long предполагает, что вторая часть выражения также имеет тип Long
+```
+
+Таким образом, будет утрачена не только тождественность (равенство по ссылке), но и равенство по значению.
+
+Как следствие, неявное преобразование меньших типов в большие НЕ происходит. Это значит, что мы не можем присвоить значение типа `Byte` переменной типа `Int` без явного преобразования.
+```kotlin
+val b: Byte = 1 // всё хорошо, литералы проверяются статически
+// val i: Int = b // ОШИБКА
+val i1: Int = b.toInt()
+```
+
+Каждый численный тип поддерживает следующие преобразования:
+
+- `toByte(): Byte`
+- `toShort(): Short`
+- `toInt(): Int`
+- `toLong(): Long`
+- `toFloat(): Float`
+- `toDouble(): Double`
+- `toChar(): Char`
+
+Часто необходимости в явных преобразованиях нет, поскольку тип выводится из контекста, а арифметические действия перегружаются для подходящих преобразований.
+```kotlin
+val l = 1L + 3 // Long + Int => Long
+```
+
+!!! example [Example](samples\02_Syntax\09_ExplicitConversions\src\Main.kt)
+```kotlin
+fun main() {
+    val testA = 1
+    val testB: Byte = 1
+    // println(testA == testB) // => Kotlin: Operator '==' cannot be applied to 'kotlin/Int' and 'kotlin/Byte'
+    // val testD: Int = testB // => Kotlin: Initializer type mismatch: expected 'kotlin/Int', actual 'kotlin/Byte'
+
+    val testH = testB.toInt()
+
+    println(5 / 2)      // => 2
+    println(5 / 2.0)    // => 2.5
+    println(6.0 / 2.0)  // => 3.0
+
+    val l = 1L + 3      // Long + Int => Long
+    println(l)          // => 4
+}
+```
+
+<details>
+<summary>Output</summary>
+
+```
+2
+2.5
+3.0
+4
+
+Process finished with exit code 0
+
+```
+
+</details>
+
+!!! error Error
+```kotlin
+fun main() {
+    val testA = 1
+    val testB: Byte = 1
+    println(testA == testB)
+}
+```
+
+<details>
+<summary>Output</summary>
+
+```
+Kotlin: Operator '==' cannot be applied to 'kotlin/Int' and 'kotlin/Byte'
+
+```
+
+</details>
+
+!!! error Error
+```kotlin
+fun main() {
+    val testA = 1
+    val testB: Byte = 1
+    val testD: Int = testB // => Kotlin: Initializer type mismatch: expected 'kotlin/Int', actual 'kotlin/Byte'
+}
+
+```
+
+<details>
+<summary>Output</summary>
+
+```
+Kotlin: Initializer type mismatch: expected 'kotlin/Int', actual 'kotlin/Byte'
+
+```
+
+</details>
+
+##### Арифметические операции
+Котлин поддерживает стандартный набор арифметических операций над числами: `+`, `-`, `*`, `/`, `%`. Они объявляются членами соответствующих классов.
+```kotlin
+println(1 + 2)
+println(2_500_000_000L - 1L)
+println(3.14 * 2.71)
+println(10.0 / 3)
+```
+
+Вы также можете переопределить эти операторы для пользовательских классов. См. [Перегрузка операторов](https://kotlinlang.ru/docs/operator-overloading.html) для деталей.
+
+!!! example [Example](samples\02_Syntax\10_ArithmeticOperations\src\Main.kt)
+```kotlin
+fun main() {
+    println(78 + 96)
+    println(158 - 9)
+    println(3.14 * 51)
+    println(854 / 32)
+    println(9 % 4)
+
+    for (i in 2..9) {
+        print("$i ")
+    }
+    println()
+    println(2 in -3..9)
+    println(-12 !in -3..9)
+}
+```
+
+<details>
+<summary>Output</summary>
+
+```
+174
+149
+160.14000000000001
+26
+1
+2 3 4 5 6 7 8 9 
+true
+true
+
+Process finished with exit code 0
+```
+
+</details>
+
+###### Деление целых чисел
+Деление целых чисел всегда возвращает целое число. Любая дробная часть отбрасывается.
+```kotlin
+val x = 5 / 2
+// println(x == 2.5) // ОШИБКА: Оператор '==' не может быть применен к 'Int' и 'Double'
+println(x == 2) // true
+```
+
+Это справедливо для деления любых двух целочисленных типов.
+```kotlin
+val x = 5L / 2
+println(x == 2L) // true
+```
+
+Чтобы вернуть тип с плавающей точкой, явно преобразуйте один из аргументов в тип с плавающей точкой.
+```kotlin
+val x = 5 / 2.toDouble()
+println(x == 2.5) // true
+```
+
+###### Побитовые операции
+Kotlin поддерживает обычный набор *побитовых операций* над целыми числами. Они работают на двоичном уровне непосредственно с битовыми представлениями чисел. Побитовые операции представлены функциями, которые могут быть вызваны в инфиксной форме. Они могут быть применены только к `Int` и `Long`.
+```kotlin
+val x = (1 shl 2) and 0x000FF000
+```
+
+Ниже приведён полный список битовых операций:
+
+- `shl(bits)` – сдвиг влево с учётом знака (`<<` в Java)
+- `shr(bits)` – сдвиг вправо с учётом знака (`>>` в Java)
+- `ushr(bits)` – сдвиг вправо без учёта знака (`>>>` в Java)
+- `and(bits)` – побитовое И
+- `or(bits)` – побитовое ИЛИ
+- `xor(bits)` – побитовое исключающее ИЛИ
+- `inv()` – побитовое отрицание
+
+##### Сравнение чисел с плавающей точкой
+В этом разделе обсуждаются следующие операции над числами с плавающей запятой:
+
+- Проверки на равенство: `a == b` и `a != b`
+- Операторы сравнения: `a < b`, `a > b`, `a <= b`, `a >= b`
+- Создание диапазона и проверка диапазона: `a..b`, `x in a..b`, `x !in a..b`
+
+Когда статически известно, что операнды `a` и `b` являются `Float` или `Double` или их аналогами с nullable-значением (тип объявлен или является результатом [умного приведения](https://kotlinlang.ru/docs/typecasts.html#smart-casts)), операции с числами и диапазоном, который они образуют, соответствуют стандарту [IEEE 754 для арифметики с плавающей точкой](https://en.wikipedia.org/wiki/IEEE_754).
+
+Однако для поддержки общих вариантов использования и обеспечения полного упорядочивания, когда операнды статически *не* объявлены как числа с плавающей запятой (например, `Any`, `Comparable<...>`, параметр типа), операции используют реализации `equals` и `compareTo` для `Float` и `Double`, которые не согласуются со стандартом, так что:
+
+- `NaN` считается равным самому себе
+- `NaN` считается больше, чем любой другой элемент, включая “POSITIVE_INFINITY”
+- `-0.0` считается меньше, чем `0.0`
+
+##### Целые беззнаковые числа
+В дополнение к [целочисленным типам](#целочисленные-типы), в Kotlin есть следующие типы целых беззнаковых чисел:
+
+- `UByte`: беззнаковое 8-битное целое число, в диапазоне от 0 до 255
+- `UShort`: беззнаковое 16-битное целое число, в диапазоне от 0 до 65535
+- `UInt`: беззнаковое 32-битное целое число, в диапазоне от 0 до 2^32^ - 1
+- `ULong`: беззнаковое 64-битное целое число, в диапазоне от 0 до 2^64^ - 1
+
+Беззнаковые типы поддерживают большинство операций своих знаковых аналогов.
+
+> Изменение типа с беззнакового типа на его знаковый аналог (и наоборот) является *двоично несовместимым* изменением.
+
+###### Беззнаковые массивы и диапазоны
+> Беззнаковые массивы и операции над ними находятся в стадии бета-тестирования. Они могут быть несовместимо изменены в любое время.
+
+Как и в случае с примитивами, каждому типу без знака соответствует тип массивов знаковых типов:
+
+- `UByteArray`: массив беззнаковых `byte`
+- `UShortArray`: массив беззнаковых `short`
+- `UIntArray`: массив беззнаковых `int`
+- `ULongArray`: массив беззнаковых `long`
+
+Как и целочисленные массивы со знаком, такие массивы предоставляют API, аналогичный классу `Array`, без дополнительных затрат на оборачивание.
+
+При использовании массивов без знака вы получите предупреждение, что эта функция еще не стабильна. Чтобы удалить предупреждение используйте аннотацию `@ExperimentalUnsignedTypes`. Вам решать, должны ли ваши пользователи явно соглашаться на использование вашего API, но имейте в виду, что беззнаковый массив не является стабильной функцией, поэтому API, который он использует, может быть нарушен изменениями в языке.
+
+[Диапазоны и прогрессии](https://kotlinlang.ru/docs/ranges.html) поддерживаются для `UInt` и `ULong` классами `UIntRange,UIntProgression`, `ULongRange` и `ULongProgression`. Вместе с целочисленными беззнаковыми типами эти классы стабильны.
+
+###### Литералы
+Чтобы целые беззнаковые числа было легче использовать, в Kotlin можно помечать целочисленный литерал суффиксом, указывающим на определенный беззнаковый тип (аналогично `Float` или `Long`):
+
+- `u` и `U` помечают беззнаковые литералы. Точный тип определяется на основе ожидаемого типа. Если ожидаемый тип не указан, компилятор будет использовать `UInt` или `ULong` в зависимости от размера литерала.
+
+  ```kotlin
+  val b: UByte = 1u  // UByte, есть ожидаемый тип
+  val s: UShort = 1u // UShort, есть ожидаемый тип
+  val l: ULong = 1u  // ULong, есть ожидаемый тип
+
+  val a1 = 42u // UInt: ожидаемого типа нет, константе подходит тип UInt
+  val a2 = 0xFFFF_FFFF_FFFFu // ULong: ожидаемого типа нет, тип UInt не подходит константе
+  ```
+
+- `uL` и `UL` явно помечают литерал как `unsigned long`.
+
+  ```kotlin
+  val a = 1UL // ULong, даже несмотря на то, что ожидаемого типа нет и константа вписывается в UInt
+  ```
+
+#### Логический тип
+Тип `Boolean` представляет логический тип данных и принимает два значения: `true` и `false`.
+
+При необходимости использования nullable-ссылок логические переменные оборачиваются `Boolean?`.
+
+Встроенные действия над логическими переменными включают:
+
+- `||` – ленивое логическое ИЛИ
+- `&&` – ленивое логическое И
+- `!` – отрицание
+
+```kotlin
+val myTrue: Boolean = true
+val myFalse: Boolean = false
+val boolNull: Boolean? = null
+
+println(myTrue || myFalse)
+println(myTrue && myFalse)
+println(!myTrue)
+```
+
+> В JVM: nullable-ссылки на логические объекты заключены в рамки аналогично числам.
+
+!!! example Example
+```kotlin
+fun main() {
+    val testTrue = true
+    val testFalse = false
+    val testNull: Boolean? = null
+
+    println(testTrue && testFalse)
+    println(testTrue || testFalse)
+    println(!testTrue || testFalse)
+    println(!testTrue || !testFalse)
+
+    println(2 > 5 && 9 > 0)
+}
+```
+
+<details>
+<summary>Output</summary>
+
+```
+false
+true
+false
+true
+false
+
+Process finished with exit code 0
+```
+
+</details>
+
+#### Символы
+Символы в Kotlin представлены типом `Char`. Символьные литералы заключаются в одинарные кавычки: `'1'`.
+
+Специальные символы начинаются с обратного слеша `\.` Поддерживаются следующие escape-последовательности: `\t`, `\b`, `\n`, `\r`, `\'`, `\"`, `\\` и `\$`.
+
+Для кодирования любого другого символа используйте синтаксис escape-последовательности Юникода: `'\uFF00'`.
+```kotlin
+val aChar: Char = 'a'
+
+println(aChar)
+println('\n') // выводит дополнительный символ новой строки
+println('\uFF00')
+```
+
+Если значение символьной переменной – цифра, её можно явно преобразовать в `Int` с помощью функции `digitToInt()`.
+
+> В JVM: Подобно числам, символы оборачиваются при необходимости использования nullable-ссылки. При использовании обёрток тождественность (равенство по ссылке) не сохраняется.
+
+!!! example Example
+```kotlin
+fun main() {
+    val testChar = 'N'
+    println(testChar)
+    println("Новая строка\n")
+    println("Еще одна новая строка")
+    println()
+    println("1\t2\t3\t4\t5")
+    println('9'.digitToInt())
+    // println("9".digitToInt()) // => Kotlin: Overload resolution ambiguity between candidates:
+    println('\uFF00') // => ＀
+}
+```
+
+<details>
+<summary>Output</summary>
+
+```
+N
+Новая строка
+
+Еще одна новая строка
+
+1	2	3	4	5
+9
+＀
+
+Process finished with exit code 0
+```
+
+</details>
+
+!!! error Error
+```kotlin
+println("9".digitToInt())
+```
+
+<details>
+<summary>Output</summary>
+
+```
+Kotlin: Overload resolution ambiguity between candidates: [@InlineOnly() fun println(message: Any?): Unit, @InlineOnly() fun println(message: Boolean): Unit, @InlineOnly() fun println(message: Byte): Unit, ...]
+```
+
+</details>
+
+#### Строки
+Строки в Kotlin представлены типом `String`. Как правило, строка представляет собой последовательность символов в двойных кавычках (`"`).
+```kotlin
+val str = "abcd 123"
+```
+
+Строки состоят из символов, которые могут быть получены по порядковому номеру: `s[i]`. Проход по строке выполняется циклом `for`.
+```kotlin
+for (c in str) {
+    println(c)
+}
+```
+
+Строки являются неизменяемыми. После инициализации строки вы не можете изменить ее значение или присвоить ей новое. Все операции, преобразующие строки, возвращают новый объект `String`, оставляя исходную строку неизменной.
+```kotlin
+val str = "abcd"
+println(str.uppercase()) // Создается и выводится новый объект String
+println(str) // исходная строка остается прежней
+```
+
+Для объединения строк используется оператор `+`. Это работает и для объединения строк с другими типами, если первый элемент в выражении является строкой.
+```kotlin
+val s = "abc" + 1
+println(s + "def") // abc1def
+```
+
+Обратите внимание, что в большинстве случаев использование [строковых шаблонов](#строковые-шаблоны) или обычных строк предпочтительнее объединения строк.
+
+!!! example [Example](samples\02_Syntax\12_Symbols\src\Main.kt)
+```kotlin
+fun main() {
+    var testString = "Строка символов"
+    println(testString.uppercase())
+    println(testString)
+    testString = testString.uppercase()
+    val newTestString = testString.uppercase()
+    println(newTestString)
+    testString = "Измененное значение переменной"
+    println(testString + "!!!")
+    println("${testString.substring(5, 9)}")
+}
+```
+
+<details>
+<summary>Output</summary>
+
+```
+СТРОКА СИМВОЛОВ
+Строка символов
+СТРОКА СИМВОЛОВ
+Измененное значение переменной!!!
+енно
+
+Process finished with exit code 0
+
+```
+
+</details>
+
+##### Строковые литералы
+В Kotlin представлены два типа строковых литералов:
+
+- *экранированные* строки с экранированными символами
+- *обычные* строки, которые могут содержать символы новой строки и произвольный текст
+
+Вот пример экранированной строки:
+```kotlin
+val s = "Hello, world!\n"
+```
+
+Экранирование выполняется общепринятым способом, а именно с помощью обратного слеша (`\`). Список поддерживаемых escape-последовательностей см. в разделе [Символы](#символы) выше.
+
+Обычная строка выделена тройной кавычкой (`"""`), не содержит экранированных символов, но может содержать символы новой строки и любые другие символы:
+```kotlin
+val text = """
+  for (c in "foo")
+    print(c)
+"""
+```
+
+Чтобы удалить пробелы в начале обычных строк, используйте функцию [`trimMargin()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.text/trim-margin.html).
+```kotlin
+val text = """
+    |Tell me and I forget.
+    |Teach me and I remember.
+    |Involve me and I learn.
+    |(Benjamin Franklin)
+    """.trimMargin()
+```
+
+По умолчанию `|` используется в качестве префикса поля, но вы можете выбрать другой символ и передать его в качестве параметра, например, `trimMargin(">")`.
+
+!!! example Example
+```kotlin
+fun main() {
+    val s = "Hello, world!\n"
+    println("Regular escaped string: " + s)
+
+    var text = """
+        for (c in "foo"){
+            print(c)
+        }"""
+
+    println(text + "\n")
+    println(text.trimIndent() + "\n")
+
+    text = """
+    |Tell me and I forget.
+    |Teach me and I remember.
+    |Involve me and I learn.
+    |(Benjamin Franklin)
+    """.trimMargin()
+    println(text)
+}
+
+```
+
+<details>
+<summary>Output</summary>
+
+```
+Regular escaped string: Hello, world!
+
+
+        for (c in "foo"){
+            print(c)
+        }
+
+for (c in "foo"){
+    print(c)
+}
+
+Tell me and I forget.
+Teach me and I remember.
+Involve me and I learn.
+(Benjamin Franklin)
+
+Process finished with exit code 0
+
+```
+
+</details>
+
+##### Строковые шаблоны
+Строки могут содержать *шаблонные* выражения, т.е. участки кода, которые выполняются, а полученный результат встраивается в строку. Шаблон начинается со знака доллара (`$`) и состоит либо из простого имени (например, переменной),
+```kotlin
+val i = 10
+println("i = $i") // выведет "i = 10"
+```
+
+либо из произвольного выражения в фигурных скобках.
+```kotlin
+val s = "abc"
+println("$s.length is ${s.length}") // выведет "abc.length is 3"
+```
+
+Шаблоны поддерживаются как в обычных, так и в экранированных строках. При необходимости вставить символ `$` в обычную строку (такие строки не поддерживают экранирование обратным слешом) перед любым символом, который разрешен в качестве начала идентификатора, используйте следующий синтаксис:
+```kotlin
+val price = """
+${'$'}_9.99
+"""
+```
+
+#### Массивы
+Массивы в Kotlin представлены классом `Array`, обладающим функциями `get` и `set` (которые обозначаются `[]` согласно соглашению о перегрузке операторов), и свойством `size`, а также несколькими полезными встроенными функциями.
+```kotlin
+class Array<T> private constructor() {
+    val size: Int
+    operator fun get(index: Int): T
+    operator fun set(index: Int, value: T): Unit
+
+    operator fun iterator(): Iterator<T>
+    // ...
+}
+```
+
+Для создания массива используйте функцию `arrayOf()`, которой в качестве аргумента передаются элементы массива, т.е. выполнение `arrayOf(1, 2, 3)` создаёт массив `[1, 2, 3]`. С другой стороны функция `arrayOfNulls()` может быть использована для создания массива заданного размера, заполненного значениями `null`.
+
+Также для создания массива можно использовать фабричную функцию, которая принимает размер массива и функцию, возвращающую начальное значение каждого элемента по его индексу.
+```kotlin
+// создаёт массив типа Array<String> со значениями ["0", "1", "4", "9", "16"]
+val asc = Array(5) { i -> (i * i).toString() }
+asc.forEach { println(it) }
+```
+
+Как отмечено выше, оператор `[]` используется вместо вызовов встроенных функций `get()` и `set()`.
+
+Обратите внимание: в отличие от Java массивы в Kotlin являются *инвариантными*. Это значит, что Kotlin запрещает нам присваивать массив `Array<String>` переменной типа `Array<Any>`, предотвращая таким образом возможный отказ во время исполнения (хотя вы можете использовать `Array<out Any>`, см. [Проекции типов](https://kotlinlang.ru/docs/generics.html#type-projections)).
+
+!!! example Example
+```kotlin
+fun main() {
+    var testArray = arrayOf("1", 2, true)
+    testArray.forEach { print(it.toString() + "\t") }
+    println("\n")
+    val testArrayNum = Array(5) { i -> (i * i).toString() }
+    testArrayNum.forEach { println(it) }
+    println(testArrayNum.get(3))
+    testArrayNum.set(0, "99")
+    testArrayNum.forEach { print(it + "\t") }
+}
+```
+
+<details>
+<summary>Output</summary>
+
+```
+1	2	true	
+
+0
+1
+4
+9
+16
+9
+99	1	4	9	16	
+Process finished with exit code 0
+
+```
+
+</details>
+
+##### Массивы примитивных типов
+Также в Kotlin есть особые классы для представления массивов примитивных типов без дополнительных затрат на оборачивание: `ByteArray`, `ShortArray`, `IntArray` и т.д. Данные классы не наследуют класс `Array`, хотя и обладают тем же набором методов и свойств. У каждого из них есть соответствующая фабричная функция:
+```kotlin
+val x: IntArray = intArrayOf(1, 2, 3)
+x[0] = x[1] + x[2]
+```
+
+```kotlin
+// int массив, размером 5 со значениями [0, 0, 0, 0, 0]
+val arr = IntArray(5)
+
+// инициализация элементов массива константой
+// int массив, размером 5 со значениями [42, 42, 42, 42, 42]
+val arr = IntArray(5) { 42 }
+
+// инициализация элементов массива лямбда-выражением
+// int массив, размером 5 со значениями [0, 1, 2, 3, 4] (элементы инициализированы своим индексом)
+var arr = IntArray(5) { it * 1 }
+```
+
+!!! example Example
+```kotlin
+import kotlin.math.pow
+
+fun main() {
+    val testArrayInt: IntArray = intArrayOf(1, 2, 3)
+    testArrayInt[0] = testArrayInt[1] + testArrayInt[2]
+    testArrayInt.forEach { print(it.toString() + "\t") }
+    println()
+    val testArrayInit = IntArray(5)
+    testArrayInit.forEach { print(it.toString() + "\t ") }
+    println()
+    val testArrayConst = IntArray(5) { 79 }
+    testArrayConst.forEach { print(it.toString() + "\t ") }
+    println()
+    var testArrayLambda = DoubleArray(9) { 2.0.pow(it) }
+    testArrayLambda.forEach { print(it.toString() + "\t ") }
+    println()
+}
+```
+
+<details>
+<summary>Output</summary>
+
+```
+5	2	3	
+0	 0	 0	 0	 0	 
+79	 79	 79	 79	 79	 
+1.0	 2.0	 4.0	 8.0	 16.0	 32.0	 64.0	 128.0	 256.0	 
+
+Process finished with exit code 0
+
+```
+
+</details>
+
+### Условия и циклы
+https://kotlinlang.ru/docs/control-flow.html
+
+#### Условное выражение `if`
+В языке Kotlin `if` является выражением, т.е. оно возвращает значение. Это позволяет отказаться от тернарного оператора (`условие ? условие истинно : условие ложно`), потому что обычному `if` вполне по силам его заменить.
+```kotlin
+// обычное использование
+var max = a
+if (a < b) max = b
+
+// с блоком else
+var max: Int
+if (a > b) {
+    max = a
+} else {
+    max = b
+}
+
+// в виде выражения
+val max = if (a > b) a else b
+```
+
+“Ветви” выражения `if` могут быть блоками, т.е. содержать несколько строк кода, при этом последнее выражение является значением блока:
+```kotlin
+val max = if (a > b) {
+    print("возвращаем a")
+    a
+} else {
+    print("возвращаем b")
+    b
+}
+```
+
+Если вы используете `if` в качестве выражения (например, возвращая его значение или присваивая его переменной), то использование ветки `else` является обязательным.
+
+!!! example Example
+```kotlin
+fun main() {
+    var testMax = 5
+    val testNew = (0..9).random()
+    println("testNew: $testNew")
+    if (testMax < testNew) testMax = testNew
+    println(testMax)
+
+    val testOne = (10..19).random()
+    val testTwo = (10..19).random()
+    println("testOne: $testOne, testTwo: $testTwo")
+
+    if (testOne > testTwo) {
+        println(testOne)
+    } else {
+        println(testTwo)
+    }
+
+    val testPrint = if (testOne > testTwo) {
+        print("Возвращаем testOne - ")
+        testOne
+    } else {
+        print("Возвращаем testTwo - ")
+        testTwo
+    }
+
+    println(testPrint)
+}
+```
+
+<details>
+<summary>Output</summary>
+
+```
+testNew: 7
+7
+testOne: 17, testTwo: 13
+17
+Возвращаем testOne - 17
+
+Process finished with exit code 0
+
+```
+
+</details>
+
+#### Условное выражение `when`
+`when` определяет условное выражение с несколькими “ветвями”. Оно похоже на оператор `switch`, присутствующий в C-подобных языках.
+```kotlin
+when (x) {
+    1 -> print("x == 1")
+    2 -> print("x == 2")
+    else -> { // обратите внимание на блок
+        print("x не равен ни 1, ни 2")
+    }
+}
+```
+
+`when` последовательно сравнивает свой аргумент со всеми указанными значениями, пока не выполнится какое-либо из условий ветвей.
+
+`when` можно использовать и как выражение, и как оператор. При использовании его в виде выражения значение первой ветки, удовлетворяющей условию, становится значением всего выражения. При использовании в виде оператора значения отдельных веток отбрасываются. В точности как `if`: каждая ветвь может быть блоком и её значением является значение последнего выражения блока.
+
+Значение ветки `else` вычисляется в том случае, когда ни одно из условий в других ветках не удовлетворено.
+
+Если when используется как *выражение*, то ветка else является обязательной, за исключением случаев, в которых компилятор может убедиться, что ветки покрывают все возможные значения. Так происходит, например с записями [класса `enum`](https://kotlinlang.ru/docs/enum-classes.html) и с подтипами [`sealed` (изолированных) классов](https://kotlinlang.ru/docs/sealed-classes.html).
+```kotlin
+enum class Bit {
+  ZERO, ONE
+}
+val numericValue = when (getRandomBit()) {
+    Bit.ZERO -> 0
+    Bit.ONE -> 1
+    // 'else' не требуется, потому что все случаи учтены
+}
+```
+
+В *операторах* `when` ветка `else` является обязательной в следующих условиях:
+
+- `when` имеет объект типа `Boolean`, `enum`, `sealed` или их nullable-аналоги;
+- ветки `when` не охватывают все возможные случаи для этого объекта.
+
+```kotlin
+enum class Color {
+    RED, GREEN, BLUE
+}
+
+when (getColor()) {
+    Color.RED -> println("red")
+    Color.GREEN -> println("green")
+    Color.BLUE -> println("blue")
+    // 'else' не требуется, потому что все случаи учтены
+}
+
+when (getColor()) {
+    Color.RED -> println("red") // нет веток для GREEN и BLUE
+    else -> println("not red") // 'else' обязателен
+}
+```
+
+Если для нескольких значений выполняется одно и то же действие, то условия можно перечислять в одной ветке через запятую.
+```kotlin
+when (x) {
+    0, 1 -> print("x == 0 or x == 1")
+    else -> print("otherwise")
+}
+```
+
+Помимо констант в ветках можно использовать произвольные выражения.
+```kotlin
+when (x) {
+    s.toInt() -> print("s encodes x")
+    else -> print("s does not encode x")
+}
+```
+
+Также можно проверять вхождение аргумента в [интервал](https://kotlinlang.ru/docs/ranges.html) `in` или `!in` или его наличие в коллекции:
+```kotlin
+when (x) {
+    in 1..10 -> print("x is in the range")
+    in validNumbers -> print("x is valid")
+    !in 10..20 -> print("x is outside the range")
+    else -> print("none of the above")
+}
+```
+
+Помимо этого Kotlin позволяет с помощью `is` или `!is` проверить тип аргумента. Обратите внимание, что благодаря [умным приведениям](https://kotlinlang.ru/docs/typecasts.html#smart-casts) вы можете получить доступ к методам и свойствам типа без дополнительной проверки.
+```kotlin
+fun hasPrefix(x: Any) = when(x) {
+    is String -> x.startsWith("prefix")
+    else -> false
+}
+```
+
+`when` удобно использовать вместо цепочки условий вида `if`-`else if`. При отсутствии аргумента условия работают как простые логические выражения, а тело ветки выполняется при его истинности.
+```kotlin
+when {
+    x.isOdd() -> print("x is odd")
+    y.isEven() -> print("y is even")
+    else -> print("x+y is odd")
+}
+```
+
+Можно получать переменную внутри `when` условия по следующему синтаксису:
+```kotlin
+fun Request.getBody() =
+    when (val response = executeRequest()) {
+        is Success -> response.body
+        is HttpError -> throw HttpException(response.status)
+    }
+```
+
+Такая переменная, объявленная внутри условия `when` может быть видна только внутри тела этого `when`.
+
+!!! example Example
+```kotlin
+fun main() {
+    val testRandom = (1..9).random()
+    println("testRandom: $testRandom")
+    when (testRandom) {
+        1 -> println("testRandom == 1")
+        2, 4, 6, 8 -> println("testRandom == 2 или 4 или 6 или 8")
+        else -> { // обратите внимание на блок
+            println("testRandom не равен 1 и не кратно 2")
+        }
+    }
+    val testArrayInt = IntArray(10) { it }
+    val testRandomNew = (1..30).random()
+    println("testRandomNew: $testRandomNew")
+    when (testRandomNew) {
+        in 10..20 -> println("Значение в промежутке от 10 до 20")
+        in testArrayInt -> println("Значение попадает в массив с числами от 0 до 9")
+        !in 21..25 -> println("Значение больше 25")
+        else -> println("Значение в промежутке от 21 до 25")
+    }
+    val testRem = when(testRandomNew) {
+        in 1..15 -> testRandomNew
+        else -> "Значение больше 15"
+    }
+    println(testRem)
+}
+```
+
+<details>
+<summary>Output</summary>
+
+```
+testRandom: 6
+testRandom == 2 или 4 или 6 или 8
+testRandomNew: 4
+Значение попадает в массив с числами от 0 до 9
+4
+
+Process finished with exit code 0
+
+```
+
+</details>
+
