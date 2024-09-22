@@ -5,9 +5,10 @@ fun main() {
     var text = """
         for (c in "foo"){
             print(c)
-        }""".trimMargin()
+        }"""
 
-    println(text)
+    println(text + "\n")
+    println(text.trimIndent() + "\n")
 
     text = """
     |Tell me and I forget.
