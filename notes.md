@@ -2056,7 +2056,7 @@ fun main() {
 }
 ```
 
-!!! example Example
+!!! example [Example](./samples/02_Syntax/21_Ranges/src/Main.kt)
 ```kotlin
 fun main() {
     for (i in 1..10) print(i.toString() + "\t")
