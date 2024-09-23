@@ -412,7 +412,7 @@ println("Hello world!")
 println(42)
 ```
 
-!!! example [Example](samples\02_Syntax\02_Output\src\Main.kt)
+!!! example [Example](samples/02_Syntax/02_Output/src/Main.kt)
 ```kotlin
 fun main() {
     val testF = "1234567"
@@ -447,7 +447,7 @@ Process finished with exit code 0
 </details>
 
 
-!!! example [Example](samples\02_Syntax\03_Output\src\Main.kt)
+!!! example [Example](samples/02_Syntax/03_Output/src/Main.kt)
 ```kotlin
 fun main() {
     print("Введите трехзначное число: ")
@@ -487,7 +487,7 @@ Process finished with exit code 0
 
 #### Чтение данных с консоли
 
-!!! example [Example](samples\02_Syntax\04_ConsoleInput\src\Main.kt)
+!!! example [Example](samples/02_Syntax/04_ConsoleInput/src/Main.kt)
 ```kotlin
 fun main() {
     print("Введите строку символов: ")
@@ -513,7 +513,7 @@ Process finished with exit code 0
 
 </details>
 
-!!! example [Example](samples\02_Syntax\05_ConsoleIO\src\Main.kt)
+!!! example [Example](samples/02_Syntax/05_ConsoleIO/src/Main.kt)
 ```kotlin
 fun main() {
     print("Введите строку символов: ")
@@ -565,7 +565,7 @@ fun incrementX() {
 }
 ```
 
-!!! example [Example](samples\02_Syntax\01_VariableDeclaration\src\Main.kt)
+!!! example [Example](samples/02_Syntax/01_VariableDeclaration/src/Main.kt)
 ```kotlin
 fun main() {
     // Неизменяемые (только для чтения)
@@ -641,7 +641,7 @@ val oneLong = 1L // Long
 val oneByte: Byte = 1
 ```
 
-!!! example [Example](samples\02_Syntax\06_IntegerTypes\src\Main.kt)
+!!! example [Example](samples/02_Syntax/06_IntegerTypes/src/Main.kt)
 ```kotlin
 fun main() {
     var testByte: Byte = 120
@@ -692,7 +692,7 @@ fun main() {
 Чтобы преобразовать числовые значения в различные типы, используйте [Явные преобразования](#явные-преобразования).
 
 
-!!! example [Example](samples\02_Syntax\07_Floats\src\Main.kt)
+!!! example [Example](samples/02_Syntax/07_Floats/src/Main.kt)
 ```kotlin
 fun main() {
     var testDouble: Double = 120.0
@@ -782,7 +782,7 @@ val hexBytes = 0xFF_EC_DE_5E
 val bytes = 0b11010010_01101001_10010100_10010010
 ```
 
-!!! error [Error](samples\02_Syntax\08_NumericLiterals\src\Main.kt)
+!!! error [Error](samples/02_Syntax/08_NumericLiterals/src/Main.kt)
 ```kotlin
 fun main() {
     var testInt = 123
@@ -853,7 +853,7 @@ val i1: Int = b.toInt()
 val l = 1L + 3 // Long + Int => Long
 ```
 
-!!! example [Example](samples\02_Syntax\09_ExplicitConversions\src\Main.kt)
+!!! example [Example](samples/02_Syntax/09_ExplicitConversions/src/Main.kt)
 ```kotlin
 fun main() {
     val testA = 1
@@ -937,7 +937,7 @@ println(10.0 / 3)
 
 Вы также можете переопределить эти операторы для пользовательских классов. См. [Перегрузка операторов](https://kotlinlang.ru/docs/operator-overloading.html) для деталей.
 
-!!! example [Example](samples\02_Syntax\10_ArithmeticOperations\src\Main.kt)
+!!! example [Example](samples/02_Syntax/10_ArithmeticOperations/src/Main.kt)
 ```kotlin
 fun main() {
     println(78 + 96)
@@ -1095,7 +1095,7 @@ println(!myTrue)
 
 > В JVM: nullable-ссылки на логические объекты заключены в рамки аналогично числам.
 
-!!! example Example
+!!! example [Example](samples/02_Syntax/11_LogicalOperations/src/Main.kt)
 ```kotlin
 fun main() {
     val testTrue = true
@@ -1144,7 +1144,7 @@ println('\uFF00')
 
 > В JVM: Подобно числам, символы оборачиваются при необходимости использования nullable-ссылки. При использовании обёрток тождественность (равенство по ссылке) не сохраняется.
 
-!!! example Example
+!!! example [Example](samples/02_Syntax/12_Symbols/src/Main.kt)
 ```kotlin
 fun main() {
     val testChar = 'N'
@@ -1219,7 +1219,7 @@ println(s + "def") // abc1def
 
 Обратите внимание, что в большинстве случаев использование [строковых шаблонов](#строковые-шаблоны) или обычных строк предпочтительнее объединения строк.
 
-!!! example [Example](samples\02_Syntax\12_Symbols\src\Main.kt)
+!!! example [Example](samples/02_Syntax/13_Strings/src/Main.kt)
 ```kotlin
 fun main() {
     var testString = "Строка символов"
@@ -1283,7 +1283,7 @@ val text = """
 
 По умолчанию `|` используется в качестве префикса поля, но вы можете выбрать другой символ и передать его в качестве параметра, например, `trimMargin(">")`.
 
-!!! example Example
+!!! example [Example](samples/02_Syntax/14_StringLiterals/src/Main.kt)
 ```kotlin
 fun main() {
     val s = "Hello, world!\n"
@@ -1380,7 +1380,7 @@ asc.forEach { println(it) }
 
 Обратите внимание: в отличие от Java массивы в Kotlin являются *инвариантными*. Это значит, что Kotlin запрещает нам присваивать массив `Array<String>` переменной типа `Array<Any>`, предотвращая таким образом возможный отказ во время исполнения (хотя вы можете использовать `Array<out Any>`, см. [Проекции типов](https://kotlinlang.ru/docs/generics.html#type-projections)).
 
-!!! example Example
+!!! example [Example](samples/02_Syntax/15_Arrays/src/Main.kt)
 ```kotlin
 fun main() {
     var testArray = arrayOf("1", 2, true)
@@ -1433,7 +1433,7 @@ val arr = IntArray(5) { 42 }
 var arr = IntArray(5) { it * 1 }
 ```
 
-!!! example Example
+!!! example [Example](samples/02_Syntax/16_PrimitivesArrays/src/Main.kt)
 ```kotlin
 import kotlin.math.pow
 
@@ -1504,7 +1504,7 @@ val max = if (a > b) {
 
 Если вы используете `if` в качестве выражения (например, возвращая его значение или присваивая его переменной), то использование ветки `else` является обязательным.
 
-!!! example Example
+!!! example [Example](samples/02_Syntax/17_If/src/Main.kt)
 ```kotlin
 fun main() {
     var testMax = 5
@@ -1658,7 +1658,7 @@ fun Request.getBody() =
 
 Такая переменная, объявленная внутри условия `when` может быть видна только внутри тела этого `when`.
 
-!!! example Example
+!!! example [Example](samples/02_Syntax/18_When/src/Main.kt)
 ```kotlin
 fun main() {
     val testRandom = (1..9).random()
@@ -1750,7 +1750,7 @@ for ((index, value) in array.withIndex()) {
 }
 ```
 
-!!! example Example
+!!! example [Example](samples/02_Syntax/20_For/src/Main.kt)
 ```kotlin
 fun main() {
     val testArrayInt = IntArray(5) { it * 5 }
@@ -1803,7 +1803,7 @@ do {
 } while (y != null) // y здесь доступно!
 ```
 
-!!! example Example
+!!! example [Example](samples/02_Syntax/19_While/src/Main.kt)
 ```kotlin
 fun main() {
     val testSize = (1..10).random()
