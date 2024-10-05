@@ -54,6 +54,36 @@
     - [Прогрессии](#прогрессии)
 - [Основы - задачи](#основы---задачи)
 - [03 Массивы, коллекции](#03-массивы-коллекции)
+  - [Массивы](#массивы-1)
+    - [Объявление массива с использованием библиотечного метода `arrayOf()`](#объявление-массива-с-использованием-библиотечного-метода-arrayof)
+    - [Свойство `indices`](#свойство-indices)
+    - [Объявление массива неустановленных ("пустых"/"нулевых") значений и его инициализация (`arrayOfNulls()`)](#объявление-массива-неустановленных-пустыхнулевых-значений-и-его-инициализация-arrayofnulls)
+    - [Создание пустого массива (`emptyArray()`)](#создание-пустого-массива-emptyarray)
+    - [`val` vs `var`](#val-vs-var)
+    - [Генерация значений с помощью инициализатора. Конструктор `Array()`](#генерация-значений-с-помощью-инициализатора-конструктор-array)
+    - [Вывод значений массива. Класс `Arrays`](#вывод-значений-массива-класс-arrays)
+    - [Массивы примитивных типов](#массивы-примитивных-типов-1)
+    - [Двумерные массивы](#двумерные-массивы)
+    - [Многомерный массив с базовыми типами](#многомерный-массив-с-базовыми-типами)
+    - [Обход (перебор элементов) массивов](#обход-перебор-элементов-массивов)
+    - [Итераторы](#итераторы)
+      - [Использование итератора (интерфейс)](#использование-итератора-интерфейс)
+        - [Functions](#functions)
+        - [Extension Functions](#extension-functions)
+    - [Операции с массивами](#операции-с-массивами)
+      - [Переворачивание массива](#переворачивание-массива)
+        - [Перевернуть массив: `reversedArray()`](#перевернуть-массив-reversedarray)
+        - [Перевернуть массив: `reverse()`](#перевернуть-массив-reverse)
+      - [Сортировка элементов массива](#сортировка-элементов-массива)
+      - [Перемешивание элементов массива: `shuffle()` (Kotlin 1.40)](#перемешивание-элементов-массива-shuffle-kotlin-140)
+      - [Наличие элемента в массиве: `contains()`](#наличие-элемента-в-массиве-contains)
+      - [Найти среднее значение чисел в массиве: `average()`](#найти-среднее-значение-чисел-в-массиве-average)
+      - [Подсчитать сумму чисел в массиве: `sum()`](#подсчитать-сумму-чисел-в-массиве-sum)
+      - [Найти наибольшее и наименьшее число в массиве](#найти-наибольшее-и-наименьшее-число-в-массиве)
+      - [Функция `intersect()`: найти общие элементы двух массивов](#функция-intersect-найти-общие-элементы-двух-массивов)
+      - [Выбрать случайную строку из массива](#выбрать-случайную-строку-из-массива)
+      - [`onEach()`: Операция с каждым элементом массива по очереди (Kotlin 1.40)](#oneach-операция-с-каждым-элементом-массива-по-очереди-kotlin-140)
+      - [Удалить дубликаты](#удалить-дубликаты)
 
 ## Общее
 66df5d7ed048d373527220f7
@@ -2130,3 +2160,1182 @@ Process finished with exit code 0
 
 ## 03 Массивы, коллекции
 66f429275040133e8429e1fb
+
+### Массивы
+Массивы в Kotlin представлены классом `Array`, обладающим функциями `get` и `set` (которые обозначаются `[]` согласно соглашению о перегрузке операторов), и свойством `size`, а также несколькими полезными встроенными функциями.
+```kotlin
+class Array<T> private constructor() {
+    val size: Int
+    operator fun get(index: Int): T
+    operator fun set(index: Int, value: T): Unit
+
+    operator fun iterator(): Iterator<T>
+    // ...
+}
+```
+
+Как отмечено выше, оператор `[]` используется вместо вызовов встроенных функций `get()` и `set()`.
+
+Обратите внимание: в отличие от Java массивы в Kotlin являются *инвариантными*. Это значит, что Kotlin запрещает нам присваивать массив `Array<String>` переменной типа `Array<Any>`, предотвращая таким образом возможный отказ во время исполнения (хотя вы можете использовать `Array<out Any>`, см. [Проекции типов](https://kotlinlang.ru/docs/generics.html#type-projections)).
+
+!!! example [Example](samples/02_Syntax/15_Arrays/src/Main.kt)
+```kotlin
+fun main() {
+    var testArray = arrayOf("1", 2, true)
+    testArray.forEach { print(it.toString() + "\t") }
+    println("\n")
+    val testArrayNum = Array(5) { i -> (i * i).toString() }
+    testArrayNum.forEach { println(it) }
+    println(testArrayNum.get(3))
+    testArrayNum.set(0, "99")
+    testArrayNum.forEach { print(it + "\t") }
+}
+```
+
+Массив можно создать двумя способами — через конструктор `Array()` или через методы `arrayOf()`, `arrayOfNulls()`, `emptyArray()`.
+
+#### Объявление массива с использованием библиотечного метода `arrayOf()`
+Для создания массива используйте функцию `arrayOf()`, которой в качестве аргумента передаются элементы массива, т.е. выполнение `arrayOf(1, 2, 3)` создаёт массив `[1, 2, 3]`.
+
+Создадим массив и получим значение третьего элемента.
+```kotlin
+val myArray = arrayOf(1, 2, 3, 4, 5)
+println(myArray[2])
+```
+
+Узнать длину массива можно при помощи свойства .
+```kotlin**`size`**
+println(myArray.size) // 5
+```
+
+А что случится, если мы добавим в массив строки?
+
+```kotlin
+val myArray = arrayOf(1, 2, 3, 4, 5, "зайчик", "вышел", "погулять")
+println(myArray[5])
+```
+
+Ничего страшного, у нас получился массив смешанного типа. Всё работает, ничего не ломается.
+
+Если мы хотим строгого поведения и не хотим смешивать разные типы, то используем обобщения.
+
+```kotlin
+val myArray = arrayOf<Int>(1, 2, 3, 4, 5) // только числа Integer
+```
+
+Таким образом, в Kotlin имеются "классические" массивы, когда в одном массиве могут быть данные только одного типа, и в массив нельзя добавлять элементы, как в список.[^younglinux]
+
+[^younglinux]: [Массивы в Kotlin](https://younglinux.info/kotlin/array)
+
+Объявление массива в Kotlin:
+```kotlin
+val имя: Array<тип>
+```
+
+Массивы обычно объявляют с помощью `val`, но это не значит, что нельзя изменять значения элементов массива. Это лишь значит, что неизменяемой переменной нельзя присвоить другой массив. Однако необходимость в подобном действии возникает редко.
+
+Существует также синонимы метода, когда уже в имени содержится подсказка: `intArrayOf()`, `charArrayOf()`, `booleanArrayOf()`, `longArrayOf()`, `shortArrayOf()`, `byteArrayOf()`.
+
+Перепишем пример.
+
+```kotlin
+val myArray = intArrayOf(1, 2, 3, 4, 5)
+```
+
+Пройтись по элементам массива и узнать значение индекса можно с помощью метода **`withIndex()`**:
+
+```kotlin
+val numbersArray = intArrayOf(1, 2, 3, 4, 5)
+for ((index, value) in numbersArray.withIndex()) {
+    println("Значение индекса $index равно $value")
+}
+```
+
+!!! example [Example](./samples/03_Arrays/01_ArrayOf/src/Main.kt)
+```kotlin
+fun main() {
+    val arrNum: Array<Int>
+    arrNum = arrayOf(12, 25, 37, 84, 95)    // преобразует перечисляемые значения в целочисленный массив
+
+    val arrTest = arrayOf(4,7, 9.65, 7.82)  // получаем массив указанного типа
+    val arrD: Array<Double> = arrayOf(65.98, 32.81, 83.96, 73.65)
+
+    val testN = arrNum[1]                   // присваиваем значение
+    val testU = arrNum.get(4)               // элементу массива
+
+    arrNum[0] = 56                          // получаем значение
+    arrNum.set(3, 97)                       // элемента массива
+}
+```
+
+<details>
+<summary><em>Output</em></summary>
+
+```
+1	2	true
+
+0
+1
+4
+9
+16
+9
+99	1	4	9	16
+
+```
+
+</details>
+
+#### Свойство `indices`
+https://developer.alexanderklimov.ru/android/kotlin/array.php
+
+У массива есть свойство **`indices`** и мы можем переписать пример по другому.
+
+```kotlin
+val numbers = intArrayOf(1, 2, 3, 4, 5)
+for (index in numbers.indices) {
+    println("Значение индекса $index равно ${numbers[index]}")
+}
+```
+
+Свойство возвращает интервал (`Range`), который содержит все индексы массива. Это позволяет не выйти за пределы массива и избежать ошибки `ArrayIndexOutOfBoundsException`.
+
+Но у свойства есть очень интересная особенность. Взгляните на код:
+
+```kotlin
+val numbers = intArrayOf(1, 2, 3, 4, 5)
+for(index in numbers.indices - 2) {
+    println(numbers[index])
+}
+
+// 1 2 4 5
+```
+
+Из интервала индексов массива мы убрали третий элемент (отсчёт от 0). И теперь при выводе элементов массива мы не увидим числа 3.
+
+Можно сложить два массива.
+
+```kotlin
+val numbers = intArrayOf(1, 2, 3)
+val numbers3 = intArrayOf(4, 5, 6)
+val foo2 = numbers3 + numbers
+println(foo2[5]) // 3
+```
+
+#### Объявление массива неустановленных ("пустых"/"нулевых") значений и его инициализация (`arrayOfNulls()`)
+Для создания массива заданного размера, заполненного значениями `null`, можно использовать отдельную функцию `arrayOfNulls()`.
+
+```kotlin
+val array = arrayOfNulls<Number>(5)
+```
+
+Создадим массив с тремя элементами.
+
+```kotlin
+val array = arrayOfNulls(3) // [null, null, null]
+// равносильно
+// arrayOf(null, null, null)
+```
+
+Присвоим значения пустым элементам.
+
+```kotlin
+var arr2 = arrayOfNulls<String>(2)
+arr2.set(0, "1")
+arr2.set(1, "2")
+
+// или
+arr2[0] = "1"
+arr2[1] = "2"
+
+// получить значения
+println(arr2[0]) // или arr2.get(0)
+println(arr2[1])
+```
+
+После создания экземпляра мы можем получить доступ к полям массива и установить их. Есть несколько способов сделать это, но наиболее распространенным является использование свойства `indices`. Это свойство возвращает диапазон допустимых индексов для массива. Мы можем использовать диапазон для доступа и установки значений массива в цикле `for`.
+
+!!! example [Example](samples/03_Arrays/03_ArrayOfNulls/src/Main.kt)
+```kotlin
+import kotlin.math.pow
+
+fun main() {
+    val arrNum = arrayOfNulls<Number>(6)
+
+    arrNum.forEach { print(it.toString() + "\t") }
+
+    println()
+
+    for (i in arrNum.indices) {
+        print("before: ${arrNum[i]}, ")
+        arrNum[i] = i * i
+        print("after: ${arrNum[i]}\n")
+    }
+
+    for (i in 0..arrNum.size - 1) {
+        arrNum[i] = i.toDouble().pow(i)
+    }
+
+    arrNum.forEach { print(it.toString() + "\t") }
+}
+
+```
+
+<details>
+<summary><em>Output</em></summary>
+
+```
+null	null	null	null	null	null
+before: null, after: 0
+before: null, after: 1
+before: null, after: 4
+before: null, after: 9
+before: null, after: 16
+before: null, after: 25
+1.0	1.0	4.0	27.0	256.0	3125.0
+```
+
+</details>
+
+#### Создание пустого массива (`emptyArray()`)
+Создадим пустой массив и заполним его данными.
+
+```kotlin
+var arr = emptyArray<String>()
+arr += "1"
+arr += "2"
+arr += "3"
+arr += "4"
+arr += "5"
+```
+
+#### `val` vs `var`
+https://developer.alexanderklimov.ru/android/kotlin/array.php
+
+Нужно уяснить разницу между **`var`** и **`val`** при работе с массивами.
+
+```kotlin
+// Создали новый массив
+var myArray = arrayOf(1, 2, 3)
+
+// Это совершенно новый массив
+myArray = arrayOf(4, 5)
+```
+
+Фактически мы уничтожили первый массив и создали вместо него второй массив.
+
+Если мы попытаем написать такой же код с использованием `val`, то компилятор запретит такое действие.
+
+```kotlin
+// Создали новый массив
+val myArray = arrayOf(1, 2, 3)
+
+// Нельзя. Компилятор не пропустит
+myArray = arrayOf(4, 5)
+```
+
+Но при этом вы можете менять значения элементов массива, созданного через `val`.
+
+```kotlin
+val myArray = arrayOf(1, 2)
+myArray[0] = 3 // меняем первый элемент массива
+myArray[1] = 4 // меняем второй элемент массива
+```
+
+#### Генерация значений с помощью инициализатора. Конструктор `Array()`
+Также для создания массива можно использовать фабричную функцию, которая принимает размер массива и функцию, возвращающую начальное значение каждого элемента по его индексу.
+```kotlin
+// создаёт массив типа Array<String> со значениями ["0", "1", "4", "9", "16"]
+val asc = Array(5) { i -> (i * i).toString() }
+asc.forEach { println(it) }
+```
+
+При использовании конструктора нужно указать размер массива в первом параметре и лямбда-выражение во втором.
+
+```kotlin
+val myArray = Array(5, { i -> i * 2 })
+println(myArray[3])
+```
+
+Мы задали пять элементов и каждый элемент в цикле умножаем на 2. В итоге получим массив чисел 0, 2, 4, 6, 8.
+
+Создадим массив строк от "A" до "Z"
+
+```kotlin
+val letters = Array<String>(26) { i -> ('A' + i).toString() }
+println(letters.joinToString(""))
+```
+
+Лямбда-выражение принимает индекс элемента массива и возвращает значение, которое будет помещено в массив с этим индексом. Значение вычисляется путём сложения индекса с кодом символа и преобразованием результата в строку.
+
+Можно опустить тип массива и написать `Array(26)`, компилятор самостоятельно определит нужный тип.
+
+Есть отдельные классы для каждого примитивного типа — `IntArray`, `ByteArray`, `CharArray` и т.д.
+
+```kotlin
+val zeros = IntArray(3) // первый способ
+val zeros = intArrayOf(0, 0, 0) // второй способ при помощи фабричного метода
+println(zeros.joinToString())
+```
+
+Можно использовать лямбда-выражение.
+
+```kotlin
+val intArray = IntArray(4){i -> i + i}
+println(intArray.joinToString())
+```
+
+!!! example Example
+```kotlin
+import kotlin.math.pow
+import kotlin.math.sqrt
+
+fun main() {
+    val arrGenerate = IntArray(7) { i -> i }
+    arrGenerate.forEach { print(it.toString() + "\t") }
+    println()
+
+    val arrGenerateFloat = FloatArray(10) { i -> sqrt(i.toFloat()) }
+    arrGenerateFloat.forEach { print(it.toString() + "\t") }
+    println()
+
+    val arrGenerateDouble = DoubleArray(11) { i -> i.toDouble().pow(1/(i+1).toDouble()) }
+    arrGenerateDouble.forEach { print("%.2f".format(it) + "\t") }
+    println()
+
+    val arrGenerateStr = Array(3) { i -> "Элемент $i = ${i * i}" }
+    arrGenerateStr.forEach { print(it.toString() + "\t") }
+    println()
+
+    println(8.0.pow(1 / 3))
+    println(8.0.pow(1 / 3.0))
+}
+```
+
+<details>
+<summary><em>Output</em></summary>
+
+```
+0	1	2	3	4	5	6
+0.0	1.0	1.4142135	1.7320508	2.0	2.236068	2.4494898	2.6457512	2.828427	3.0
+0.00	1.00	1.26	1.32	1.32	1.31	1.29	1.28	1.26	1.25	1.23
+Элемент 0 = 0	Элемент 1 = 1	Элемент 2 = 4
+1.0
+2.0
+```
+
+</details>
+
+> `println(8.0.pow(1 / 3))` выводит 1, поскольку результатом операции `1 / 3` является `0` как следствие операций с целочисленными типами, а любое число в нулевой степени даёт 1.
+
+#### Вывод значений массива. Класс `Arrays`
+Для вывода значений массива используйте класс **`Arrays`** с методом `toString()`, который вернёт результат в удобном и читаемом виде. Сейчас в Kotlin появилась функция **`contentToString()`**, которая является предпочтительным вариантом.
+
+```kotlin
+println(Arrays.toString(arr)) // старый способ
+println(arr.contentToString()) // рекомендуемый способ
+```
+
+#### Массивы примитивных типов
+Kotlin автоматически упаковывает примитивные значения в соответствующие им классы-оболочки объектов, что будет иметь пагубные последствия для производительности. Чтобы избежать этих накладных расходов, в Котлине предусмотрена широкая поддержка примитивных массивов.
+
+Так, в Kotlin есть особые классы для представления массивов примитивных типов без дополнительных затрат на оборачивание: `ByteArray`, `ShortArray`, `IntArray` и т.д. Данные классы не наследуют класс `Array`, хотя и обладают тем же набором методов и свойств. У каждого из них есть соответствующая фабричная функция:
+```kotlin
+val x: IntArray = intArrayOf(1, 2, 3)
+x[0] = x[1] + x[2]
+```
+
+```kotlin
+// int массив, размером 5 со значениями [0, 0, 0, 0, 0]
+val arr = IntArray(5)
+
+// инициализация элементов массива константой
+// int массив, размером 5 со значениями [42, 42, 42, 42, 42]
+val arr = IntArray(5) { 42 }
+
+// инициализация элементов массива лямбда-выражением
+// int массив, размером 5 со значениями [0, 1, 2, 3, 4] (элементы инициализированы своим индексом)
+var arr = IntArray(5) { it * 1 }
+```
+
+!!! example [Example](samples/02_Syntax/16_PrimitivesArrays/src/Main.kt)
+```kotlin
+import kotlin.math.pow
+
+fun main() {
+    val testArrayInt: IntArray = intArrayOf(1, 2, 3)
+    testArrayInt[0] = testArrayInt[1] + testArrayInt[2]
+    testArrayInt.forEach { print(it.toString() + "\t") }
+    println()
+    val testArrayInit = IntArray(5)
+    testArrayInit.forEach { print(it.toString() + "\t ") }
+    println()
+    val testArrayConst = IntArray(5) { 79 }
+    testArrayConst.forEach { print(it.toString() + "\t ") }
+    println()
+    var testArrayLambda = DoubleArray(9) { 2.0.pow(it) }
+    testArrayLambda.forEach { print(it.toString() + "\t ") }
+    println()
+}
+```
+
+> Существуют специальные методы `arrayOf` для следующих типов: `double`, `float`, `long`, `int`, `char`, `short`, `byte`, `boolean`.
+
+Мы можем легко инициализировать примитивный массив `int`, используя специальный метод `arrayOf`:
+
+```kotlin
+val integers = intArrayOf(1, 2, 3, 4)
+```
+
+!!! example [Example](samples/03_Arrays/02_PrimitivesArrays/src/Main.kt)
+```kotlin
+fun main() {
+    val arrInt = intArrayOf(9, 6, 3, 6, 1)
+    val arrDouble = doubleArrayOf(3.7, 3.4, 9.1)
+    val arrLogic = booleanArrayOf(true, true, false)
+    val arrFloatOne = floatArrayOf(2F, 5.78F, 78.91F, 105F)
+    // val arrFloatTwo = floatArrayOf(2, 5.78, 78.91, 105) // => Kotlin: Argument type mismatch
+    val arrChar = charArrayOf('E', 'G', 'k', 'p', 'Z')
+    val arrLongOne = longArrayOf(78L, 62L, 100_456_891L)
+    val arrLongTwo = longArrayOf(78, 62, 100_456_891)
+    val arrByte = byteArrayOf(-23, 127, 17, -98)
+    val arrShort = shortArrayOf(-32000, 4500, 491, -9837)
+}
+```
+
+!!! error Error
+```kotlin
+val arrFloatTwo = floatArrayOf(2, 5.78, 78.91, 105)
+```
+
+<details>
+<summary><em>Output</em></summary>
+
+```
+Kotlin: Argument type mismatch: actual type is 'kotlin/Int' but 'kotlin/Float' was expected
+```
+
+</details>
+
+#### Двумерные массивы
+https://developer.alexanderklimov.ru/android/kotlin/array.php
+
+Часто одного массива недостаточно. В некоторых случаях удобно использовать двумерные массивы. Визуально их легко представить в виде сетки. Типичный пример — зал в кинотеатре. Чтобы найти нужно место в большом зале, нам нужно знать ряд и место.
+
+<dfn title="двумерный массив">Двумерный массив</dfn> — это массив, который содержит другие массивы. Создадим двумерный массив 5х5 и заполним его нулями.
+
+```kotlin
+// Создаём двумерный массив
+var cinema = arrayOf<Array<Int>>()
+
+// заполняем нулями
+for (i in 0..4) {
+    var array = arrayOf<Int>()
+    for (j in 0..4) {
+        array += 0
+    }
+    cinema += array
+}
+
+// выводим данные массива
+for (array in cinema) {
+    for (value in array) {
+        print("$value ")
+    }
+    println()
+}
+// Результат
+0 0 0 0 0
+0 0 0 0 0
+0 0 0 0 0
+0 0 0 0 0
+0 0 0 0 0
+```
+
+Сейчас в кинотеатре пусто. Первый зритель берёт билет в центре зала.
+
+```kotlin
+// центр зала
+cinema[2][2] = 1
+
+// три места во втором ряду
+for (i in 1..3) {
+    cinema[3][i] = 1
+}
+
+// весь первый ряд
+for (i in 0..4) {
+    cinema[4][i] = 1
+}
+
+// выводим данные массива
+for (array in cinema) {
+    for (value in array) {
+        print("$value ")
+    }
+    println()
+}
+
+// Результат
+0 0 0 0 0
+0 0 0 0 0
+0 0 1 0 0
+0 1 1 1 0
+1 1 1 1 1
+```
+
+!!! example Example
+```kotlin
+fun main() {
+    val arrOneDimens: Array<Int> = Array(10) { (0..255).random() }
+    arrOneDimens.forEach { print(it.toString() + "\t") }
+    println()
+
+    val arrTwoDimens: Array<Array<Int>> = Array(10) {
+        Array(10) {
+            (0..255).random()
+        }
+    }
+
+    for (i in 0..9) {
+        for (j in 0..9) {
+            print(arrTwoDimens[i][j].toString() + "\t\t")
+        }
+        println()
+    }
+}
+```
+
+<details>
+<summary><em>Output</em></summary>
+
+```
+23	181	59	133	173	58	176	55	7	202
+126		95		7		107		94		229		152		237		73		232
+177		236		242		168		142		65		84		92		84		201
+187		63		112		134		22		240		160		0		87		157
+71		88		43		28		147		6		153		113		79		206
+79		43		4		145		121		196		255		99		125		126
+76		119		195		211		114		193		116		16		216		21
+35		88		138		56		216		218		80		246		31		196
+57		29		126		21		105		18		29		180		133		238
+121		229		89		84		108		201		20		191		24		146
+203		236		161		122		34		38		95		133		136		209
+```
+
+</details>
+
+#### Многомерный массив с базовыми типами
+https://developer.alexanderklimov.ru/android/kotlin/array.php
+
+По такому же принципу строится трёхмерный массив. На этот раз его можно представить не в виде сетки, а в виде куба. В этом случае сетки идут как бы друг за другом, образуя слои.
+
+```kotlin
+var rubikCube = arrayOf<Array<Array<Int>>>()
+for (i in 0..2) {
+    var piece = arrayOf<Array<Int>>()
+    for (j in 0..2) {
+        var array = arrayOf<Int>()
+        for (k in 0..2) {
+            array += 0
+        }
+        piece += array
+    }
+    rubikCube += piece
+}
+
+// второй слой, третий ряд, первое место
+rubikCube[1][2][0] = 1
+println(Arrays.deepToString(rubikCube))
+
+// Результат
+0, 0, 0 | 0, 0, 0 | 0, 0, 0
+0, 0, 0 | 0, 0, 0 | 0, 0, 0
+0, 0, 0 | 1, 0, 0 | 0, 0, 0
+```
+
+Если нам приходится обрабатывать многомерный массив базовых типов Kotlin, мы можем полагаться на различные примитивные библиотечные функции и дополнительные классы. Фактически, Kotlin определяет дополнительные классы, как `IntArray`, `BooleanArray`, `LongArray` и т.д., а также библиотечные функции для создания экземпляров этих типов.
+
+В качестве примера давайте посмотрим, как можно определить простой двумерный массив целых чисел, используя методы `arrayOf` и `intArrayOf`.
+
+Используя `arrayOfNulls`, можно инициализировать массив нулевыми значениями. Таким образом, с помощью этого метода можно инициализировать каждую строку разным размером массива.
+
+!!! example Example
+```kotlin
+fun main() {
+    val arrOne: Array<IntArray> = arrayOf(
+        intArrayOf(2, 7, 8, 1),
+        intArrayOf(5, 2, 9, 3),
+    )
+
+    val arrTwo = arrayOfNulls<Array<Int>>(2)
+    arrTwo[0] = Array(3) {0}
+    arrTwo[1] = Array(2) {1}
+}
+```
+
+#### Обход (перебор элементов) массивов
+https://developer.alexanderklimov.ru/android/kotlin/array.php
+
+Обычный перебор через **`for`**.
+
+```kotlin
+val arr = arrayOf(1, 2, 3, 4, 5)
+
+for (i in arr) {
+    println("Значение элемента равно $i")
+}
+```
+
+Можно одной строкой через **`forEach`**.
+
+```kotlin
+arr.forEach { i -> println("Значение элемента равно $i") }
+```
+
+Если нужна информация не только о значении элемента, но и его индексе, то используем **`forEachIndexed`**.
+
+```kotlin
+arr.forEachIndexed { index, element ->
+    println("$index : $element")
+}
+
+// Результат
+0 : 1
+1 : 2
+2 : 3
+3 : 4
+4 : 5
+```
+
+`forEachIndexed` дает нам и индекс, и значение по этому индексу в массиве.
+
+!!! example [Example](samples/03_Arrays/08_IterationOverArray/src/Main.kt)
+
+```kotlin
+fun main() {
+    val arrOne = IntArray(10) { i -> i * 3 }
+
+    arrOne.forEach { item -> print(item.toString() + "\t") }
+    println()
+
+    arrOne.forEachIndexed { index, item -> println("Элемент с индексом $index равен $item") }
+}
+
+```
+
+
+<details>
+<summary><em>Output</em></summary>
+
+```
+0	3	6	9	12	15	18	21	24	27
+Элемент с индексом 0 равен 0
+Элемент с индексом 1 равен 3
+Элемент с индексом 2 равен 6
+Элемент с индексом 3 равен 9
+Элемент с индексом 4 равен 12
+Элемент с индексом 5 равен 15
+Элемент с индексом 6 равен 18
+Элемент с индексом 7 равен 21
+Элемент с индексом 8 равен 24
+Элемент с индексом 9 равен 27
+```
+
+</details>
+
+#### Итераторы
+https://kotlinlang.ru/docs/iterators.html
+
+Для обхода элементов коллекции стандартная библиотека Kotlin поддерживает механизм <dfn title="итератор">итераторов</dfn> — объектов, которые предоставляют доступ к элементам последовательно, не раскрывая базовую структуру коллекции. Итераторы полезны, когда вам нужно обработать все элементы коллекции один за другим, например, вывести в лог их значения или обновить.
+
+##### Использование итератора (интерфейс)
+https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-iterator/
+
+```kotlin
+interface Iterator<out T>
+(Common source) (Native source)
+```
+
+###### Functions
+https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-iterator/#functions
+
+- `hasNext`
+
+    Returns true if the iteration has more elements.
+
+    ```kotlin
+    abstract operator fun hasNext(): Boolean
+    ```
+
+- `next`
+
+    Returns the next element in the iteration.
+    ```kotlin
+    abstract operator fun next(): T
+    ```
+
+###### Extension Functions
+https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-iterator/#extension-functions
+
+- `asSequence`
+
+    Creates a sequence that returns all elements from this iterator. The sequence is constrained to be iterated only once.
+    ```kotlin
+    fun <T> Iterator<T>.asSequence(): Sequence<T>
+    ```
+
+- `forEach`
+
+    Performs the given operation on each element of this Iterator.
+    ```kotlin
+    fun <T> Iterator<T>.forEach(operation: (T) -> Unit)
+    ```
+
+- `iterator`
+
+    Returns the given iterator itself. This allows to use an instance of iterator in a `for` loop.
+    ```kotlin
+    operator fun <T> Iterator<T>.iterator(): Iterator<T>
+    ```
+
+- `withIndex`
+
+    Returns an Iterator that wraps each element produced by the original iterator into an IndexedValue containing the index of that element and the element itself.
+    ```kotlin
+    fun <T> Iterator<T>.withIndex(): Iterator<IndexedValue<T>>
+    ```
+
+Итераторы доступны всем наследникам интерфейса `Iterable<T>`, включая `Set` и `List`, путём вызова функции `iterator()`.
+
+При получении итератора он сначала указывает на первый элемент коллекции; вызов функции `next()` возвращает этот элемент и перемещает позицию итератора на следующий элемент, если такой существует.
+
+Как только итератор проходит через последний элемент, его больше нельзя использовать для извлечения элементов; его также нельзя вернуть в предыдущее положение. Чтобы снова перебрать коллекцию, нужно создать новый итератор.
+```kotlin
+fun main() {
+    val numbers = listOf("one", "two", "three", "four")
+    val numbersIterator = numbers.iterator()
+    while (numbersIterator.hasNext()) {
+        println(numbersIterator.next())
+    }
+}
+
+// В логе будет:
+// one
+// two
+// three
+// four
+```
+
+Другой способ перебрать `Iterable` коллекцию — это всем известный цикл `for`. При использовании `for` вы неявно получаете итератор. Поэтому, приведённый ниже код эквивалентен предыдущему примеру:
+```kotlin
+fun main() {
+    val numbers = listOf("one", "two", "three", "four")
+    for (item in numbers) {
+        println(item)
+    }
+}
+
+// В логе будет:
+// one
+// two
+// three
+// four
+```
+
+!!! example [Example](samples/03_Arrays/07_ArrayIteration/src/Main.kt)
+
+```kotlin
+fun main() {
+    val arrOne = IntArray(10) { i -> i * 3 }
+
+    for (item in arrOne) {
+        print(item.toString() + "\t")
+    }
+    println()
+
+    var iter = arrOne.iterator()
+    while (iter.hasNext()) {
+        val item = iter.next()
+        print(item.toString() + "\t")
+    }
+}
+
+```
+
+
+<details>
+<summary><em>Output</em></summary>
+
+```
+0	3	6	9	12	15	18	21	24	27
+0	3	6	9	12	15	18	21	24	27
+```
+
+</details>
+
+Также, есть полезная функция `forEach()`, которая позволяет автоматически перебирать коллекцию и выполнять заданный код для каждого элемента. Перепишем пример выше:
+```kotlin
+fun main() {
+    val numbers = listOf("one", "two", "three", "four")
+    numbers.forEach {
+        println(it)
+    }
+}
+
+// В логе будет:
+// one
+// two
+// three
+// four
+```
+
+#### Операции с массивами
+
+##### Переворачивание массива
+
+###### Перевернуть массив: `reversedArray()`
+Для операции создадим дополнительную переменную для нового массива с перевёрнутыми значениями. Оригинал останется без изменений.
+
+```kotlin
+val numbers: IntArray = intArrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9)
+var reversedArray = numbers.reversedArray()
+
+println(Arrays.toString(reversedArray))
+```
+
+###### Перевернуть массив: `reverse()`
+Если оригинал массива нам точно не понадобится, то мы можем перевернуть его без создания нового массива.
+
+```kotlin
+val numbers: IntArray = intArrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9)
+numbers.reverse()
+
+println(Arrays.toString(numbers))
+```
+
+!!! example [Example](samples/03_Arrays/09_Reverse/src/Main.kt)
+
+```kotlin
+fun main() {
+    val arrOne = IntArray(10) { i -> i * 3 }
+    arrOne.forEach { i -> print(i.toString() + "\t") }
+    println()
+    arrOne.reverse()
+    arrOne.forEach { i -> print(i.toString() + "\t") }
+    println()
+    arrOne.reversed()
+    arrOne.forEach { i -> print(i.toString() + "\t") }
+    println()
+    val arrTwo = arrOne.reversed()
+    arrTwo.forEach { i -> print(i.toString() + "\t") }
+    println()
+    arrOne.reverse(3, 6)
+    arrOne.forEach { i -> print(i.toString() + "\t") }
+    // arrTwo.reverse(3, 6) // => Kotlin: Unresolved reference: reverse
+    // Reversed возвращает тип List, у которого отсутствует метод reverse, т.е.
+    // val arrTwo: List<Int> = arrOne.reversed()
+}
+
+```
+
+
+<details>
+<summary><em>Output</em></summary>
+
+```
+0	3	6	9	12	15	18	21	24	27
+27	24	21	18	15	12	9	6	3	0
+27	24	21	18	15	12	9	6	3	0
+0	3	6	9	12	15	18	21	24	27
+27	24	21	12	15	18	9	6	3	0
+```
+
+</details>
+
+Стоит обратить внимание на тип `arrTwo`. Метод `reversed` возвращает тип `List`, у которого отсутствует метод `reverse`, т.е. присвоение в примере ниже эквивалентно `val arrTwo: List<Int> = arrOne.reversed()`. Поэтому попытка обращения к несуществующему методу вызовет ошибку `Unresolved reference`.
+
+!!! error Error
+
+```kotlin
+fun main() {
+    val arrOne = IntArray(10) { i -> i * 3 }
+    val arrTwo = arrOne.reversed()
+    arrTwo.reverse(3, 6)
+}
+
+```
+
+<details>
+<summary><em>Output</em></summary>
+
+```
+Kotlin: Unresolved reference: reverse
+```
+
+</details>
+
+##### Сортировка элементов массива
+В Kotlin очень просто сортировать элементы.
+
+Вызываем метод **`sort()`**. Мы меняем существующий массив, а не создаём новый.
+
+```kotlin
+val numbers: IntArray = intArrayOf(7, 5, 8, 4, 9, 6, 1, 3, 2)
+numbers.sort()
+
+// println(Arrays.toString(numbers)) // старый способ
+println("Sorted array: ${numbers.contentToString()}")
+```
+
+Сортировать можно не весь массив, а только определённый диапазон. Указываем начало и размер диапазона. Допустим, нам нужно отсортировать только первые три элемента из предыдущего примера.
+
+```kotlin
+numbers.sort(0, 3)
+
+// 5, 7, 8, 4, 9, 6, 1, 3, 2
+```
+
+Сортировка в обратном порядке от наибольшего значения к наименьшему.
+
+```kotlin
+numbers.sortDescending()
+```
+
+!!! example [Example](samples/03_Arrays/10_Sorting/src/Main.kt)
+
+```kotlin
+fun main() {
+    var arrOne = intArrayOf(7, 9, 1, 15, 8, 1, 24, 5, 78)
+    arrOne.sort()
+    arrOne.forEach { print(it.toString() + "\t") }
+    println()
+    arrOne = intArrayOf(7, 9, 1, 15, 8, 1, 24, 5, 78)
+    arrOne.sort(4)
+    arrOne.forEach { print(it.toString() + "\t") }
+    println()
+    arrOne = intArrayOf(7, 9, 1, 15, 8, 1, 24, 5, 78)
+    arrOne.sort(3, 6)
+    arrOne.forEach { print(it.toString() + "\t") }
+}
+
+```
+
+<details>
+<summary><em>Output</em></summary>
+
+```
+1	1	5	7	8	9	15	24	78
+7	9	1	15	1	5	8	24	78
+7	9	1	1	8	15	24	5	78
+```
+
+</details>
+
+Если нужно сохранить исходный массив, то вызываем другие функции, которые создадут новый массив.
+
+```kotlin
+val numbers: IntArray = intArrayOf(7, 5, 8, 4, 9, 6, 1, 3, 2)
+val sortedNumbers: IntArray = numbers.sortedArray() // новый сортированный массив
+val descendingSortedNumber: IntArray = numbers.sortedArrayDescending() // новый сортированный массив в обратном порядке
+
+println("Original array ${numbers.contentToString()}:Sorted array ${sortedNumbers
+        .contentToString()}")
+// Original array [7, 5, 8, 4, 9, 6, 1, 3, 2]:Sorted array [1, 2, 3, 4, 5, 6, 7, 8, 9]
+```
+
+Для сортировки объектов указываем компаратор и условие сравнения. Например, мы хотим сравнить котов по их возрастам.
+
+```kotlin
+val cats = arrayOf(Cat("Барсик", 8), Cat("Мурзик", 4), Cat("Васька", 9))
+// массив до сортировки
+cats.forEach { println(it) }
+
+// сортируем по возрасту
+cats.sortWith(Comparator { c1: Cat, c2: Cat -> c1.age - c2.age })
+cats.forEach { println(it) }
+
+
+data class Cat(val name: String, val age: Int)
+```
+
+Вместо компаратора можно использовать функцию **`sortBy()`** с указанием условия. Сравним теперь котов не по возрасту, а по их именам.
+
+```kotlin
+val cats = arrayOf(Cat("Барсик", 8), Cat("Мурзик", 4), Cat("Васька", 9))
+cats.forEach { println(it) }
+cats.sortBy { cat -> cat.name }
+cats.forEach { println(it) }
+
+
+data class Cat(val name: String, val age: Int)
+```
+
+##### Перемешивание элементов массива: `shuffle()` (Kotlin 1.40)
+Перемешать элементы массива в случайном порядке можно при помощи метода `shuffle()`.
+
+```kotlin
+val numbers = arrayOf(1, 2, 3, 4, 5)
+numbers.shuffle()
+println(numbers.contentToString())
+```
+
+!!! example [Example](samples/03_Arrays/11_Shuffle/src/Main.kt)
+
+```kotlin
+import kotlin.random.Random
+
+fun main() {
+    var arrOne = intArrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15)
+    arrOne.shuffle()
+    arrOne.forEach { print(it.toString() + "\t") }
+    println()
+    arrOne = intArrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15)
+    arrOne.shuffle(Random(2))
+    arrOne.forEach { print(it.toString() + "\t") }
+    println()
+    arrOne = intArrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15)
+    arrOne.shuffle(Random(2)) // => The same seed number gives the same sequence
+    arrOne.forEach { print(it.toString() + "\t") }
+    println()
+    arrOne = intArrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15)
+    arrOne.shuffle(Random(5))
+    arrOne.forEach { print(it.toString() + "\t") }
+}
+
+```
+
+<details>
+<summary><em>Output</em></summary>
+
+```
+1	6	13	10	8	3	4	7	14	9	11	2	5	15	12
+4	15	7	6	11	2	9	3	1	10	14	12	13	8	5
+4	15	7	6	11	2	9	3	1	10	14	12	13	8	5
+4	2	10	11	14	13	3	6	8	15	5	7	9	1	12
+```
+
+</details>
+
+##### Наличие элемента в массиве: `contains()`
+Если элемент содержится в массиве, то метод **`contains()`** возвращает `true`.
+
+```kotlin
+val array = arrayOf(1, 2, 3, 4, 5)
+val isContains = array.contains(9)
+println(isContains) // false
+```
+
+##### Найти среднее значение чисел в массиве: `average()`
+Используем функцию **`average()`**. Возвращается `Double`.
+
+```kotlin
+val array = arrayOf(1, 3, 5)
+println(array.average()) // 3.0
+```
+
+##### Подсчитать сумму чисел в массиве: `sum()`
+
+```kotlin
+val array = arrayOf(1, 2, 3, 4, 5)
+println(array.sum()) // 15
+```
+
+##### Найти наибольшее и наименьшее число в массиве
+В цикле сравниваем каждое число с эталоном, которые вначале принимает значение первого элемента. Если следующее число массива больше эталона, то берём его значение. В итоге после перебора получим наибольшее число в массиве.
+
+```kotlin
+val numbers: IntArray = intArrayOf(4, 9, 3, 2, 6)
+var largestElement = numbers[0]
+
+for (number in numbers){
+    if(largestElement < number)
+        largestElement = number
+}
+
+println("Наибольшее число в массиве: $largestElement")
+```
+
+Но можно не писать свой код, а вызвать готовые функции **`min()`** и **`max()`**.
+
+```kotlin
+println(numbers.min())
+println(numbers.max())
+```
+
+##### Функция `intersect()`: найти общие элементы двух массивов
+Есть два массива с числами. Нужно сравнить их и найти у них общие числа. Поможет нам функция **`intersect()`**
+
+```kotlin
+val firstArray = arrayOf(1, 2, 3, 4, 5)
+val secondArray = arrayOf(3, 5, 6, 7, 8)
+
+val intersectedArray = firstArray.intersect(secondArray.toList()).toIntArray()
+println(Arrays.toString(intersectedArray))
+
+//[3, 5]
+```
+
+##### Выбрать случайную строку из массива
+Имеется массив строк. Сначала вычисляем размер массива. Затем генерируем случайное число в диапазоне от 0 до (почти) 1, которое умножаем на количество элементов в массиве. После этого результат преобразуется в целое число вызовом `toInt()`. Получается выражение типа `0.811948208873101 * 5 = 4`. В Kotlin есть свой класс `Random`, поэтому случайное число можно получить другим способом.
+
+```kotlin
+val cats = arrayOf("Барсик", "Мурзик", "Васька", "Рыжик", "Персик")
+val arraySize = cats.size
+
+// Java-style
+val rand = (Math.random() * arraySize).toInt()
+val name = "${cats[rand]}}"
+println(name)
+
+// Kotlin-style
+val rand = Random.nextInt(arraySize)
+val name = "${cats[rand]}"
+println(name)
+```
+
+По этому принципу можно создать игру "Камень, Ножницы, Бумага".
+
+```kotlin
+private fun getChoice(optionsParam: Array<String>) =
+    optionsParam[Random.nextInt(optionsParam.size)]
+
+val options = arrayOf("Камень", "Ножницы", "Бумага")
+val choice = getChoice(options)
+println(choice)
+```
+
+##### `onEach()`: Операция с каждым элементом массива по очереди (Kotlin 1.40)
+В коллекциях мы можем пройтись по всем элементам и что-то с каждым сделать. Теперь такое возможно и с элементами массива. Пройдёмся по всем числам массива, удвоим каждое число и конвертируем в строку.
+
+```kotlin
+var str = ""
+val numbers = arrayOf(1, 2, 3, 4, 5)
+numbers.onEach {str += it * 2}
+println(str)
+```
+
+##### Удалить дубликаты
+Удалить дубликаты можно несколькими способами. Например, через **`toSet()`**
+
+```kotlin
+val myArray = arrayOf(1, 1, 2, 3, 4, 5, 5, 4, 3, 2)
+
+println(myArray.toSet().joinToString())
+```
+
+Мы получим множество, которое не допускает дубликатов. Порядок элементов сохраняется. Обратно в массив можно преобразовать через `toIntArray()` или схожие функции.
+
+Аналогично можно использовать **`toHashSet()`**, получив `HashSet`, который тоже не допускает дубликатов, но не гарантирует очерёдность элементов.
+
+Другой вариант — **`toMutableSet()`**. Порядок сохранится.
+
+Самый простой вариант — вызвать функцию **`distinct()`**, который вернёт новый массив без дубликатов.
+
+```kotlin
+val myArray = arrayOf(1, 1, 2, 3, 4, 5, 5, 4, 3, 2)
+println(myArray.joinToString())
+
+val newArray = myArray.distinct()
+println(newArray.joinToString())
+```
