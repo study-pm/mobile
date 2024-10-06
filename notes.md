@@ -84,6 +84,14 @@
       - [Выбрать случайную строку из массива](#выбрать-случайную-строку-из-массива)
       - [`onEach()`: Операция с каждым элементом массива по очереди (Kotlin 1.40)](#oneach-операция-с-каждым-элементом-массива-по-очереди-kotlin-140)
       - [Удалить дубликаты](#удалить-дубликаты)
+  - [Коллекции](#коллекции)
+    - [Виды коллекций в Kotlin](#виды-коллекций-в-kotlin)
+    - [Использование коллекций](#использование-коллекций)
+    - [Типы коллекций](#типы-коллекций)
+    - [`Collection`](#collection)
+    - [`List`](#list)
+    - [`Set`](#set)
+    - [`Map`](#map)
 
 ## Общее
 66df5d7ed048d373527220f7
@@ -3339,3 +3347,516 @@ println(myArray.joinToString())
 val newArray = myArray.distinct()
 println(newArray.joinToString())
 ```
+
+### Коллекции
+https://kotlinlang.ru/docs/collections-overview.html
+
+Стандартная библиотека Kotlin предоставляет большой набор инструментов для работы с <dfn title="коллекция">коллекциями</dfn> — группами с переменным количеством элементов (или нулём элементов), которые используются для решения какой-либо задачи.
+
+Коллекции — это общая концепция для большинства языков программирования, поэтому если вы знакомы с коллекциями, например, в Java или Python, то можете пропустить данное введение и перейти к разделам с более подробным описанием.
+
+Обычно в коллекции находится несколько объектов одного типа (но также коллекция может быть пустой). Эти объекты называются <dfn title="элемент коллекции">элементами</dfn> или <dfn title="item collection">items</dfn>. Например, все студенты одного факультета образуют коллекцию, которую можно использовать для расчёта их среднего возраста.
+
+#### Виды коллекций в Kotlin
+* <dfn title="List">List</dfn> (<dfn title="список">список</dfn>) — упорядоченная коллекция, в которой к элементам можно обращаться по индексам — целым числам, отражающим положение элементов в коллекции. Идентичные элементы (дубликаты) могут встречаться в списке более одного раза. Примером списка является предложение: это группа слов, их порядок важен, и они могут повторяться.
+* <dfn title="Set">Set</dfn> (<dfn title="множество">множество</dfn>) - коллекция уникальных элементов. Отражает математическую абстракцию множества: группа объектов без повторов. Как правило, порядок расположения элементов здесь не имеет значения. Примером множества является алфавит.
+* <dfn title="Map">Map</dfn> (<dfn title="словарь">словарь</dfn>, <dfn title="ассоциативный список">ассоциативный список</dfn>) — набор из пар “ключ-значение”. Ключи уникальны и каждый из них соответствует ровно одному значению. Значения могут иметь дубликаты. Ассоциативные списки полезны для хранения логических связей между объектами, например, ID сотрудников и их должностей.
+
+Kotlin позволяет управлять коллекциями независимо от того, какой именно тип объектов в них хранится: будь то `String`, `Int` или какой-то собственный класс, общие принципы работы с коллекцией всегда неизменны. Стандартная библиотека Kotlin предоставляет общие интерфейсы, классы и функции для создания, заполнения и управления коллекциями любого типа.
+
+Интерфейсы коллекций и связанные с ними функции находятся в пакете `kotlin.collections`. Давайте рассмотрим его содержимое.
+
+#### Использование коллекций
+- `List` — **когда важен порядок**
+
+    `List` хранит и отслеживает позицию элементов. Она знает, в какой позиции списка находится тот или иной элемент, и несколько элементов могут содержать ссылки на один объект.
+
+- `Set` — **когда важна уникальность**
+
+    `Set` не разрешает дубликаты и не отслеживает порядок, в котором хранятся значения. Коллекция не может содержать несколько элементов, ссылающихся на один и тот же объект, или несколько элементов, ссылающихся на два объекта, которые считаются равными.
+
+- `Map` — **когда важен поиск по ключу**
+
+    `Map` использует пары «ключ-значение». Этот тип коллекции знает, какое значение связано с заданным ключом. Два ключа могут ссылаться на один объект, но дубликаты ключей невозможны. Хотя ключи обычно представляют собой строковые имена (например, для составления списков свойств в формате «имя-значение»), ключом также может быть произвольный объект.
+
+#### Типы коллекций
+Стандартная библиотека Kotlin предоставляет реализации для основных типов коллекций: `Set`, `List`, `Map`. Есть два вида интерфейсов, предоставляющих каждый из этих типов:
+* *неизменяемый* (*read-only*) — предоставляет операции, которые дают доступ к элементам коллекции.
+* *изменяемый* (*mutable*) — расширяет предыдущий интерфейс и дополнительно даёт доступ к операциям добавления, удаления и обновления элементов коллекции.
+
+Обратите внимание, что изменяемую коллекцию не требуется объявлять с помощью ключевого слова `var`. Связано это с тем, что изменения вносятся в изначальные объекты коллекции без изменения ссылки на саму коллекцию. Но если вы объявите коллекцию с помощью `val` и попытаетесь ее перезаписать, то получите ошибку компиляции.
+```kotlin
+fun main() {
+    val numbers = mutableListOf("one", "two", "three", "four")
+    numbers.add("five") // this is OK
+    //numbers = mutableListOf("six", "seven") // compilation error
+}
+```
+
+Неизменяемые типы коллекций [ковариантны](https://kotlinlang.ru/docs/generics.html). Это означает, что если класс `Rectangle` наследуется от `Shape`, вы можете использовать `List<Rectangle>` там, где требуется `List<Shape>`. Другими словами, типы коллекций имеют такое же отношение подтипов, что и типы элементов. `Map`-ы ковариантны по типу значения, но не по типу ключа.
+
+В свою очередь, изменяемые коллекции не являются ковариантными; в противном случае это привело бы к сбоям во время выполнения. Если `MutableList<Rectangle>` был подтипом `MutableList<Shape>`, вы могли добавить в него других наследников `Shape` (например, `Circle`), таким образом нарушая изначальный тип коллекции — `Rectangle`.
+
+!!! info [Ковариантность и контравариантность](https://ru.wikipedia.org/wiki/%D0%9A%D0%BE%D0%B2%D0%B0%D1%80%D0%B8%D0%B0%D0%BD%D1%82%D0%BD%D0%BE%D1%81%D1%82%D1%8C_%D0%B8_%D0%BA%D0%BE%D0%BD%D1%82%D1%80%D0%B0%D0%B2%D0%B0%D1%80%D0%B8%D0%B0%D0%BD%D1%82%D0%BD%D0%BE%D1%81%D1%82%D1%8C_(%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5))
+
+    **Ковариа́нтность** и **контравариа́нтность** в программировании — способы переноса наследования типов на производные от них типы — контейнеры, обобщённые типы, делегаты и т. п. Термины произошли от аналогичных понятий теории категорий «ковариантный» и «контравариантный функтор».
+
+    <dfn title="ковариантность">Ковариантностью</dfn> называется сохранение иерархии наследования исходных типов в производных типах в том же порядке. Так, если класс `Cat` наследуется от класса `Animal`, то естественно полагать, что перечисление `IEnumerable<Cat>` будет потомком перечисления `IEnumerable<Animal>`. Действительно, «список из пяти кошек» — это частный случай «списка из пяти животных». В таком случае говорят, что тип (в данном случае обобщённый интерфейс) `IEnumerable<T>` *ковариантен* своему параметру-типу `T`.
+
+    <dfn title="контравариантность">Контравариантностью</dfn> называется обращение иерархии исходных типов на противоположную в производных типах. Так, если класс `String` наследуется от класса `Object`, а делегат `Action<T>` определён как метод, принимающий объект типа `T`, то `Action<Object>` наследуется от делегата `Action<String>`, а не наоборот. Действительно, если «все строки — объекты», то «всякий метод, оперирующий произвольными объектами, может выполнить операцию над строкой», но не наоборот. В таком случае говорят, что тип (в данном случае обобщённый делегат) `Action<T>` контравариантен своему параметру-типу `T`.
+
+    Отсутствие наследования между производными типами называется <dfn title="инвариантность">инвариантностью</dfn>.
+
+    Контравариантность позволяет корректно устанавливать тип при *создании подтипов* (subtyping), то есть, установить множество функций, позволяющее заменить другое множество функций в любом контексте. В свою очередь, ковариантность характеризует *специализацию кода*, то есть замену старого кода новым в определённых случаях. Таким образом, ковариантность и контравариантность являются независимыми механизмами типобезопасности, не исключающими друг друга, и могут и должны применяться в объектно-ориентированных языках программирования.
+
+
+Ниже представлена ​​схема интерфейсов коллекций Kotlin:
+
+![](./img/collections-diagram.png)
+
+#### `Collection`
+`Collection<T>` является корнем в иерархии коллекций. Этот интерфейс представляет собой обычное поведение неизменяемой коллекции: операции типа `size`, `get` и т. д. Collection наследуется от интерфейса `Iterable<T>`, который определяет операции для итерации элементов. Вы можете использовать `Collection` как параметр функции, которая может работать с разными типами коллекций. Для более конкретных случаев следует использовать наследников `Collection`: `List` и `Set`.
+```kotlin
+fun printAll(strings: Collection<String>) {
+        for(s in strings) print("$s ")
+        println()
+    }
+
+fun main() {
+    val stringList = listOf("one", "two", "one")
+    printAll(stringList) // one two one
+
+    val stringSet = setOf("one", "two", "three")
+    printAll(stringSet) // one two three
+}
+```
+
+`MutableCollection<T>` — это `Collection` с операциями записи, такими как `add` и `remove`.
+
+```kotlin
+fun List<String>.getShortWordsTo(shortWords: MutableList<String>, maxLength: Int) {
+    this.filterTo(shortWords) { it.length <= maxLength }
+    // throwing away the articles
+    val articles = setOf("a", "A", "an", "An", "the", "The")
+    shortWords -= articles
+}
+
+fun main() {
+    val words = "A long time ago in a galaxy far far away".split(" ")
+    val shortWords = mutableListOf<String>()
+    words.getShortWordsTo(shortWords, 3)
+    println(shortWords) // [ago, in, far, far]
+}
+```
+
+#### `List`
+`List<T>` хранит элементы в определённом порядке и обеспечивает к ним доступ по индексу. Индексы начинаются с нуля (0 — индекс первого элемента) и идут до `lastIndex`, который равен (`list.size - 1`).
+```kotlin
+fun main() {
+    val numbers = listOf("one", "two", "three", "four")
+    println("Number of elements: ${numbers.size}") // 4
+    println("Third element: ${numbers.get(2)}") // three
+    println("Fourth element: ${numbers[3]}") // four
+    println("Index of element \"two\" ${numbers.indexOf("two")}") // 1
+}
+```
+
+!!! example [Объявление коллекции `List`](samples/03_Arrays/12_List/src/Main.kt)
+
+```kotlin
+fun main() {
+    val testListStr = listOf("один", "два", "три", 97)
+    val testListNum = listOf(3, 7, 9)
+    val testListSum: List<Int>
+
+    testListSum = testListNum + listOf(6, 8, 2)
+
+    println(testListStr)
+    println(testListNum)
+    println(testListSum)
+}
+```
+
+<details>
+<summary><em>Output</em></summary>
+
+```
+[один, два, три, 97]
+[3, 7, 9]
+[3, 7, 9, 6, 8, 2]
+```
+
+</details>
+
+В неизменяемых коллекциях нельзя менять количество элементов и изменять значение элементов. Это сделано с целью защиты данных.
+
+!!! error Попытка измененить значение
+
+```kotlin
+fun main() {
+    val testListStr = listOf("один", "два", "три", 97)
+    val testListNum = listOf(3, 7, 9)
+    val testListSum: List<Int>
+
+    testListSum = testListNum + listOf(6, 8, 2)
+
+    println(testListStr[2])
+    testListNum[2] = 78 // => Error: No set method providing array access
+}
+
+```
+
+<details>
+<summary><em>Output</em></summary>
+
+```
+Kotlin: No set method providing array access
+```
+
+</details>
+
+Нельзя к массиву с элементами одного типа прибавлять массив с элементами другого типа.
+
+!!! error `List` с разными типами
+
+```kotlin
+fun main() {
+    val testListStr = listOf("один", "два", "три", 97)
+    val testListNum = listOf(3, 7, 9)
+    val testListSum: List<Int>
+
+    testListSum = testListNum + listOf(6.0, 8, 2) // => Error: Assignment type mismatch
+}
+
+```
+
+<details>
+<summary><em>Output</em></summary>
+
+    Kotlin: Assignment type mismatch: actual type is 'kotlin/collections/List<it(kotlin/Number & kotlin/Comparable<*>)>' but 'kotlin/collections/List<kotlin/Int>' was expected
+
+
+</details>
+
+Элементы списка (в том числе `null`) могут дублироваться: список может содержать любое количество одинаковых объектов. Два списка считаются равными, если они имеют одинаковый размер и их элементы в одних и тех позициях [структурно равны](https://kotlinlang.ru/docs/equality.html).
+```kotlin
+data class Person(var name: String, var age: Int)
+
+fun main() {
+    val bob = Person("Bob", 31)
+    val people = listOf(Person("Adam", 20), bob, bob)
+    val people2 = listOf(Person("Adam", 20), Person("Bob", 31), bob)
+    println(people == people2) // true
+    bob.age = 32
+    println(people == people2) // false
+}
+```
+
+`MutableList<T>` — это `List` с операциями записи, специфичными для списка, например, для добавления или удаления элемента в определённой позиции.
+```kotlin
+fun main() {
+    val numbers = mutableListOf(1, 2, 3, 4)
+    numbers.add(5)
+    numbers.removeAt(1)
+    numbers[0] = 0
+    numbers.shuffle()
+    println(numbers) // [4, 0, 3, 5]
+}
+```
+
+!!! example [Работа с `MutableList`](samples/03_Arrays/13_MutableList/src/Main.kt)
+
+```kotlin
+fun main() {
+    val testListNum = mutableListOf(3, 9, 7, 9)
+    println(testListNum)
+
+    testListNum.add(798) // Добавили элемент в конец List
+    println(testListNum)
+
+    testListNum.add(0, 641) // Добавили элемент на место с индексом
+    testListNum.forEach { println(it.toString() + "\t") }
+    println(testListNum)
+
+    testListNum.removeAt(0) // Удалили элемент по индексу
+    testListNum.remove(9) // Удалили первое вхождение элемента со значением
+    println(testListNum)
+}
+
+```
+
+<details>
+<summary><em>Output</em></summary>
+
+```
+[3, 9, 7, 9]
+[3, 9, 7, 9, 798]
+641
+3
+9
+7
+9
+798
+[641, 3, 9, 7, 9, 798]
+[3, 7, 9, 798]
+```
+
+</details>
+
+Как видите, в некоторых аспектах списки очень похожи на массивы. Однако есть одно важное отличие: размер массива определяется при инициализации и никогда не изменяется; в свою очередь список не имеет предопределённого размера; размер списка может быть изменён в результате операций записи: добавления, обновления или удаления элементов.
+
+По умолчанию в Kotlin реализацией `List` является `ArrayList`, который можно рассматривать как массив с изменяемым размером.
+
+!!! example [`mutableListOf` и `ArrayList`](samples/03_Arrays/14_ArrayList/src/Main.kt)
+
+```kotlin
+fun main() {
+    val testListNum = mutableListOf<Int>() // Вызываем метод
+    testListNum.add(97)
+    testListNum.add(85)
+    testListNum.add(17)
+    println(testListNum)
+
+    val testArrList = ArrayList<String>() // Вызываем конструктор класса
+    testArrList.add("один")
+    testArrList.add("два")
+    testArrList.add("три")
+    println(testArrList)
+}
+
+```
+
+<details>
+<summary><em>Output</em></summary>
+
+```
+[97, 85, 17]
+[один, два, три]
+```
+
+</details>
+
+Как видно из примера выше, в обоих случаях получаем `ArrayList`, который можно использовать для получения динамических массивов.
+
+#### `Set`
+`Set<T>` хранит уникальные элементы; их порядок обычно не определён. `null` также является уникальным элементом: `Set` может содержать только один `null`. Два множества равны, если они имеют одинаковый размер и для каждого элемента множества есть равный элемент в другом множестве.
+```kotlin
+fun main() {
+    val numbers = setOf(1, 2, 3, 4)
+    println("Number of elements: ${numbers.size}") // Number of elements: 4
+    if (numbers.contains(1)) println("1 is in the set")
+
+    val numbersBackwards = setOf(4, 3, 2, 1)
+    println("The sets are equal: ${numbers == numbersBackwards}") // true
+}
+```
+
+!!! example [Неизменяемый `Set`](samples/03_Arrays/15_Set/src/Main.kt)
+
+```kotlin
+fun main() {
+    val testSetNum = setOf(1, 4, 8, 5, 4)
+    println(testSetNum)
+    val testSetTwo: Set<Int>
+    testSetTwo = setOf(2, 4, 9, 3, 5)
+    for (item in testSetNum) {
+        print(testSetTwo.contains(item).toString() + "\t")
+    }
+    println()
+
+    println(testSetNum.intersect(testSetTwo))       // пересечение наборов
+    val testNewSet = testSetNum.union(testSetTwo)   // объединение
+    println(testNewSet)
+    val testPlusSet = testSetNum.plus(789)
+    println(testPlusSet)
+}
+
+```
+
+<details>
+<summary><em>Output</em></summary>
+
+```
+[1, 4, 8, 5]
+false	true	false	true
+[4, 5]
+[1, 4, 8, 5, 2, 9, 3]
+[1, 4, 8, 5, 789]
+```
+
+</details>
+
+`MutableSet` — это `Set` с операциями записи из `MutableCollection`.
+
+!!! example [Изменяемый `Set`](samples/03_Arrays/16_MutableSet/src/Main.kt)
+
+```kotlin
+fun main() {
+    val testSetNum = mutableSetOf(1, 9, 6, 4, 7)
+    val testSetTwo: MutableSet<Int> = mutableSetOf()
+    for (i in 9..16) {
+        testSetTwo.add(i * (105..145).random())
+    }
+    println(testSetNum)
+    println(testSetTwo)
+    testSetNum.remove(1)
+    println(testSetNum)
+    println(testSetNum.dropWhile { it > 6 })
+}
+
+```
+
+<details>
+<summary><em>Output</em></summary>
+
+```
+[1, 9, 6, 4, 7]
+[1080, 1130, 1408, 1332, 1482, 1638, 1935, 2064]
+[9, 6, 4, 7]
+[6, 4, 7]
+```
+
+</details>
+
+По умолчанию реализацией `Set` является `LinkedHashSet`, который сохраняет порядок вставки элементов. Следовательно, функции, которые зависят от порядка элементов, такие как `first()` или `last()`, возвращают предсказуемые результаты для таких множеств.
+```kotlin
+fun main() {
+    val numbers = setOf(1, 2, 3, 4)  // по умолчанию LinkedHashSet
+    val numbersBackwards = setOf(4, 3, 2, 1)
+
+    println(numbers.first() == numbersBackwards.first()) // false
+    println(numbers.first() == numbersBackwards.last()) // true
+}
+```
+
+Альтернативная реализация — `HashSet` — не сохраняет порядок элементов, поэтому при вызове функций `first()` или `last()` вернётся непредсказуемый результат. Однако `HashSet` требует меньше памяти для хранения того же количества элементов.
+
+Можно преобразовывать изменяемые коллекции в неизменяемые и наоборот:
+
+!!! example [Конверсия](samples/03_Arrays/17_Conversion/src/Main.kt)
+
+```kotlin
+fun main() {
+    val testSetNum = mutableSetOf(1, 9, 6, 4, 7)
+    println(testSetNum)
+    testSetNum.add(47)
+    println(testSetNum)
+    val testNoMutableSet = testSetNum.toSet() // Можно преобразовывать изменяемые коллекции в неизменяемые и наоборот
+    testSetNum.add(59)
+    println(testNoMutableSet)
+    // testNoMutableSet.add(39) // Нельзя добавить элемент, так как мы вернули неизменяемую коллекцию
+    println(testSetNum)
+}
+
+```
+
+<details>
+<summary><em>Output</em></summary>
+
+```
+[1, 9, 6, 4, 7]
+[1, 9, 6, 4, 7, 47]
+[1, 9, 6, 4, 7, 47]
+[1, 9, 6, 4, 7, 47, 59]
+```
+
+</details>
+
+#### `Map`
+`Map<K, V>` не является наследником интерфейса `Collection`; однако это один из типов коллекций в Kotlin. `Map` хранит пары “ключ-значение” (или *entries*); ключи уникальны, но разные ключи могут иметь одинаковые значения. Интерфейс `Map` предоставляет такие функции, как доступ к значению по ключу, поиск ключей и значений и т. д.
+```kotlin
+fun main() {
+    val numbersMap = mapOf("key1" to 1, "key2" to 2, "key3" to 3, "key4" to 1)
+
+    println("All keys: ${numbersMap.keys}") // [key1, key2, key3, key4]
+    println("All values: ${numbersMap.values}") // [1, 2, 3, 1]
+    if ("key2" in numbersMap) println("Value by key \"key2\": ${numbersMap["key2"]}")
+    if (1 in numbersMap.values) println("The value 1 is in the map")
+    if (numbersMap.containsValue(1)) println("The value 1 is in the map") // аналогичен предыдущему условию
+}
+```
+
+Две `Map`-ы, содержащие равные пары, равны независимо от порядка пар.
+```kotlin
+fun main() {
+    val numbersMap = mapOf("key1" to 1, "key2" to 2, "key3" to 3, "key4" to 1)
+    val anotherMap = mapOf("key2" to 2, "key1" to 1, "key4" to 1, "key3" to 3)
+
+    println("The maps are equal: ${numbersMap == anotherMap}") // The maps are equal: true
+}
+```
+
+!!! example [Словари `Map`](samples/03_Arrays/18_Map/src/Main.kt)
+
+```kotlin
+fun main() {
+    val num = mapOf(1 to "one", 2 to "two", 3 to "three", 4 to "three")
+    val k = num.keys
+    val v = num.values
+    val e = num.entries
+
+    println(k)
+    println(v)
+    println(e)
+
+    for ((i, j) in e)
+        println("The $i is $j!")
+}
+
+```
+
+<details>
+<summary><em>Output</em></summary>
+
+```
+[1, 2, 3, 4]
+[one, two, three, three]
+[1=one, 2=two, 3=three, 4=three]
+The 1 is one!
+The 2 is two!
+The 3 is three!
+The 4 is three!
+```
+
+</details>
+
+`MutableMap` — это `Map` с операциями записи, например, можно добавить новую пару “ключ-значение” или обновить значение, связанное с указанным ключом.
+```kotlin
+fun main() {
+    val numbersMap = mutableMapOf("one" to 1, "two" to 2)
+    numbersMap.put("three", 3)
+    numbersMap["one"] = 11
+
+    println(numbersMap) // {one=11, two=2, three=3}
+}
+```
+
+По умолчанию реализацией `Map` является `LinkedHashMap` — сохраняет порядок элементов. Альтернативная реализация — `HashMap` — не сохраняет порядок элементов.
+
+!!! example [Изменяемый `Map`](samples/03_Arrays/19_MutableMap/src/Main.kt)
+
+```kotlin
+fun main() {
+    val num = mutableMapOf(1 to "один", 2 to "два", 3 to "три", 4 to "три")
+    num.remove(3)
+    println(num)
+    num[1] = "восемь"
+    num[55] = "пятьдесят пять"
+    println(num)
+    num.putAll(setOf(6 to "шесть", 9 to "девять"))
+    num.putAll(mapOf(16 to "десять и шесть", 29 to "двадцать и девять"))
+    println(num)
+}
+
+```
+
+<details>
+<summary><em>Output</em></summary>
+
+```
+{1=один, 2=два, 4=три}
+{1=восемь, 2=два, 4=три, 55=пятьдесят пять}
+{1=восемь, 2=два, 4=три, 55=пятьдесят пять, 6=шесть, 9=девять, 16=десять и шесть, 29=двадцать и девять}
+```
+
+</details>
