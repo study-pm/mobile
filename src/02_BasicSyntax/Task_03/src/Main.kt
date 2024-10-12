@@ -10,12 +10,12 @@ fun convertDecToBinary(d: UInt): String {
 }
 fun convertDecToBinary(d: Int): String {
     var res = ""
-    var quotient = d
+    var quotient = if (d < 0) -d else d
     do {
         res = (quotient % 2).toString() + res
         quotient /= 2
     } while (quotient != 0)
-    return res
+    return if (d < 0) "-$res" else res
 }
 
 fun main() {
