@@ -48,9 +48,9 @@ fun evalExp(s: String): Double {
 }
 
 fun main() {
-    println("Enter two numbers and operation symbol in the following format: ")
+    println("Enter two numbers and an operation symbol in the following format: ")
     println("\t<OPERAND> <OPERAND> <OPERATION>")
-    println("where OPERAND stands for a real number and OPERATION must be any of: + - * /")
+    println("where the <OPERAND> stands for a real number and the <OPERATION> must be any of: + - * /")
     val input = readln()
     try {
         val result = evalExp(input)
