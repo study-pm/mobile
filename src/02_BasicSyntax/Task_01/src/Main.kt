@@ -26,5 +26,5 @@ fun main() {
     println(res)
 }
 
-// Sample string:   AAADSSSRRTTHAAAA
+// Sample input:    AAADSSSRRTTHAAAA
 // Expected output: A3DS3R2T2HA4
