@@ -93,6 +93,28 @@
     - [`Set`](#set)
     - [`Map`](#map)
 - [04 Функции](#04-функции)
+  - [Функции – обязательные и необязательные параметры (значения по умолчанию)](#функции--обязательные-и-необязательные-параметры-значения-по-умолчанию)
+  - [Функции – именованные параметры](#функции--именованные-параметры)
+  - [Функции – изменение параметров](#функции--изменение-параметров)
+  - [Функции – переменное число параметров](#функции--переменное-число-параметров)
+  - [Оператор `*` — spread operator](#оператор---spread-operator)
+  - [Функции – оператор `return`](#функции--оператор-return)
+  - [Функции – вернули `Unit`](#функции--вернули-unit)
+  - [Функции – однострочные функции](#функции--однострочные-функции)
+  - [Функции – локальная функция](#функции--локальная-функция)
+  - [Функции – рефакторинг кода](#функции--рефакторинг-кода)
+  - [Функции – перегрузка](#функции--перегрузка)
+  - [Функции – присвоение переменной](#функции--присвоение-переменной)
+  - [Функции – примеры использования](#функции--примеры-использования)
+  - [Функции высокого порядка](#функции-высокого-порядка)
+  - [Возвращение функции из функции](#возвращение-функции-из-функции)
+  - [Анонимные функции](#анонимные-функции)
+  - [Анонимные функции как аргумент](#анонимные-функции-как-аргумент)
+  - [Возвращение анонимной функции из функции](#возвращение-анонимной-функции-из-функции)
+  - [Функции – лямбда-выражения](#функции--лямбда-выражения)
+  - [Лямбда-выражения. Передача параметров](#лямбда-выражения-передача-параметров)
+  - [Лямбда-выражения как аргументы функций](#лямбда-выражения-как-аргументы-функций)
+  - [Ключевые особенности функций в Kotlin](#ключевые-особенности-функций-в-kotlin)
 
 ## Общее
 [66df5d7ed048d373527220f7](https://e-learn.petrocollege.ru/course/view.php?id=7179#section-0)
@@ -3867,7 +3889,11 @@ fun main() {
 
 <dfn title="функция">Функция</dfn> — это группа взаимосвязанных блоков кода, которая выполняет определенную задачу. Функция используется для разбиения программы на разные вспомогательные модули. Это упрощает повторное использование кода и делает программу более управляемой.
 
+[Source](samples/04_Functions/01_NoFun/src/Main.kt)
+
 ![Function refactoring](./img/fun-refactor-1.png "refactor")
+
+[Source](samples/04_Functions/02_Fun/src/Main.kt)
 
 ![Function refactoring](./img/fun-refactor-2.png "refactor")
 
@@ -3876,8 +3902,6 @@ fun main() {
 ![Function refactoring](./img/fun-refactor-4.png "refactor")
 
 ![Function refactoring](./img/fun-refactor-5.png "refactor")
-
-![Function refactoring](./img/fun-refactor-6.png "refactor")
 
 ![Function refactoring](./img/fun-refactor-7.png "refactor")
 
@@ -3910,8 +3934,690 @@ fun main() {
 - Стандартная библиотечная функция
 - Определяемая пользователем функция
 
-Пример использования стандартныхбиблиотечных функций `sqrt()` и `log()`.
+!!! example [Использование стандартных библиотечных функций](samples/04_Functions/03_FunTypes/src/Main.kt)
 
-**Определяемая пользователем функция** — это функция, которая создается пользователем.Определяемая пользователем функция принимает параметры,выполняет действие и возвращает результат этого действия в видезначения.
+*Пример использования стандартных библиотечных функций `sqrt()` и `log()`.*
 
-Функции также принимают параметр в качестве аргументови возвращают значение. Функции Kotlin определяются с использованием нотации Pascal, т.е. `имя:тип` (имя параметра и его тип). Параметры в функции разделяются запятыми. Если функция не возвращает никакого значения, то ее возвращаемый тип равен `Unit`. Необязательно указывать возвращаемый тип определения функции, который не возвращает никакого значения.
+```kotlin
+import kotlin.math.log
+import kotlin.math.sqrt
+
+fun main() {
+    val number = 81
+    println(sqrt(number.toFloat()))
+
+    val base = 10
+    println(log(1000F, base.toFloat()))
+}
+```
+
+<details>
+<summary><em>Output</em></summary>
+
+```
+9.0
+3.0
+```
+
+</details>
+
+**Определяемая пользователем функция** — это функция, которая создается пользователем. Определяемая пользователем функция принимает параметры, выполняет действие и возвращает результат этого действия в виде значения.
+
+Функции Kotlin объявляются с использованием ключевого слова `fun`. Например:
+
+!!! example [Example](samples/04_Functions/04_UserFun/src/Main.kt)
+
+```kotlin
+fun main() {
+    println(prediction("Афанасий", 45))
+}
+
+private fun prediction(name: String, age: Int): String {
+    return if (name.count() > 7 && age % 5 == 0) {
+        "Все будет ОЧЕНЬ хорошо"
+    } else {
+        "Все будет отлично"
+    }
+}
+
+```
+
+<details>
+<summary><em>Output</em></summary>
+
+```
+Все будет ОЧЕНЬ хорошо
+```
+
+</details>
+
+Функции также принимают параметры в качестве аргументов и возвращают значение. Функции Kotlin определяются с использованием нотации Pascal, т.е. `имя:тип` (имя параметра и его тип). Параметры в функции разделяются запятыми.
+
+Если функция не возвращает никакого значения, то ее возвращаемый тип равен `Unit`. Необязательно указывать возвращаемый тип определения функции, который не возвращает никакого значения.
+
+![Function params](./img/fun_01.png "Function params")
+
+### Функции – обязательные и необязательные параметры (значения по умолчанию)
+Мы можем определить какие-то параметры функции как необязательные и установить для них значения по умолчанию.
+
+Необязательные параметры обязательно идут в конце списка параметров.
+
+!!! example [Example](samples/04_Functions/05_OptionalParams/src/Main.kt)
+
+```kotlin
+fun main() {
+    println(sumThree(15, 25, 44))
+    println(sumThree(16, 18))
+}
+
+fun sumThree(koefA: Int, koefB: Int, koefC: Int = 5): String {
+    return "$koefA + $koefB + $koefC = ${koefA + koefB + koefC}"
+}
+
+```
+
+<details>
+<summary><em>Output</em></summary>
+
+```
+15 + 25 + 44 = 84
+16 + 18 + 5 = 39
+```
+
+</details>
+
+### Функции – именованные параметры
+Используя именованные аргументы, мы можем переопределить порядок их передачи параметрам.
+
+Часть аргументов могут передаваться параметрам по позиции. Но если какой-то аргумент передан по имени, то остальные аргументы после него также должны передаваться по имени соответствующих параметров.
+
+Если до обязательного параметра функции идут необязательные параметры, то для обязательного параметра значение передается по имени.
+
+!!! example [Example](samples/04_Functions/06_NamedParams/src/Main.kt)
+
+```kotlin
+fun main() {
+    println(sumThree(koefC = 15, koefA = 25, koefB = 44))
+    println(sumThree(16, koefB = 18))
+    println(sumThree(16, koefC = 18, koefB = 75))
+    println(myIncrease(koefB = 73, koefC = 64))
+}
+
+fun sumThree(koefA: Int, koefB: Int, koefC: Int = 5): String {
+    return "$koefA + $koefB + $koefC = ${koefA + koefB + koefC}"
+}
+
+fun myIncrease(koefA: Int = 42, koefB: Int, koefC: Int): String {
+    return "$koefA + $koefB + $koefC = ${koefA + koefB + koefC}"
+}
+
+```
+
+<details>
+<summary><em>Output</em></summary>
+
+```
+25 + 44 + 15 = 84
+16 + 18 + 5 = 39
+16 + 75 + 18 = 109
+42 + 73 + 64 = 179
+```
+
+</details>
+
+### Функции – изменение параметров
+По умолчанию все параметры функции равносильны `val`-переменным, поэтому их значение нельзя изменить.
+
+Однако если параметр представляет какой-то сложный объект, то можно изменять отдельные значения в этом объекте.
+
+Изменение элемента массива внутри функции приведет к тому, что также будет изменено значение элемента в том массиве, который передается в качестве аргумента в функцию, так как этот один и тот же массив.
+
+!!! example [Example](samples/04_Functions/07_MutableParams/src/Main.kt)
+
+```kotlin
+fun main() {
+    val testArr = intArrayOf(9, 7, 6)
+    doubleArray(testArr)
+    println()
+    testArr.forEach { print(it.toString() + "\t") }
+}
+
+fun doubleArray(numArr: IntArray) {
+    for (i in 0..numArr.size - 1) {
+        numArr[i] = numArr[i] * 2
+    }
+    print("Печать из функции\t")
+    numArr.forEach { print(it.toString() + "\t") }
+}
+
+```
+
+<details>
+<summary><em>Output</em></summary>
+
+```
+Печать из функции	18	14	12
+18	14	12
+```
+
+</details>
+
+### Функции – переменное число параметров
+Функция может принимать переменное количество параметров одного типа. Для определения таких параметров применяется ключевое слово `vararg`.
+
+В самой функции мы можем работать с параметром как с последовательностью.
+
+Только один параметр может быть помечен как `vararg`.
+
+!!! example [Example](samples/04_Functions/08_Vararg/src/Main.kt)
+
+```kotlin
+fun main() {
+    prnStr("Иван", "Петр", "Афанасий", "Владимир", "Дмитрий")
+    println()
+    prnStr("C++", "Kotlin", "Golang")
+    println()
+    print(prnSum(1, 9, 5, 16, 73))
+}
+
+fun prnStr(vararg name: String) {
+    for (item in name) {
+        print(item + "\t")
+    }
+}
+
+fun prnSum(vararg itemNum: Int):Int {
+    var result = 0
+    for (item in itemNum) result += item
+    return result
+}
+
+```
+
+<details>
+<summary><em>Output</em></summary>
+
+```
+Иван	Петр	Афанасий	Владимир	Дмитрий
+C++	Kotlin	Golang
+104
+```
+
+</details>
+
+Если функция принимает несколько параметров, то обычно `vararg`-параметр является последним.
+
+!!! example [Example](samples/04_Functions/09_Vararg/src/Main.kt)
+
+```kotlin
+fun main() {
+    if(myCount(7, "Иван", "Петр", "Сергей")) {
+        println("Людей больше, чем мест")
+    }
+    else {
+        println("Мест хватает для всех")
+    }
+}
+
+fun myCount(counts: Int, vararg users: String) = if (counts > users.size) {
+    false
+} else {
+    true
+}
+
+```
+
+<details>
+<summary><em>Output</em></summary>
+
+```
+Мест хватает для всех
+```
+
+</details>
+
+Однако это необязательно, и, если после `vararg`-параметра идут еще какие-нибудь параметры, то при вызове функции значения этим параметрам передаются через именованные аргументы.
+
+!!! example [Example](samples/04_Functions/10-Vararg/src/Main.kt.kt)
+
+```kotlin
+fun main() {
+    if(myCount("Иван", "Петр", "Сергей", counts = 2)) {
+        println("Людей больше, чем мест")
+    }
+    else {
+        println("Мест хватает для всех")
+    }
+}
+
+fun myCount(vararg users: String, counts: Int) = if (counts > users.size) {
+    false
+} else {
+    true
+}
+
+```
+
+<details>
+<summary><em>Output</em></summary>
+
+```
+Людей больше, чем мест
+```
+
+</details>
+
+### Оператор `*` — spread operator
+Оператор `*` (spread operator) (не стоит путать со знаком умножения) позволяет передать параметру в качестве значения элементы из массива.
+
+Обратите внимание на звездочку перед `nums` при вызове функции:
+```kotlin
+myCount(5, *testArr)
+```
+
+Без применения данного оператора мы столкнулись бы с ошибкой, поскольку параметры функции представляют не массив, а неопределенное количество значений типа `Int`.
+
+!!! example [Example](samples/04_Functions/11_SpreadOperator/src/Main.kt)
+
+```kotlin
+fun main() {
+    val testArr = intArrayOf(8, 9, 6, 7, 3, 4)
+    println(myCount(5, *testArr))
+}
+
+fun myCount(koef: Int, vararg numbers: Int): Int {
+    var summa = 0
+    for (item in numbers) summa += item * koef
+    return summa
+}
+
+```
+
+<details>
+<summary><em>Output</em></summary>
+
+```
+185
+```
+
+</details>
+
+### Функции – оператор `return`
+
+![Return operator](./img/fun_02.png "Return operator")
+
+### Функции – вернули `Unit`
+Если функция возвращает значение `Unit`, мы также можем использовать оператор `return` для возврата из функции.
+
+![Unit type](./img/fun_03.png "Unit type")
+
+### Функции – однострочные функции
+Однострочные функции (single expression function) используют сокращенный синтаксис определения функции в виде одного выражения. Эта форма позволяет опустить возвращаемый тип и оператор `return`.
+
+После списка параметров не указывается возвращаемый тип. Возвращаемый тип будет выводится компилятором. Далее через оператор присвоения `=` определяется тело функции в виде одного выражения.
+
+!!! example [Example](samples/04_Functions/12_SingleExpressionFun/src/Main.kt)
+
+```kotlin
+import java.lang.Math.pow
+import kotlin.math.pow
+
+fun main() {
+    val testBasis = 7.0
+    val testDegree = 4.0
+    println(nthDegreeRoot(testBasis, testDegree))
+    println(nthDegreeRootKotlin(testBasis, testDegree))
+}
+
+fun nthDegreeRoot(basis: Double, degree: Double) = pow(pow(basis, degree), 1 /2.0)
+
+fun nthDegreeRootKotlin(basis: Double, degree: Double) = basis.pow(degree).pow(1 / 2.0)
+
+```
+
+<details>
+<summary><em>Output</em></summary>
+
+```
+49.0
+49.0
+```
+
+</details>
+
+### Функции – локальная функция
+Одни функции могут быть определены внутри других функций. Внутренние или вложенные функции еще называют локальными.
+
+Локальные функции могут определять действия, которые используются только в рамках какой-то конкретной функции и нигде больше не применяются.
+
+![Local function](./img/fun_04.png "Local function")
+
+### Функции – рефакторинг кода
+
+![Function refactoring](./img/fun_05.png "Function refactoring")
+
+### Функции – перегрузка
+Каждый раз при вызове функции должно быть понятно, какая функция будет выполняться.
+
+Обычно это достигается через разницу в списке параметров:
+- разное количество параметров;
+- разные типы у параметров;
+- разный порядок параметров.
+
+Одного возвращаемого типа недостаточно для различия двух функций. Т.е. если одна функция возвращает Int, а другая возвращает строку — этого будет недостаточно, чтобы компилятор понял, какую из них вызвать, ведь тип у параметров один и тот же.
+
+!!! example [Example](samples/04_Functions/13_Overloading/src/Main.kt)
+
+```kotlin
+fun main() {
+    println("7 < 9 < 16 => " + ascSequence(7, 9, 16))
+    println("7.8 < 7.81 < 16.85 => " + ascSequence(7.8, 7.81, 16.85))
+    println("7.8f < 7.81f < 16.85f => " + ascSequence(7.8f, 7.81f, 16.85f))
+    println("87 < 69.3F < 56.15 => " + ascSequence(87, 69.3F, 56.15))
+}
+
+fun ascSequence(a: Int, b: Int, c: Int) = b in (a + 1)..c
+
+fun ascSequence(a: Double, b: Double, c: Double) = a < b && b < c
+
+fun ascSequence(a: Float, b: Float, c: Float) = a < b && b < c
+
+fun ascSequence(a: Int, b: Float, c: Double) = a < b && b < c
+
+```
+
+<details>
+<summary><em>Output</em></summary>
+
+```
+7 < 9 < 16 => true
+7.8 < 7.81 < 16.85 => true
+7.8f < 7.81f < 16.85f => true
+87 < 69.3F < 56.15 => false
+```
+
+</details>
+
+> Почему перегруженные функции для типов `Double`, `Float` и смешанных нельзя записать так же, как функцию для типа `Int`?
+>
+> Тело функции для типа `Int` можно записать как проверку диапазона в силу дискретности проверяемых значений. Если записать остальные функции так же, то при равенстве некоторых из входящих параметров функция будет выдавать неверный результат.
+
+### Функции – присвоение переменной
+Переменная может представлять функцию. С помощью типа функции можно определить, какие именно функции переменная может представлять.
+
+Чтобы передать функцию, перед названием функции ставится оператор `::`.
+
+Затем через имя переменной фактически можно обращаться к функции.
+
+!!! example [Example](samples/04_Functions/14_AssigningToVar/src/Main.kt)
+
+```kotlin
+fun main() {
+    val operationFun: (Int, Int) -> Int
+    val testA = (100..999).random()
+    val testB = (100..999).random()
+    if (testA < testB) {
+        operationFun = ::addFun
+    } else {
+        operationFun = ::myDiff
+    }
+    print("$testA $testB => ")
+    printResult(operationFun(testA, testB))
+}
+
+fun myDiff(a: Int, b: Int) = a - b
+
+fun addFun(a: Int, b: Int) = a + b
+
+fun printResult(function: Int) {
+    println(function)
+}
+
+```
+
+<details>
+<summary><em>Output</em></summary>
+
+```
+870 767 => 103
+```
+
+</details>
+
+### Функции – примеры использования
+Примеры использования функции как переменной или в качестве параметра для другой функции.
+
+!!! example [Example](samples/04_Functions/15_UsageExamples/src/Main.kt)
+
+```kotlin
+fun main() {
+    val operationFun = ::myFun
+    printResult(operationFun, 5, 67)
+    printResult(::addFun, 72, 28)
+    println(myDiff(addFun(67, 45), 67))
+}
+
+fun myDiff(a: Int, b: Int) = a - b
+
+fun addFun(a: Int, b: Int) = a + b
+
+fun myFun(a: Int, b: Int) = a * b
+
+fun printResult(function: (Int, Int) -> Int, a: Int, b: Int) {
+    println(function(a, b))
+}
+
+```
+
+<details>
+<summary><em>Output</em></summary>
+
+```
+335
+100
+45
+```
+
+</details>
+
+### Функции высокого порядка
+Функции высокого порядка (high order function) — это функции, которые либо принимают функцию в качестве параметра, либо возвращают функцию, либо и то, и другое.
+
+![High order function](./img/fun_06.png "High order function")
+
+!!! example [Example](samples/04_Functions/16_HighOrderFun/src/Main.kt)
+
+```kotlin
+fun main() {
+    printResult(::addFun, 72, 28)
+    prnRes(::myFun)
+}
+
+fun addFun(a: Int, b: Int) = a + b
+
+fun myFun() {
+    println("Вы распечатали строку")
+}
+
+fun printResult(function: (Int, Int) -> Int, a: Int, b: Int) {
+    println(function(a, b))
+}
+
+fun prnRes(function: () -> Unit) {
+    function()
+}
+
+```
+
+<details>
+<summary><em>Output</em></summary>
+
+```
+100
+Вы распечатали строку
+```
+
+</details>
+
+### Возвращение функции из функции
+В более редких случаях может потребоваться возвратить функцию из другой функции. В этом случае для функции в качестве возвращаемого типа устанавливается тип другой функции. А в теле функции возвращается лямбда выражение.
+
+!!! example [Example](samples/04_Functions/17_ReturnFun/src/Main.kt)
+
+```kotlin
+fun main() {
+    val actionOne = selectAction(1)
+    println(actionOne(15, 95))
+    val actionTwo = selectAction(2)
+    println(actionTwo(43, 67))
+}
+
+fun selectAction(key: Int): (Int, Int) -> Int {
+    return when (key) {
+        1 -> ::sumFun
+        2 -> ::subtractionFun
+        else -> ::emptyFun
+    }
+}
+
+fun sumFun(a: Int, b: Int) = a + b
+
+fun subtractionFun(a: Int, b: Int) = a - b
+
+fun emptyFun(a: Int, b: Int) = 0
+
+```
+
+<details>
+<summary><em>Output</em></summary>
+
+```
+110
+-24
+```
+
+</details>
+
+### Анонимные функции
+Анонимные функции выглядят как обычные за тем исключением, что они не имеют имени.
+
+!!! example [Example](samples/04_Functions/18_AnonymousFun/src/Main.kt)
+
+```kotlin
+fun main() {
+    val message = fun() = println("Hello, World!!!")
+    message()
+
+    val sumFun = fun(x: Int, y: Int) = x + y
+    println(sumFun(18, 37))
+}
+
+```
+
+<details>
+<summary><em>Output</em></summary>
+
+```
+Hello, World!!!
+55
+```
+
+</details>
+
+### Анонимные функции как аргумент
+Анонимную функцию можно передавать в функцию, если параметр соответствует типу этой функции.
+
+!!! example [Example](samples/04_Functions/19_AnonymousFunAsArg/src/Main.kt)
+
+```kotlin
+fun main() {
+    doOperation(9, 5, fun(x: Int, y: Int): Int = x + y)
+    doOperation(9, 5, fun(x: Int, y: Int): Int = x - y)
+
+    val action = fun(x: Int, y: Int): Int = x * y
+    doOperation(9, 5, action)
+}
+
+fun doOperation(x: Int, y: Int, op: (Int, Int) -> Int) {
+    val result = op(x, y)
+    println(result)
+}
+
+```
+
+<details>
+<summary><em>Output</em></summary>
+
+```
+14
+4
+45
+```
+
+</details>
+
+### Возвращение анонимной функции из функции
+Фунция может возвращать анонимную функцию в качестве результата.
+
+!!! example [Example](samples/04_Functions/20_ReturnAnonymousFun/src/Main.kt)
+
+```kotlin
+fun main() {
+    val action1 = selectAction(1)
+    val result1 = action1(4, 5)
+    println(result1)
+    val action2 = selectAction(2)
+    println(action2(4, 5))
+    val action3 = selectAction(3)
+    println(action3(4, 5))
+    val action = selectAction(9)
+    println(action(4, 5))
+}
+
+fun selectAction(key: Int): (Int, Int) -> Int {
+    return when (key) {
+        1 -> fun(x: Int, y: Int): Int = x + y
+        2 -> fun(x: Int, y: Int): Int = x - y
+        3 -> fun(x: Int, y: Int): Int = x * y
+        else -> fun(_: Int, _: Int): Int = 0
+    }
+}
+
+```
+
+<details>
+<summary><em>Output</em></summary>
+
+```
+9
+-1
+20
+0
+```
+
+</details>
+
+### Функции – лямбда-выражения
+Лямбда-выражения представляют небольшие кусочки кода, которые выполняют некоторые действия. Фактически лямбды преставляют сокращенную запись функций. При этом лямбды, как и обычные и анонимные функции, могут передаваться в качестве значений переменным и параметрам функции.
+
+![Lambda statement](./img/fun_07.png "Lambda statement")
+
+### Лямбда-выражения. Передача параметров
+Лямбды как и функции могут принимать параметры. Для передачи параметров используется стрелка `->`. Параметры указываются слева от стрелки, а тело лямбда-выражения, то есть сами выполняемые действия, справа от стрелки.
+
+![Lambda params](./img/fun_08.png "Lambda params")
+
+### Лямбда-выражения как аргументы функций
+
+![Lambda as arg](./img/fun_09.png "Lambda as arg")
+
+### Ключевые особенности функций в Kotlin
+- Функция используется для определения задачи, которую можно выполнять столько раз, сколько потребуется без необходимости повторно писать код;
+- Функции могут принимать ноль или более параметров и, при необходимости, возвращать значение;
+- Для ясности при вызове функции можно использовать именованные аргументы;
+- Указание значений функций по умолчанию может упростить работу и сократить объем кода;
+- Функции могут обладать одним и тем же названием с разными параметрами. Это называется перегрузкой;
+- Можно назначать функции переменным и передавать их другим функциям;
+- У функций может быть специальный возвращаемый тип `Nothing`, который сообщает Kotlin, что эта функция никогда не завершится;
+- Стремитесь создавать функции с четкими и понятными названиями;
+- Одна функция должна выполнять ОДНУ задачу которая соответствует её названию.
