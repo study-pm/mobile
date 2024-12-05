@@ -12,7 +12,7 @@ import kotlin.math.sqrt
  *
  * Usage examples
  * ```kotlin
- * // Getting a new instance without any suggestion or hint provided: discouraged for taking the longest
+ * // Getting a new instance without any suggestion/hint provided: discouraged for taking the longest
  * val cipher: Porta<Iterable<Char>> = Porta()
  * // Original message
  * val original = "kotlin"
@@ -24,7 +24,7 @@ import kotlin.math.sqrt
  * cipher.printResult(original, encrypted)
  * cipher.printResult(decrypted)
  * // Output
- * Plaintext	ko		tl		in
+ * Plaintext	ko	tl	in
  * Ciphertext	46655	07991	30853
  * Decrypted	kotlin
  *
