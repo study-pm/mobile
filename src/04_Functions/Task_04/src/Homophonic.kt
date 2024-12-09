@@ -37,6 +37,21 @@ import kotlin.math.pow
  * Ciphertext	0014	0592	0013	0777	0060	0357	0251	0668
  * Decrypted	о	м	о	ф	о	н	и	я
  *
+ *
+ * // Getting a new instance with a specific language map provided
+ * val cipher = Homophonic("и")
+ * // Original message
+ * val original = "ОмОфОниЯ"
+ * // Encryption
+ * val encrypted = cipher.encrypt(original)
+ * // Decryption
+ * val decrypted = cipher.decrypt(encrypted)
+ * // Print results
+ * cipher.printResult(original, encrypted, decrypted)
+ * Plaintext	K	r	y	p	t	o	g	r	a	p	h	i	e
+ * Ciphertext	5148	7153	5880	4266	5326	6831	5971	0639	1666	7435	0328	0704	3838
+ * Decrypted	k	r	y	p	t	o	g	r	a	p	h	i	e
+ *
  * // Getting a new instance within a specific frequency map provided and randomizing within full range off
  * val cipher = Homophonic(Crypto.Chars.FqMap.RuSt, false)
  * // Original message
@@ -144,7 +159,7 @@ class Homophonic(private val fqMap: Chars.FqMap, private val isRnd: Boolean = tr
         cipher.chunked(valRank).forEach { print("$it\t") }
         println()
         print(Console.format("Decrypted\t", styles = setOf(Console.Style.Strong)))
-        plain.forEach { print("$it\t") }
+        decrypted.forEach { print("$it\t") }
         println()
     }
 
