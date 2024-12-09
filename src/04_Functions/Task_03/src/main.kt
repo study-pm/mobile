@@ -43,7 +43,8 @@ fun main() {
         cipher.printResult(original, encrypted, decrypted)
         println()
         cipher.printCipherTable()
-    } catch (exc: Exception) {
+    }
+    catch (exc: Exception) {
         println(Console.format("Invalid input: ", mode = Console.Mode.Error) + exc.message)
     }
 }
