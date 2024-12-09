@@ -18,7 +18,8 @@
  */
 
 fun main() {
-    try {// Input
+    try {
+        // Input
         print("Enter a text to encrypt: ")
         val original = readln()
         print("Enter an encryption key: ")
