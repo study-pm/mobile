@@ -43,7 +43,7 @@
  * cipher.printCipherTable()
  * // Output
  * Plaintext	4567890
- * Keyword		1231231
+ * Keyword	1231231
  * Ciphertext	9656844
  * Decrypted	4567890
  *
@@ -72,7 +72,7 @@
  * cipher.printResult(original, encrypted, decrypted)
  * // Output
  * Plaintext	Абрамов
- * Keyword		Виженер
+ * Keyword	Виженер
  * Ciphertext	ВЙЧЕЪУТ
  * Decrypted	Абрамов
  *
@@ -89,7 +89,7 @@
  * cipher.printResult(original, encrypted, decrypted)
  * // Output
  * Plaintext	Абрамов
- * Keyword		Виженер
+ * Keyword	Виженер
  * Ciphertext	ВЙЧЕЪУТ
  * Decrypted	Абрамов
  *
@@ -105,7 +105,7 @@
  * cipher.printResult(original, encrypted, decrypted)
  * // Output
  * Plaintext	Kotlin (/ˈkɒtlɪn/) (Ко́тлин) — кроссплатформенный, статически типизированный, ООЯП.
- * Keyword		VigenèreVigenèreVigenèreVigenèreVigenèreVigenèreVigenèreVigenèreVigenèreVigenèreVig
+ * Keyword	VigenèreVigenèreVigenèreVigenèreVigenèreVigenèreVigenèreVigenèreVigenèreVigenèreVig
  * Ciphertext	анlоoVраKeV.KыonḰoаПèОɪ—)ыКаОрПзО.ч фыɪеОм(ètЯkКыoчКl—iɪз.Пвn—iП)Пiˈè.фоlˈɒtnс/ввк
  * Decrypted	Kotlin (/ˈkɒtlɪn/) (Ко́тлин) — кроссплатформенный, статически типизированный, ООЯП.
  */
