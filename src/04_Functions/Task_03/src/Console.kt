@@ -43,7 +43,6 @@ class Console {
          */
         fun format(msg: String, mode: Mode = Mode.Reset, styles: Set<Style>)
                 = mode.code + styles.fold("") { acc, style -> acc + style.code } + msg + Mode.Reset.code
-        fun format(msg: String, mode: Mode = Mode.Reset, vararg styles: Style) =
-           format(msg, mode, styles.toSet())
+        fun format(msg: String, mode: Mode = Mode.Reset, vararg styles: Style) = format(msg, mode, styles.toSet())
     }
 }
