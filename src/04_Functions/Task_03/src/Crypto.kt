@@ -99,7 +99,7 @@ abstract class Crypto : Cryptable {
             isRuBase    -> CharSets.letRu + CharSets.baseLat - CharSets.letEn
             isMixLow    -> CharSets.letRuLow + CharSets.letEnLow
             isMixLet    -> CharSets.letRu + CharSets.letEn
-            else        -> value.toSet().toList()
+            else        -> value.toSet().toList() // Ensures no duplicating values
         }
 
         /**
