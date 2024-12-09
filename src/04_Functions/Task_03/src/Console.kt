@@ -1,0 +1,48 @@
+/**
+ * Collection of utils helping add formatting to console output
+ */
+class Console {
+    /**
+     * Collection of control characters representing ANSI color codes used for console output
+     */
+    enum class Mode(val code: String) {
+        Reset("\u001b[0m"),         // Default
+        Error("\u001b[31m"),        // Red
+        Service("\u001b[90m"),      // Grey
+        Success("\u001b[32m"),      // Green
+        Warning("\u001b[33m"),      // Yellow
+        Info("\u001b[34m"),         // Blue
+    }
+
+    /**
+     * Collection of control characters representing ANSI codes used for additional styling
+     */
+    enum class Style(val code: String) {
+        None(""),                   // No additional styling
+        Strong("\u001b[1m"),        // Bold
+        Emphasized("\u001b[3m"),    // Italic
+        Important("\u001b[4m"),     // Underlined
+        Deleted("\u001b[9m"),       // Strikethrough
+    }
+    companion object {
+        /**
+         * Sets additional formatting to console out based on the input semantics
+         * @param msg an input message [String]
+         * @param mode color [Mode] defining the output [String] color
+         * @param styles font list of [Style] enums defining the additional styling
+         * @return formatted [String] fragment with trailing reset code
+         *
+         * Usage examples:
+         * ```kotlin
+         * println(Console.format("Success", Mode.Success, Style.Strong))
+         * println(Console.format("Warning", Mode.Warning, Style.Important))
+         * println(Console.format("Invalid input", Mode.Error))
+         * println(Console.format("some msg", styles = setOf(Console.Style.Strong, Console.Style.Important)))
+         * println(Console.format("information", Console.Mode.Info, Console.Style.Emphasized, Console.Style.Important)))
+         * ```
+         */
+        fun format(msg: String, mode: Mode = Mode.Reset, styles: Set<Style>)
+                = mode.code + styles.fold("") { acc, style -> acc + style.code } + msg + Mode.Reset.code
+        fun format(msg: String, mode: Mode = Mode.Reset, vararg styles: Style) = format(msg, mode, styles.toSet())
+    }
+}
