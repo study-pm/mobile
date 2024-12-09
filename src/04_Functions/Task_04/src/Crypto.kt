@@ -28,13 +28,17 @@ abstract class Crypto : Cryptable {
         val baseLatLow = (' '..'@') + ('['..'~')
         val extLatA = 'Ā'..'ſ'
         val extLatB = 'ƀ'..'ɏ'
+
         /**
          * Represent character frequency analysis as probabilities for each symbol for several common european languages
          * Source: https://beobaxter.livejournal.com/892772.html
          */
         enum class FqMap(val value: Map<Char, Double>) {
             De(mapOf(
-                'e' to .1918, 'n' to .1020, 'i' to .0821, 's' to .0707
+                'e' to .1918, 'n' to .1020, 'i' to .0821, 's' to .0707, 'r' to .0701, 't' to .0586, 'a' to .0552,
+                'h' to .0502, 'd' to .0491, 'u' to .0422, 'g' to .0360, 'l' to .0348, 'c' to .0294, 'o' to .0214,
+                'f' to .0196, 'm' to .0169, 'b' to .0156, 'w' to .0138, 'k' to .0133, 'z' to .0117, 'v' to .0084,
+                'p' to .0054, 'j' to .0016, 'x' to .0001, 'x' to .0001, 'y' to .0001
             )),
             En(mapOf(
                 'e' to .1286, 't' to .0972, 'a' to .0796, 'i' to .0777, 'n' to .0751, 'r' to .0683, 'o' to .0662,
@@ -42,11 +46,23 @@ abstract class Crypto : Cryptable {
                 'm' to .0243, 'g' to .0199, 'p' to .0181, 'w' to .0180, 'b' to .0160, 'y' to .0152, 'v' to .0115,
                 'k' to .0041, 'q' to .0017, 'x' to .0017, 'j' to .0016, 'z' to .0005
             )),
+            Es(mapOf(
+                'e' to .1415, 'a' to .0129, 'o' to .0884, 's' to .0764, 'i' to .0701, 'r' to .0695, 'n' to .0620,
+                'l' to .0552, 'd' to .0467, 'c' to .0442, 't' to .0436, 'u' to .0400, 'p' to .0326, 'm' to .0255,
+                'q' to .0155, 'y' to .0105, 'b' to .0103, 'g' to .0100, 'h' to .0091, 'f' to .0070, 'v' to .0067,
+                'z' to .0031, 'j' to .0024, 'x' to .0007, 'k' to .0001, 'w' to .0001
+            )),
             Fr(mapOf(
                 'e' to .1776, 's' to .0823, 'a' to .0768, 'n' to .0761, 't' to .0730, 'i' to .0723, 'r' to .0681,
                 'u' to .0605, 'l' to .0589, 'o' to .0534, 'd' to .0360, 'c' to .0332, 'p' to .0324, 'm' to .0272,
                 'q' to .0134, 'v' to .0127, 'g' to .0110, 'f' to .0106, 'b' to .0080, 'h' to .0064, 'x' to .0054,
                 'y' to .0021, 'j' to .0019, 'z' to .0007, 'k' to .0001, 'w' to .0001
+            )),
+            It(mapOf(
+                'i' to .1204, 'e' to .1163, 'a' to .1112, 'o' to .0892, 'n' to .0768, 't' to .0707, 'r' to .0656,
+                'l' to .0595, 's' to .0481, 'c' to .0411, 'd' to .0354, 'u' to .0309, 'p' to .0266, 'm' to .0265,
+                'g' to .0173, 'v' to .0167, 'z' to .0124, 'f' to .0115, 'b' to .0107, 'h' to .0083, 'q' to .0048,
+                'j' to .0001, 'k' to .0001, 'w' to .0001, 'x' to .0001, 'y' to .0001
             )),
             Ru(mapOf(
                 'о' to .0764, 'е' to .0732, 'а' to .0629, 'и' to .0577, 'т' to .0549, 'н' to .0490, 'р' to .0459,
