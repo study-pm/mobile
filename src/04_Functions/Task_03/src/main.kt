@@ -46,34 +46,6 @@ fun main() {
     } catch (exc: Exception) {
         println(Console.format("Invalid input: ", mode = Console.Mode.Error) + exc.message)
     }
-
-    /*
-    println()
-    var sum = 0.0
-    Homophonic.Companion.FqMap.RuSt.value.forEach {
-        sum += it.value
-    }
-    println(sum)
-
-    val con = Homophonic(Homophonic.Companion.FqMap.RuSt, false)
-    println()
-    val original = "абрамов"
-    val encrypt = con.encrypt(original)
-    val decrypt = con.decrypt(encrypt)
-    con.printResult(original, encrypt, decrypt)
-    con.printCipherTable()
-    val rnd = Homophonic(Homophonic.Companion.FqMap.RuSt, false)
-    println()
-
-    val en = Homophonic(Homophonic.Companion.FqMap.En, false)
-    println()
-    val txt = "kotlin"
-    val enc = en.encrypt(txt)
-    val dec = en.decrypt(enc)
-    en.printResult(txt, enc, dec)
-    en.printCipherTable()
-
-     */
 }
 
 /* Sample I/O
