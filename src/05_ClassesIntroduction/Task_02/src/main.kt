@@ -5,15 +5,19 @@
  */
 
 fun main() {
-    // Input
-    print("Enter the first point coordinates on a plane (must be two values separated by a space, comma or semicolon): ")
-    val a = readln().toPoint(2) as Point2D
-    print("Enter the second point coordinates on a plane (must be two values separated by a space, comma or semicolon): ")
-    val b = readln().toPoint(2) as Point2D
-    // Result
-    val distance = a - b
-    // Output
-    println("The distance between $a and $b is " + String.format("%.2f", distance))
+    try {
+        // Input
+        print("Enter the first point coordinates on a plane (must be two values separated by a space, comma or semicolon): ")
+        val a = readln().toPoint(2) as Point2D
+        print("Enter the second point coordinates on a plane (must be two values separated by a space, comma or semicolon): ")
+        val b = readln().toPoint(2) as Point2D
+        // Result
+        val distance = a - b
+        // Output
+        println("The distance between $a and $b is " + String.format("%.2f", distance))
+    } catch (exc: Exception) {
+        println(exc.message)
+    }
 }
 
 /* Sample I/O
