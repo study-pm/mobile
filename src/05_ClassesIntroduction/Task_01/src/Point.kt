@@ -20,10 +20,6 @@ abstract class Point<T> (internal val value: FloatArray): Figure {
          * Parse [String] input trimming both the input string and each value as well as omitting empty values
          * @param s an input [String]
          *
-         * Usage examples
-         * ```
-         * "1.22  3.2 , 12.33  ;  5  ".toPoint() // => 1.22 3.2 12.33 5
-         * ```
          */
         fun parseValue(s: String) = s.trim().split(" ", ",", ";", ", ", "; ")
             .filter { it.isNotEmpty() }
@@ -37,7 +33,7 @@ abstract class Point<T> (internal val value: FloatArray): Figure {
  * @return a [Point] of a specified or auto inferred dimensionality
  * @throws [IllegalArgumentException] when a string cannot be converted to a [Point] or context mismatch
  *
- * Usage examples
+ * Usage example
  * ```
  * "1 2.3 4.56".toPoint() // => Point3D (1.0, 2.3, 4.56)
  * ```
