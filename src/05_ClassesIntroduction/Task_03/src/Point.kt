@@ -29,9 +29,7 @@ abstract class Point<T> (internal val value: FloatArray): Figure {
     /**
      * Generates a hash code based on the point value (coordinates)
      */
-    override fun hashCode(): Int {
-        return value.fold(0) { acc, v -> acc + v.toInt() }
-    }
+    override fun hashCode(): Int = value.fold(0) { acc, v -> acc + v.toInt() }
 
     /**
      * Gets a string representation of a [Point]
