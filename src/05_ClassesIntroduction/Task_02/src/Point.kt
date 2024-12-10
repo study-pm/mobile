@@ -51,7 +51,6 @@ abstract class Point<T> (internal val value: FloatArray): Figure {
         /**
          * Parse [String] input trimming both the input string and each value as well as omitting empty values
          * @param s an input [String]
-         *
          */
         fun parseValue(s: String) = s.trim().split(" ", ",", ";", ", ", "; ")
             .filter { it.isNotEmpty() }
