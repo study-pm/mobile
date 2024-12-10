@@ -24,7 +24,7 @@ abstract class Point<T> (internal val value: FloatArray): Figure {
 
     /**
      * Gets distance between any point and the given point
-     * @param p a right side [Point]
+     * @param point a right side [Point]
      * @return distance between the points
      */
     operator fun minus(point: Point<T>): Float = this.distance(point)
