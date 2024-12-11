@@ -50,7 +50,7 @@ open class Line(override val eq: Triple<Float, Float, Float>) : Curve {
      * @param line a right side [Line]
      * @return a lines intersection [Point2D] or `null` if the lines are parallel
      */
-     operator fun minus(line: Line) = this.intersects(line)
+    operator fun minus(line: Line) = this.intersects(line)
 
     /**
      * Contains utility methods associated with line segments

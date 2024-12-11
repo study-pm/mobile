@@ -14,9 +14,9 @@ class Point3D(value: FloatArray) : Point<Float>(value) {
         get() = this.value[2]
 
     /**
-     * @param x a [Float] number representing the x coordinate of [Point1D]
-     * @param y a [Float] number representing the y coordinate of [Point1D]
-     * @param z a [Float] number representing the z coordinate of [Point1D]
+     * @param x a [Float] number representing the x coordinate of [Point3D]
+     * @param y a [Float] number representing the y coordinate of [Point3D]
+     * @param z a [Float] number representing the z coordinate of [Point3D]
      */
     constructor(x: Float, y: Float, z: Float): this(floatArrayOf(x, y, z))
 }

@@ -11,8 +11,8 @@ class Point2D(value: FloatArray) : Point<Float>(value) {
         get() = this.value[1]
 
     /**
-     * @param x a [Float] number representing the x coordinate of [Point1D]
-     * @param y a [Float] number representing the y coordinate of [Point1D]
+     * @param x a [Float] number representing the x coordinate of [Point2D]
+     * @param y a [Float] number representing the y coordinate of [Point2D]
      */
     constructor(x: Float, y: Float): this(floatArrayOf(x, y))
 }
