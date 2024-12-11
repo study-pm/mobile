@@ -147,6 +147,12 @@
     - [3. Выбор наибольшего и наименьшего расстояний (обязательно использовать класс Точка)](#3-выбор-наибольшего-и-наименьшего-расстояний-обязательно-использовать-класс-точка)
     - [4. Треугольник в окружности (обязательно использование класса Точка и класса Треугольник. Класс Окружность и другие классы — по желанию)](#4-треугольник-в-окружности-обязательно-использование-класса-точка-и-класса-треугольник-класс-окружность-и-другие-классы--по-желанию)
     - [5. Окружность в треугольнике (обязательно использование класса Точка и класса Треугольник. Класс Окружность и другие классы — по желанию)](#5-окружность-в-треугольнике-обязательно-использование-класса-точка-и-класса-треугольник-класс-окружность-и-другие-классы--по-желанию)
+- [06 Классы. Конструкторы. Get-еры. Set-еры](#06-классы-конструкторы-get-еры-set-еры)
+  - [Классы. Конструкторы. Get-еры. Set-еры](#классы-конструкторы-get-еры-set-еры)
+    - [Kotlin. Классы](#kotlin-классы)
+    - [Kotlin. Классы. Конструкторы](#kotlin-классы-конструкторы)
+    - [Kotlin. Классы. Вторичные конструкторы](#kotlin-классы-вторичные-конструкторы)
+    - [Kotlin. Классы. Get-еры и Set-еры](#kotlin-классы-get-еры-и-set-еры)
 
 ## Общее
 [66df5d7ed048d373527220f7](https://e-learn.petrocollege.ru/course/view.php?id=7179#section-0)
@@ -5226,3 +5232,464 @@ fun main() {
 Треугольник расположен на координатной плоскости и описан координатами своих вершин. Написать программу вычисляющую координаты центра вписанной в треугольник окружности и ее радиус.
 
 [Решение](src/05_ClassesIntroduction/Task_05/src/main.kt)
+
+## 06 Классы. Конструкторы. Get-еры. Set-еры
+[67595ee75040133e8429e818](https://e-learn.petrocollege.ru/course/view.php?id=7179#section-6)
+
+### Классы. Конструкторы. Get-еры. Set-еры
+[67598c985040133e8429e821](https://e-learn.petrocollege.ru/mod/url/view.php?id=345149)
+
+https://wywiwyg.ru/learn_kotlin/lesson06.html
+
+#### Kotlin. Классы
+Синтаксис определения класса состоит из ключевого слова `class`, за которым следует имя класса, и блока кода, содержащего свойства и функции класса:
+
+```kotlin
+class ClassName {
+    // свойства
+    // функции
+}
+```
+
+- Имя класса должно начинаться с заглавной буквы и быть существительным (например, `Dog`, `Person`, `BankAccount`).
+- Класс может иметь свойства (данные) и функции (поведение).
+- Свойства и функции класса могут быть общедоступными (доступными откуда угодно) или частными (доступными только внутри класса). По умолчанию они общедоступны в Котлине.
+- Класс может иметь первичный конструктор и/или один или несколько вторичных конструкторов. Первичный конструктор определяется в заголовке класса, а вторичные конструкторы определяются с помощью ключевого слова `constructor`.
+- Класс может иметь модификатор `open`, `abstract`, `sealed` или `final`. Модификатор `open` позволяет классу создавать подклассы, модификатор `abstract` позволяет классу иметь абстрактные (нереализованные) функции, модификатор `sealed` позволяет классу иметь подклассы, но только в том же файле, а модификатор `final` предотвращает создание подклассов класса.
+- Класс может иметь модификатор `inner`, `nested`, или `static` вложенный. Модификатор `inner` позволяет классу получать доступ к членам внешнего класса, модификатор `nested` позволяет классу быть `static` вложенным классом, а вложенный модификатор `static` позволяет классу быть статическим вложенным классом и получать доступ только к статическим членам внешнего класса.
+- Класс может иметь сопутствующий объект, который является одноэлементным объектом, связанным с классом.
+- Класс может расширять один или несколько суперклассов и реализовывать один или несколько интерфейсов.
+- Класс может переопределять и/или перегружать функции и свойства своего суперкласса и/или интерфейсов.
+
+![Classes](./img/class_01.png)
+
+![Classes](./img/class_02.png)
+
+![Classes](./img/class_03.png)
+
+![Classes](./img/class_04.png)
+
+![Classes](./img/class_05.png)
+
+![Classes](./img/class_06.png)
+
+#### Kotlin. Классы. Конструкторы
+<dfn title="конструктор">Конструктор</dfn> — это специальная функция-член, которая вызывается при создании объекта класса в первую очередь для инициализации переменных или свойств. Класс должен иметь конструктор, и если мы не объявим конструктор, компилятор генерирует конструктор по умолчанию. В Kotlin есть два типа конструкторов:
+- Первичный конструктор
+- Вторичный конструктор
+
+Класс в Kotlin может иметь не более одного первичного конструктора и одного или нескольких вторичных конструкторов. Первичный конструктор инициализирует класс, а вторичный конструктор используется для инициализации класса и введения дополнительной логики.
+
+Первичный конструктор инициализируется в заголовке класса и идет после имени класса с использованием ключевого слова `constructor`. Параметры являются необязательными в основном конструкторе.
+
+```kotlin
+class AddValue constructor(val a: Int, val b: Int) {
+    val c = a + b
+}
+```
+
+Ключевое слово `constructor` можно опустить , если не указаны аннотации или модификаторы доступа.
+
+```kotlin
+class AddValue(val a: Int, val b: Int) {
+    val c = a + b
+}
+```
+
+Первичный конструктор не может содержать какой-либо код, код инициализации может быть помещен в отдельный блок инициализатора с префиксом ключевого слова `init`.
+
+Он действует как блок инициализатора, в котором инициализируются переменные-члены. Этот блок выполняется всякий раз, когда создается экземпляр этого класса. Блоков инициализации может быть несколько, и они вызываются в том порядке, в котором они записаны внутри класса.
+
+Блоки инициализации вызываются **ДО** вызова конструктора этого класса.
+
+[Example](samples/06_Constructors/01_Constructors/src/main.kt)
+```kotlin
+class InitOrderDemo(name: String) {
+    val firstProperty = "Первое свойство: $name"
+
+    init {
+        println("Первый блок инициализации: $name")
+    }
+
+    val secondProperty = "Второе свойство: ${name.length}"
+
+    init {
+        println("Второй блок инициализации: ${name.length}")
+    }
+}
+
+fun main() {
+   val demo = InitOrderDemo("User")
+}
+
+```
+
+<details>
+<summary><em>Output</em></summary>
+
+```
+Первый блок инициализации: User
+Второй блок инициализации: 4
+```
+
+</details>
+
+В примере выше блоки `init` выполнились при создании объекта класса.
+
+Подобно значениям по умолчанию в функциях, мы можем инициализировать параметры конструктора некоторыми значениями по умолчанию.
+
+[Example](samples/06_Constructors/02_Constructors/src/main.kt)
+```kotlin
+class InitOrderDemo (emp_id: Int = 100, emp_name: String = "User") {
+    val id: Int
+    val name: String
+    init {
+        id = emp_id
+        name = emp_name
+
+        println("Значение id: $id")
+        println("Значение name: $name")
+        println()
+    }
+}
+
+fun main() {
+    val empOne = InitOrderDemo(249857, "Александр")
+    val empTwo = InitOrderDemo(372648)
+    val empThree = InitOrderDemo()
+}
+
+```
+
+<details>
+<summary><em>Output</em></summary>
+
+```
+Значение id: 249857
+Значение name: Александр
+
+Значение id: 372648
+Значение name: User
+
+Значение id: 100
+Значение name: User
+```
+
+</details>
+
+#### Kotlin. Классы. Вторичные конструкторы
+Котлин может иметь один или несколько вторичных конструкторов. Вторичные конструкторы позволяют инициализировать переменные, а также предоставляют некоторую логику классу. Им предшествует ключевое слово `constructor`. В данном случае мы используем конструктор по умолчанию. Поэтому все вторичные конструкторы наследуются от него.
+
+[Example](samples/06_Constructors/03_SecondaryConstructors/src/main.kt)
+```kotlin
+class AddValue {
+    constructor(a: Int, b: Int) {
+        println("Складываем целые числа: $a + $b = ${a + b}")
+    }
+    constructor(a: String, b: Int) {
+        println("Складываем строку и число: $a + $b = ${a.toInt() + b}")
+    }
+    constructor(a: Int, b: String) {
+        println("Складываем число и строку: $a + $b = ${a + b.toInt()}")
+    }
+    constructor(a: String, b: String) {
+        println("Складываем строки: $a + $b = ${a.toInt() + b.toInt()}")
+    }
+}
+
+fun main() {
+    val one = AddValue(25, 35)
+    val two = AddValue("65", 75)
+    val three = AddValue(45, "85")
+    val four = AddValue("95", "75")
+}
+
+```
+
+<details>
+<summary><em>Output</em></summary>
+
+```
+Складываем целые числа: 25 + 35 = 60
+Складываем строку и число: 65 + 75 = 140
+Складываем число и строку: 45 + 85 = 130
+Складываем строки: 95 + 75 = 170
+```
+
+</details>
+
+![Classes](./img/class_07.png)
+
+![Classes](./img/class_08.png)
+
+![Classes](./img/class_09.png)
+
+![Classes](./img/class_10.png)
+
+[Примеры](samples/06_Constructors/04_Examples/src/main.kt)
+```kotlin
+fun main() {
+    println("ParentClass(25, 35)===========================")
+    val one = ParentClass(25, 35)
+    println("\nParentClass(65, 75, 50)=====================")
+    val two = ParentClass(65, 75, 50)
+    println("\nDescendantClassOne(5, 15)===================")
+    val three = DescendantClassOne(5, 15)
+    println("\nDescendantClassOne(5, 25, 15, 47)===========")
+    val four = DescendantClassOne(5, 25, 15, 47)
+    println("\nDescendantClassTwo(5, 9, 6)=================")
+    val five = DescendantClassTwo(5, 9, 6)
+    println("\nDescendantClassThree(9, 7, 6)===============")
+    val six = DescendantClassThree(9, 7, 6)
+    println("\nDescendantClassFour(18, 78)=================")
+    val seven = DescendantClassFour(18, 78)
+    println("\nDescendantClassFour(18, 78, 75)=============")
+    val eight = DescendantClassFour(18, 78, 75)
+    println("\nDescendantClassFour(15, 78, 96, 34)=========")
+    val nine = DescendantClassFour(15, 78, 96, 34)
+    println("\nDescendantClassFour(46, 78, \"99\")=========")
+    val ten = DescendantClassFour(15, 78, "99")
+}
+
+open class ParentClass(a: Int, b: Int) {
+    init {
+        println("init-блок от ParentClass")
+    }
+
+    constructor(a: Int, b: Int, c: Int) : this(a, b) {
+        println("Вторичный конструктор от ParentClass")
+    }
+}
+
+class DescendantClassOne(a: Int, b: Int) : ParentClass(a, b) {
+    init {
+        println("init-блок от DescendantClassOne")
+    }
+
+    // constructor(a: Int, b: Int, c: Int):super(a,b)
+    constructor(a: Int, b: Int, c: Int, d: Int) : this(a, b) {
+        println("Вторичный конструктор от DescendantClassOne")
+    }
+}
+
+class DescendantClassTwo(a: Int, b: Int, c: Int) : ParentClass(a, b) {
+    init {
+        println("init-блок от DescendantClassTwo")
+    }
+    // constructor(a: Int, b: Int, c: Int):super(a, b)
+}
+
+class DescendantClassThree(a: Int, b: Int, c: Int) : ParentClass(a, b, c) {
+    init {
+        println("init-блок от DescendantClassThree")
+    }
+    // constructor(a: Int, b: Int, c: Int) : super(a, b, c)
+}
+
+class DescendantClassFour : ParentClass {
+    init {
+        println("init-блок от DescendantClassFour")
+    }
+
+    constructor(a: Int, b: Int) : super(a, b) {
+        println("Вторичный конструктор от DescendantClassFour constructor(a: Int, b: Int) : super(a, b)")
+    }
+
+    constructor(a: Int, b: Int, c: Int) : super(a, b) {
+        println("Вторичный конструктор от DescendantClassFour constructor(a: Int, b: Int, c: Int) : super(a, b)")
+    }
+
+    constructor(a: Int, b: Int, c: Int, d: Int) : super(a, b, c) {
+        println("Вторичный конструктор от DescendantClassFour constructor(a: Int, b: Int, c: Int, d: Int) : super(a, b, c)")
+    }
+
+    constructor(a: Int, b: Int, c: String) : super(a, b, c.toInt()) {
+        println("Вторичный конструктор от DescendantClassFour constructor(a: Int, b: Int, c: String) : super(a, b, c)")
+    }
+}
+
+```
+
+<details>
+<summary><em>Output</em></summary>
+
+```
+ParentClass(25, 35)===========================
+init-блок от ParentClass
+
+ParentClass(65, 75, 50)=====================
+init-блок от ParentClass
+Вторичный конструктор от ParentClass
+
+DescendantClassOne(5, 15)===================
+init-блок от ParentClass
+init-блок от DescendantClassOne
+
+DescendantClassOne(5, 25, 15, 47)===========
+init-блок от ParentClass
+init-блок от DescendantClassOne
+Вторичный конструктор от DescendantClassOne
+
+DescendantClassTwo(5, 9, 6)=================
+init-блок от ParentClass
+init-блок от DescendantClassTwo
+
+DescendantClassThree(9, 7, 6)===============
+init-блок от ParentClass
+Вторичный конструктор от ParentClass
+init-блок от DescendantClassThree
+
+DescendantClassFour(18, 78)=================
+init-блок от ParentClass
+init-блок от DescendantClassFour
+Вторичный конструктор от DescendantClassFour constructor(a: Int, b: Int) : super(a, b)
+
+DescendantClassFour(18, 78, 75)=============
+init-блок от ParentClass
+init-блок от DescendantClassFour
+Вторичный конструктор от DescendantClassFour constructor(a: Int, b: Int, c: Int) : super(a, b)
+
+DescendantClassFour(15, 78, 96, 34)=========
+init-блок от ParentClass
+Вторичный конструктор от ParentClass
+init-блок от DescendantClassFour
+Вторичный конструктор от DescendantClassFour constructor(a: Int, b: Int, c: Int, d: Int) : super(a, b, c)
+
+DescendantClassFour(46, 78, "99")=========
+init-блок от ParentClass
+Вторичный конструктор от ParentClass
+init-блок от DescendantClassFour
+Вторичный конструктор от DescendantClassFour constructor(a: Int, b: Int, c: String) : super(a, b, c)
+```
+
+</details>
+
+#### Kotlin. Классы. Get-еры и Set-еры
+Если необходимо внести изменения в прочитанное значение свойства или проверить значение перед тем, как оно будет записано в свойство, следует написать собственные get-и set-методы.
+
+Get- и set-методы предназначены для чтения и записи значений свойств.
+
+Единственное предназначение get-метода — вернуть значение, запрошенное для данного свойства. А set-методы получают значение аргумента и используют его для записи значения в свойство.
+
+Специализированные get-и set-методы позволяют защитить значения свойств и управлять тем, какие значения читаются или записываются в свойства.
+
+Геттеры (getter) и сеттеры (setter) (еще их называют методами доступа) позволяют управлять доступом к переменной. Их формальный синтаксис:
+```kotlin
+var имя_свойства[: тип_свойства] [= инициализатор_свойства]
+    [getter]
+    [setter]
+```
+
+Инициализатор, геттер и сеттер свойства необязательны. Указывать тип свойства также необязательно, если он может быть выведен из значения инициализатора или из возвращаемого значения геттера.
+
+Геттеры и сеттеры необязательно определять именно для свойств внутри класса, они могут также применяться к переменным верхнего уровня.
+
+[Example](samples/06_Constructors/05_GettersSetters/src/main.kt)
+```kotlin
+fun main() {
+    val personOne = Person()
+    val personTwo = Person()
+    val personThree = Person()
+
+    personOne.age = 19
+    println(personOne.age)
+
+    personTwo.age = 166
+    println(personTwo.age)
+
+    personThree.age = -19
+    println(personTwo.age)
+}
+
+class Person() {
+    var age = 0
+        set(value) {
+            if ((value > 0) and (value < 124)) {
+                field = value
+            } else {
+                field = 45
+                println("Неправильный возраст")
+            }
+        }
+}
+
+```
+
+<details>
+<summary><em>Output</em></summary>
+
+```
+19
+Неправильный возраст
+45
+Неправильный возраст
+45
+```
+
+</details>
+
+
+[Example](samples/06_Constructors/06_GettersSetters/src/main.kt)
+```kotlin
+fun main() {
+    val personOne = Person(19)
+    val personTwo = Person(166)
+    val personThree = Person(-19)
+
+    personOne.age = 55
+    println(personOne.age)
+    personOne.prnAge()
+    println()
+
+    println(personTwo.age)
+    personTwo.prnAge()
+    println()
+
+    personThree.age = -19
+    println(personTwo.age)
+    personThree.prnAge()
+}
+
+class Person(_age: Int) {
+    var age = _age
+        set(value) {
+            if ((value > 0) and (value < 124)) {
+                field = value
+            } else {
+                field = 45
+                println("Неправильный возраст")
+            }
+        }
+        get() {
+            if ((field > 0) and (field < 124)) {
+                return field
+            } else {
+                println("Установленный возраст")
+                return 85
+            }
+        }
+    fun prnAge() = println("Возраст $age")
+
+}
+
+```
+
+<details>
+<summary><em>Output</em></summary>
+
+```
+55
+Возраст 55
+
+Установленный возраст
+85
+Установленный возраст
+Возраст 85
+
+Неправильный возраст
+Установленный возраст
+85
+Возраст 45
+```
+
+</details>
