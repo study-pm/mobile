@@ -35,13 +35,7 @@ class Triangle(vertices: List<Point2D>) : Polygon(vertices) {
      *  Gets the radius of the circumscribed circle of the [Triangle]
      *  @return a [Point2D] representing the circumradius
      */
-    fun getCircumradius(): Float {
-        val circumcenter = getCircumcenter()
-        val a = vertices[0] - circumcenter
-        val b = vertices[1] - circumcenter
-        val c = vertices[2] - circumcenter
-        return vertices[0] - circumcenter
-    }
+    fun getCircumradius(): Float = vertices[0] - getCircumcenter()
 
     /**
      * Gets a point position relative to the triangle
