@@ -40,7 +40,6 @@ class Triangle(vertices: List<Point2D>) : Polygon(vertices) {
         val a = vertices[0] - circumcenter
         val b = vertices[1] - circumcenter
         val c = vertices[2] - circumcenter
-        println("$a, $b, $c")
         return vertices[0] - circumcenter
     }
 
