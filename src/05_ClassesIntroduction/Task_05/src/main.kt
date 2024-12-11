@@ -8,7 +8,8 @@
 fun main() {
     try {
         // Input
-        println("Enter the triangle apex coordinates on a plane (the same format, each from a new line): ")
+        println("Enter the triangle apex coordinates on a plane " +
+                "(must be two values separated by a space, comma or semicolon, each from a new line): ")
         val triangle = Triangle(buildList { (1..3).map { add(readln().toPoint(2) as Point2D) } })
         // Result
         val incenter = triangle.getIncenter()
