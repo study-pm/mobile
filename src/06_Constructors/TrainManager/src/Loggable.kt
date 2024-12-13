@@ -5,6 +5,7 @@ interface Loggable {
     /**
      * Gets [Console.Color] mapping for message [Status]
      * @status a [Status] enum representing a message status
+     * @return a [Console.Color] item value
      */
     fun getColor(status: Status) = when(status) {
         Status.Error    -> Console.Color.Red
