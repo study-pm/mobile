@@ -5,6 +5,7 @@ import kotlin.reflect.KProperty
  * When a property using this delegate is accessed or modified, it logs the action to the console.
  * @param value a property value
  * @param message a log message [String]
+ * @param isMute a [Boolean] flag specifying if the set value should be logged
  * @property logger an attached [Logger] instance to handle the logging actions
  */
 class LogDelegate<T>(private var value: T, private val message: String = "", private val isMute: Boolean = false) {
