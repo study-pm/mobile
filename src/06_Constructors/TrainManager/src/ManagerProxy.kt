@@ -89,9 +89,9 @@ class ManagerProxy(private val base: Manager) : Manageable by base {
                 "${train.cars.size} car${if (train.cars.size > 1) "s" else ""} " +
                 "with $tickets passengers is setting off the terminal station")
         print(Console.format("${route.value.first.name} ", Console.Color.Yellow, Console.Style.Bold))
-        print("Chug-chug!") // setting off
+        print("Chug-chug!")
         val isArrived = base.sendTrain(dist, interval, sound)
-        print("Toot-toot!") // at the place
+        print("Toot-toot!")
         print(Console.format(" ${route.value.second.name}", Console.Color.Yellow, Console.Style.Bold))
         println()
         println("The train is arriving to the final station")
