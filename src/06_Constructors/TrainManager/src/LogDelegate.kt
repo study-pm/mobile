@@ -28,7 +28,7 @@ class LogDelegate<T>(private var value: T, private val message: String = "", pri
         var msg = message
         if (message.isEmpty()) msg += "Set $newValue"
         else if (!isMute) msg += newValue
-        logger.log(msg, Loggable.Status.Info);
+        logger.log(msg, Loggable.Status.Info)
         value = newValue
     }
 }
