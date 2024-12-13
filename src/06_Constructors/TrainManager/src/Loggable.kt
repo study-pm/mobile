@@ -3,7 +3,7 @@
  */
 interface Loggable {
     /**
-     * Gets [Console.Color]
+     * Gets [Console.Color] mapping for message [Status]
      * @status a [Status] enum representing a message status
      */
     fun getColor(status: Status) = when(status) {
