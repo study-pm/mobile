@@ -12,26 +12,26 @@ class ManagerProxy(private val base: Manager) : Manageable by base {
 
     private var _isArrived: Boolean by LogDelegate(base.isArrived, "Arrival", true)
     override var isArrived: Boolean
-        get() = _isArrived // Get from the logging delegate
+        get() = _isArrived
         set(value) {
-            _isArrived = value // Set on the logging delegate (which logs)
-            base.isArrived = value // Optionally update the original printer's name if needed
+            _isArrived = value
+            base.isArrived = value
         }
 
     private var _isLeft: Boolean by LogDelegate(base.isLeft, "Departure", true)
     override var isLeft: Boolean
-        get() = _isLeft // Get from the logging delegate
+        get() = _isLeft
         set(value) {
-            _isLeft = value // Set on the logging delegate (which logs)
-            base.isLeft = value // Optionally update the original printer's name if needed
+            _isLeft = value
+            base.isLeft = value
         }
 
     private var _route: Route by LogDelegate(base.route)
     override var route: Route
-        get() = _route // Get from the logging delegate
+        get() = _route
         set(value) {
-            _route = value // Set on the logging delegate (which logs)
-            base.route = value // Optionally update the original printer's name if needed
+            _route = value
+            base.route = value
         }
 
     private var _tickets: Int by LogDelegate(base.tickets, "Tickets sold: ")
