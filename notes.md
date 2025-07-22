@@ -187,6 +187,7 @@
   - [Мой банк](#мой-банк)
   - [Пример распределения при использовании одной вилки](#пример-распределения-при-использовании-одной-вилки)
   - [Пример распределения при использовании двух палочек](#пример-распределения-при-использовании-двух-палочек)
+- [09 Coroutines](#09-coroutines)
 - [19 01 Основы XML-разметки пользовательского интерфейса. FrameLayout, LinerLayout, GridLayout](#19-01-основы-xml-разметки-пользовательского-интерфейса-framelayout-linerlayout-gridlayout)
   - [ЛЕКЦИЯ - 01](#лекция---01)
     - [FrameLayout](#framelayout)
@@ -6359,6 +6360,11 @@ enum class DAYS {
 [67d305195040133e8429f1a3](https://e-learn.petrocollege.ru/mod/url/view.php?id=345159)
 
 Нажмите на ссылку https://rutube.ru/video/private/991a7c8bb60a8927e849e063ad2e98e1/?p=HBBAE3I0Lmh8e-Ckbj0oVw, чтобы открыть ресурс.
+
+## 09 Coroutines
+[67cec4945040133e8429f15a](https://e-learn.petrocollege.ru/course/view.php?id=7179#section-9)
+
+---
 
 ## 19 01 Основы XML-разметки пользовательского интерфейса. FrameLayout, LinerLayout, GridLayout
 
