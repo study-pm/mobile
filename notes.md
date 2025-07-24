@@ -212,6 +212,7 @@
     - [LinearLayout](#linearlayout)
     - [GridLayout](#gridlayout)
 - [20 ПРАКТИКА по теме "Основы XML-разметки пользовательского интерфейса. FrameLayout, LinerLayout, GridLayout"](#20-практика-по-теме-основы-xml-разметки-пользовательского-интерфейса-framelayout-linerlayout-gridlayout)
+  - [Разметка клавиатуры](#разметка-клавиатуры)
 
 ## Общее
 [66df5d7ed048d373527220f7](https://e-learn.petrocollege.ru/course/view.php?id=7179#section-0)
@@ -6733,3 +6734,10 @@ https://wywiwyg.ru/learn_kotlin/MAD/second_semester/lecture-01/?page=1
 
 ## 20 ПРАКТИКА по теме "Основы XML-разметки пользовательского интерфейса. FrameLayout, LinerLayout, GridLayout"
 [67cec6445040133e8429f165](https://e-learn.petrocollege.ru/course/view.php?id=7179#section-20)
+
+### Разметка клавиатуры
+[688291fc63e4ad8e0adf416f](https://e-learn.petrocollege.ru/mod/assign/view.php?id=345178)
+
+Используя известные вам компоновщики создать макет клавиатуры максимально приближенный к картинке.
+
+![Calculator layout](./img/calculator_layout.jpg)
