@@ -2395,8 +2395,9 @@ val myArray = arrayOf(1, 2, 3, 4, 5)
 println(myArray[2])
 ```
 
-Узнать длину массива можно при помощи свойства .
-```kotlin**`size`**
+Узнать длину массива можно при помощи свойства **`size`**.
+
+```kotlin
 println(myArray.size) // 5
 ```
 
