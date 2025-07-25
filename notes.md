@@ -206,6 +206,7 @@
     - [Задание 1](#задание-1-1)
     - [Задание 2](#задание-2-1)
   - [Пример вывода на консоль](#пример-вывода-на-консоль)
+- [10 Установка, настройка и интерфейс Android Studio](#10-установка-настройка-и-интерфейс-android-studio)
 - [19 01 Основы XML-разметки пользовательского интерфейса. FrameLayout, LinerLayout, GridLayout](#19-01-основы-xml-разметки-пользовательского-интерфейса-framelayout-linerlayout-gridlayout)
   - [ЛЕКЦИЯ - 01](#лекция---01)
     - [FrameLayout](#framelayout)
@@ -6555,6 +6556,11 @@ https://wywiwyg.ru/learn_kotlin/lesson09.html
 Нажмите на ссылку https://wywiwyg.ru/learn_kotlin/Bombe.png, чтобы открыть ресурс.
 
 ![Bombe](./img/Bombe.png)
+
+## 10 Установка, настройка и интерфейс Android Studio
+[67cec4b65040133e8429f15b](https://e-learn.petrocollege.ru/course/view.php?id=7179#section-10)
+
+
 
 ---
 
