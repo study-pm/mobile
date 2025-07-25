@@ -229,6 +229,12 @@
 - [20 ПРАКТИКА по теме "Основы XML-разметки пользовательского интерфейса. FrameLayout, LinerLayout, GridLayout"](#20-практика-по-теме-основы-xml-разметки-пользовательского-интерфейса-framelayout-linerlayout-gridlayout)
   - [Разметка клавиатуры](#разметка-клавиатуры)
 - [21 02 Компоновщики RelativeLayout и ConstraintLayout](#21-02-компоновщики-relativelayout-и-constraintlayout)
+  - [ЛЕКЦИЯ - 02](#лекция---02)
+    - [RelativeLayout](#relativelayout)
+    - [ConstraintLayout](#constraintlayout)
+      - [Преимущества ConstraintLayout](#преимущества-constraintlayout)
+      - [Создание ConstraintLayout](#создание-constraintlayout)
+    - [Задания](#задания)
 
 ## Общее
 [66df5d7ed048d373527220f7](https://e-learn.petrocollege.ru/course/view.php?id=7179#section-0)
@@ -6839,3 +6845,154 @@ https://wywiwyg.ru/learn_kotlin/MAD/second_semester/lecture-01/?page=1
 
 ## 21 02 Компоновщики RelativeLayout и ConstraintLayout
 [67cec6625040133e8429f166](https://e-learn.petrocollege.ru/course/view.php?id=7179#section-21)
+
+### ЛЕКЦИЯ - 02
+[6883b73563e4ad8e0adf4190](https://e-learn.petrocollege.ru/mod/url/view.php?id=345179)
+
+https://wywiwyg.ru/learn_kotlin/MAD/second_semester/lecture-02/?page=1
+
+#### RelativeLayout
+Исходя из названия, `RelativeLayout` (рус. относительный макет или если перефразировать – макет с относительным расположением элементов) может располагать элементы относительно друг друга. У его вложенных элементов есть ряд параметров для указания зависимостей относительно остальных элементов или же самого `RelaveLayout`.
+
+Элементы внутри `RelativeLayout` имеют свойства, отвечающие за их расположение по вертикали и горизонтали. По умолчанию горизонтальное свойство расположения прижато к левому краю `RelativeLayout`, а вертикальное — к верхнему. Получается по умолчанию расположение элементов зависят от верхнего и левого края родительского контейнера `RelativeLayout`. Часто такое зависящее от чего-то расположение для удобства называют зависимостью. Например, установить для текста зависимость снизу от кнопки и справа от родительского контейнера. Если вы не укажете ни одной зависимости, то все элементы будут располагаться один над одним в верхнем левом углу. Причём элемент, который будет ниже всего в xml файле будет находиться поверх остальных.
+
+Использование `RelativeLayout` позволяет увеличить производительность приложения, так как мы получаем «плоский» интерфейс (без вложений).
+
+![RelativeLayout 01](./img/relative_layout_01.jpg)
+
+![RelativeLayout 02](./img/relative_layout_02.jpg)
+
+![RelativeLayout 03](./img/relative_layout_03.jpg)
+
+![RelativeLayout 04](./img/relative_layout_04.jpg)
+
+![RelativeLayout 05](./img/relative_layout_05.jpg)
+
+![RelativeLayout 06](./img/relative_layout_06.jpg)
+
+![RelativeLayout 07](./img/relative_layout_07.jpg)
+
+![RelativeLayout 08](./img/relative_layout_08.jpg)
+
+![RelativeLayout 09](./img/relative_layout_09.jpg)
+
+![RelativeLayout 10](./img/relative_layout_10.jpg)
+
+![RelativeLayout 11](./img/relative_layout_11.jpg)
+
+![RelativeLayout 12](./img/relative_layout_12.jpg)
+
+#### ConstraintLayout
+Как и все другие макеты, `ConstraintLayout` управляет позиционированием и размером содержащихся в нем визуальных компонентов (также называемых виджетами). Это делается на основе ограничений соединений, установленных для каждого дочернего виджета.
+
+Чтобы полностью понять и использовать `ConstraintLayout`, важно понять следующие ключевые понятия:
+- Ограничения
+- Поля
+- Противоположные ограничения
+- Смещение ограничений
+- Цепи
+- Стили цепочек
+- Методические рекомендации
+- Группы
+- Барьеры
+- Поток
+
+##### Преимущества ConstraintLayout
+`ConstraintLayout` обеспечивает уровень гибкости, который позволяет реализовать многие функции старых макетов с помощью одного экземпляра макета, где раньше было необходимо вкладывать несколько макетов. Это позволяет избежать проблем, присущих вложению макетов, позволяя разрабатывать так называемые «плоские» или «поверхностные» иерархии макетов, что приводит как к менее сложным макетам, так и к повышению производительности рендеринга пользовательского интерфейса во время выполнения. `ConstraintLayout` также был реализован для удовлетворения широкого спектра размеров экрана устройств Android, доступных сегодня. Гибкость `ConstraintLayout` упрощает разработку пользовательских интерфейсов, которые реагируют и адаптируются к устройству, на котором работает приложение.
+
+##### Создание ConstraintLayout
+
+![ConstraintLayout 01](./img/constraint_layout_01.jpg)
+
+![ConstraintLayout 02](./img/constraint_layout_02.jpg)
+
+![ConstraintLayout 03](./img/constraint_layout_03.jpg)
+
+![ConstraintLayout 04](./img/constraint_layout_04.jpg)
+
+![ConstraintLayout 05](./img/constraint_layout_05.jpg)
+
+![ConstraintLayout 06](./img/constraint_layout_06.jpg)
+
+![ConstraintLayout 07](./img/constraint_layout_07.jpg)
+
+![ConstraintLayout 08](./img/constraint_layout_08.jpg)
+
+![ConstraintLayout 09](./img/constraint_layout_09.jpg)
+
+![ConstraintLayout 10](./img/constraint_layout_10.jpg)
+
+![ConstraintLayout 11](./img/constraint_layout_11.jpg)
+
+![ConstraintLayout 12](./img/constraint_layout_12.jpg)
+
+![ConstraintLayout 13](./img/constraint_layout_13.jpg)
+
+![ConstraintLayout 14](./img/constraint_layout_14.jpg)
+
+![ConstraintLayout 15](./img/constraint_layout_15.jpg)
+
+![ConstraintLayout 16](./img/constraint_layout_16.jpg)
+
+![ConstraintLayout 17](./img/constraint_layout_17.jpg)
+
+![ConstraintLayout 18](./img/constraint_layout_18.jpg)
+
+![ConstraintLayout 19](./img/constraint_layout_19.jpg)
+
+![ConstraintLayout 20](./img/constraint_layout_20.jpg)
+
+![ConstraintLayout 21](./img/constraint_layout_21.jpg)
+
+![ConstraintLayout 22](./img/constraint_layout_22.jpg)
+
+![ConstraintLayout 23](./img/constraint_layout_23.jpg)
+
+![ConstraintLayout 24](./img/constraint_layout_24.jpg)
+
+![ConstraintLayout 25](./img/constraint_layout_25.jpg)
+
+![ConstraintLayout 26](./img/constraint_layout_26.jpg)
+
+![ConstraintLayout 27](./img/constraint_layout_27.jpg)
+
+![ConstraintLayout 28](./img/constraint_layout_28.jpg)
+
+![ConstraintLayout 29](./img/constraint_layout_29.jpg)
+
+![ConstraintLayout 30](./img/constraint_layout_30.jpg)
+
+![ConstraintLayout 31](./img/constraint_layout_31.jpg)
+
+![ConstraintLayout 32](./img/constraint_layout_32.jpg)
+
+![ConstraintLayout 33](./img/constraint_layout_33.jpg)
+
+![ConstraintLayout 34](./img/constraint_layout_34.jpg)
+
+![ConstraintLayout 35](./img/constraint_layout_35.jpg)
+
+![ConstraintLayout 36](./img/constraint_layout_36.jpg)
+
+![ConstraintLayout 37](./img/constraint_layout_37.jpg)
+
+![ConstraintLayout 38](./img/constraint_layout_38.jpg)
+
+![ConstraintLayout 39](./img/constraint_layout_39.jpg)
+
+![ConstraintLayout 40](./img/constraint_layout_40.jpg)
+
+![ConstraintLayout 41](./img/constraint_layout_41.jpg)
+
+![ConstraintLayout 42](./img/constraint_layout_42.jpg)
+
+![ConstraintLayout 43](./img/constraint_layout_43.jpg)
+
+#### Задания
+Создать один из двух макетов с использованием изученных компоновщиков.
+
+![Card Layouts](./img/card_layouts.jpg)
+
+Создать один из трех макетов с использованием изученных компоновщиков.
+
+![Coin Market App Layouts](./img/coin_market_app_layouts.jpg)
