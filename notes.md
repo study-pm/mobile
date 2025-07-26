@@ -221,6 +221,7 @@
       - [Папка ресурсов *Raw*:](#папка-ресурсов-raw)
       - [Окно Logcat:](#окно-logcat)
       - [*debug.keystore* file:](#debugkeystore-file)
+- [11 Жизненный цикл Activity](#11-жизненный-цикл-activity)
 - [19 01 Основы XML-разметки пользовательского интерфейса. FrameLayout, LinerLayout, GridLayout](#19-01-основы-xml-разметки-пользовательского-интерфейса-framelayout-linerlayout-gridlayout)
   - [ЛЕКЦИЯ - 01](#лекция---01)
     - [FrameLayout](#framelayout)
@@ -6656,7 +6657,10 @@ Scenario | Assets Folder | Res/Raw Folder
 
 *Предварительное условие: у вас должен быть готов проект Android Studio, с помощью которого мы сможем найти вашу отладку.файл хранилища ключей.*
 
----
+## 11 Жизненный цикл Activity
+[67cec4d85040133e8429f15c](https://e-learn.petrocollege.ru/course/view.php?id=7179#section-11)
+
+=====
 
 ## 19 01 Основы XML-разметки пользовательского интерфейса. FrameLayout, LinerLayout, GridLayout
 
