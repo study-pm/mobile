@@ -240,6 +240,7 @@
   - [Реплика игры "Танчики"](#реплика-игры-танчики)
   - [Файлы ресурсов для игры (картинки, звуки)](#файлы-ресурсов-для-игры-картинки-звуки)
   - [Видео - 01](#видео---01)
+  - [Видео - all](#видео---all)
 - [19 01 Основы XML-разметки пользовательского интерфейса. FrameLayout, LinerLayout, GridLayout](#19-01-основы-xml-разметки-пользовательского-интерфейса-framelayout-linerlayout-gridlayout)
   - [ЛЕКЦИЯ - 01](#лекция---01)
     - [FrameLayout](#framelayout)
@@ -6904,6 +6905,13 @@ Activity уничтожается в двух случаях:
 
 ### Видео - 01
 [6888675163e4ad8e0adf4222](https://e-learn.petrocollege.ru/mod/url/view.php?id=345170)
+
+https://wywiwyg.ru/learn_kotlin/BatlTank/resource/tank01.mp4
+
+### Видео - all
+[68899fc363e4ad8e0adf422f](https://e-learn.petrocollege.ru/mod/url/view.php?id=345171)
+
+https://wywiwyg.ru/learn_kotlin/BatlTank/resource/batl_all.mp4
 
 *****
 
