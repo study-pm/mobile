@@ -255,6 +255,7 @@
       - [Преимущества ConstraintLayout](#преимущества-constraintlayout)
       - [Создание ConstraintLayout](#создание-constraintlayout)
     - [Задания](#задания)
+- [13 Android. Камень, ножницы, бумага (5 событий)](#13-android-камень-ножницы-бумага-5-событий)
 
 ## Общее
 [66df5d7ed048d373527220f7](https://e-learn.petrocollege.ru/course/view.php?id=7179#section-0)
@@ -7253,3 +7254,6 @@ https://wywiwyg.ru/learn_kotlin/MAD/second_semester/lecture-02/?page=1
 Создать один из трех макетов с использованием изученных компоновщиков.
 
 ![Coin Market App Layouts](./img/coin_market_app_layouts.jpg)
+
+## 13 Android. Камень, ножницы, бумага (5 событий)
+[67cec5575040133e8429f15e](https://e-learn.petrocollege.ru/course/view.php?id=7179#section-13)
