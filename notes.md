@@ -241,6 +241,7 @@
   - [Файлы ресурсов для игры (картинки, звуки)](#файлы-ресурсов-для-игры-картинки-звуки)
   - [Видео - 01](#видео---01)
   - [Видео - all](#видео---all)
+- [14 Android. Реши пример](#14-android-реши-пример)
 - [19 01 Основы XML-разметки пользовательского интерфейса. FrameLayout, LinerLayout, GridLayout](#19-01-основы-xml-разметки-пользовательского-интерфейса-framelayout-linerlayout-gridlayout)
   - [ЛЕКЦИЯ - 01](#лекция---01)
     - [FrameLayout](#framelayout)
@@ -6914,6 +6915,9 @@ https://wywiwyg.ru/learn_kotlin/BatlTank/resource/tank01.mp4
 [68899fc363e4ad8e0adf422f](https://e-learn.petrocollege.ru/mod/url/view.php?id=345171)
 
 https://wywiwyg.ru/learn_kotlin/BatlTank/resource/batl_all.mp4
+
+## 14 Android. Реши пример
+[67cec5705040133e8429f15f](https://e-learn.petrocollege.ru/course/view.php?id=7179#section-14)
 
 *****
 
