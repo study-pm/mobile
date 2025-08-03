@@ -243,6 +243,7 @@
   - [Видео - all](#видео---all)
 - [14 Android. Реши пример](#14-android-реши-пример)
   - [Реши пример](#реши-пример)
+- [15 Android. Проверь решение](#15-android-проверь-решение)
 - [19 01 Основы XML-разметки пользовательского интерфейса. FrameLayout, LinerLayout, GridLayout](#19-01-основы-xml-разметки-пользовательского-интерфейса-framelayout-linerlayout-gridlayout)
   - [ЛЕКЦИЯ - 01](#лекция---01)
     - [FrameLayout](#framelayout)
@@ -6938,6 +6939,9 @@ https://wywiwyg.ru/learn_kotlin/BatlTank/resource/batl_all.mp4
 **Примерное расположение элементов на экране**
 
 ![Реши пример](./img/reschprimer.png)
+
+## 15 Android. Проверь решение
+[67cec58b5040133e8429f160](https://e-learn.petrocollege.ru/login/index.php#section-15)
 
 *****
 
