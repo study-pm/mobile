@@ -247,6 +247,7 @@
   - [Реши пример](#реши-пример)
 - [15 Android. Проверь решение](#15-android-проверь-решение)
   - [Проверь решение](#проверь-решение)
+- [16 Android. Отгадай загадку](#16-android-отгадай-загадку)
 - [19 01 Основы XML-разметки пользовательского интерфейса. FrameLayout, LinerLayout, GridLayout](#19-01-основы-xml-разметки-пользовательского-интерфейса-framelayout-linerlayout-gridlayout)
   - [ЛЕКЦИЯ - 01](#лекция---01)
     - [FrameLayout](#framelayout)
@@ -7054,6 +7055,9 @@ https://wywiwyg.ru/learn_kotlin/BatlTank/resource/batl_all.mp4
 Пример расположения элементов на макете
 
 ![Proverka](./img/proverka.png)
+
+## 16 Android. Отгадай загадку
+[67cec5a65040133e8429f161](https://e-learn.petrocollege.ru/course/view.php?id=7179#section-16)
 
 *****
 
