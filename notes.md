@@ -238,6 +238,8 @@
     - [Задание 1](#задание-1-2)
 - [12 Android. Танчики](#12-android-танчики)
   - [Реплика игры "Танчики"](#реплика-игры-танчики)
+  - [Игра "Танчики"](#игра-танчики)
+    - [Android. Танчики - 01. Первые движения. Картинка танка](#android-танчики---01-первые-движения-картинка-танка)
   - [Файлы ресурсов для игры (картинки, звуки)](#файлы-ресурсов-для-игры-картинки-звуки)
   - [Видео - 01](#видео---01)
   - [Видео - all](#видео---all)
@@ -6905,6 +6907,96 @@ Activity уничтожается в двух случаях:
 3. Количество запушенных коммитов должно быть, как минимум, равно количеству выполненных презентаций
 
 4. Ссылку на репозиторий прикрепить к заданию
+
+### Игра "Танчики"
+[68904feb63e4ad8e0adf42b5](https://e-learn.petrocollege.ru/mod/folder/view.php?id=345168)
+
+#### Android. Танчики - 01. Первые движения. Картинка танка
+[689050fd63e4ad8e0adf42b6](https://wywiwyg.ru/learn_kotlin/BatlTank/pptx_html_folder/lessonTank_01)
+
+https://wywiwyg.ru/learn_kotlin/BatlTank/pptx_html_folder/lessonTank_01/?page=1
+
+![Battle tank](./img/battle-tank-01_1.jpg)
+
+![Battle tank](./img/battle-tank-01_2.jpg)
+
+![Battle tank](./img/battle-tank-01_3.jpg)
+
+![Battle tank](./img/battle-tank-01_4.jpg)
+
+![Battle tank](./img/battle-tank-01_5.jpg)
+
+![Battle tank](./img/battle-tank-01_6.jpg)
+
+![Battle tank](./img/battle-tank-01_07.jpg)
+
+![Battle tank](./img/battle-tank-01_08.jpg)
+
+![Battle tank](./img/battle-tank-01_09.jpg)
+
+![Battle tank](./img/battle-tank-01_010.jpg)
+
+![Battle tank](./img/battle-tank-01_11.jpg)
+
+![Battle tank](./img/battle-tank-01_12.jpg)
+
+![Battle tank](./img/battle-tank-01_13.jpg)
+
+![Battle tank](./img/battle-tank-01_14.jpg)
+
+![Battle tank](./img/battle-tank-01_015.jpg)
+
+![Battle tank](./img/battle-tank-01_016.jpg)
+
+![Battle tank](./img/battle-tank-01_017.jpg)
+
+![Battle tank](./img/battle-tank-01_018.jpg)
+
+![Battle tank](./img/battle-tank-01_019.jpg)
+
+![Battle tank](./img/battle-tank-01_20.jpg)
+
+![Battle tank](./img/battle-tank-01_21a.jpg)
+
+![Battle tank](./img/battle-tank-01_21b.jpg)
+
+![Battle tank](./img/battle-tank-01_22.jpg)
+
+![Battle tank](./img/battle-tank-01_23a.jpg)
+
+![Battle tank](./img/battle-tank-01_23b.jpg)
+
+Android. Танчики - 02. Рисуем сетку уровня. Делаем границы
+Android. Танчики - 03. Добавляем материалы уровня
+Android. Танчики - 04. Рисуем материалы на карте
+Android. Танчики - 05. Взаимодействие с препятствиями
+Android. Танчики - 06. Взаимодействие танка с различными материалами
+Android. Танчики - 07. Делаем танку снаряды
+Android. Танчики - 08. Движение снарядов
+Android. Танчики - 09. Танк уничтожает кирпичи
+Android. Танчики - 10. Снаряды пролетают над травой и разбиваются о бетон
+Android. Танчики - 11. Делаем базу для танков
+Android. Танчики - 12. Сохранение созданного уровня
+Android. Танчики - 13. Исправляем баг с рисованием базы
+Android. Танчики - 14. Добавляем точки создания танков
+Android. Танчики - 15. Убираем респауны в режиме редактирования
+Android. Танчики - 16. Переделываем создание респаунов
+Android. Танчики - 17. Появление вражеских танков
+Android. Танчики - 18. Рефакторинг. Подготовка танков к движению
+Android. Танчики - 19. Учим вражеские танки двигаться
+Android. Танчики - 20. Размещение базы и танка игрока
+Android. Танчики - 21. Вражеские танки стреляют
+Android. Танчики - 22. Добавление неожиданных поворотов и выстрелов
+Android. Танчики - 23. Убираем многопоточность снарядов
+Android. Танчики - 24. Убираем снаряды при столкновении
+Android. Танчики - 25. Ставим игру на паузу
+Android. Танчики - 26. Добавляем звуки
+Android. Танчики - 27. Stop game при уничтожении танка игрока или базы
+Android. Танчики - 28. Изучаем SoundPool и основы инкапсуляции
+Android. Танчики - 29. Добавление экрана для подсчета очков
+Android. Танчики - 30. Добавляем звук при подсчете очков
+Android. Танчики - 31. Добавляем название уровня в начале игры
+Android. Танчики - 32. Запускаем уровень по кнопке Play
 
 ### Файлы ресурсов для игры (картинки, звуки)
 [688711db63e4ad8e0adf41f7](https://e-learn.petrocollege.ru/mod/url/view.php?id=345169)
