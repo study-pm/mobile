@@ -239,7 +239,8 @@
 - [12 Android. Танчики](#12-android-танчики)
   - [Реплика игры "Танчики"](#реплика-игры-танчики)
   - [Игра "Танчики"](#игра-танчики)
-    - [Android. Танчики - 01. Первые движения. Картинка танка](#android-танчики---01-первые-движения-картинка-танка)
+    - [01. Первые движения. Картинка танка](#01-первые-движения-картинка-танка)
+    - [02. Рисуем сетку уровня. Делаем границы](#02-рисуем-сетку-уровня-делаем-границы)
   - [Файлы ресурсов для игры (картинки, звуки)](#файлы-ресурсов-для-игры-картинки-звуки)
   - [Видео - 01](#видео---01)
   - [Видео - all](#видео---all)
@@ -6913,8 +6914,10 @@ Activity уничтожается в двух случаях:
 ### Игра "Танчики"
 [68904feb63e4ad8e0adf42b5](https://e-learn.petrocollege.ru/mod/folder/view.php?id=345168)
 
-#### Android. Танчики - 01. Первые движения. Картинка танка
+#### 01. Первые движения. Картинка танка
 [689050fd63e4ad8e0adf42b6](https://wywiwyg.ru/learn_kotlin/BatlTank/pptx_html_folder/lessonTank_01)
+
+Танки – создали движущийся танк
 
 https://wywiwyg.ru/learn_kotlin/BatlTank/pptx_html_folder/lessonTank_01/?page=1
 
@@ -6968,7 +6971,53 @@ https://wywiwyg.ru/learn_kotlin/BatlTank/pptx_html_folder/lessonTank_01/?page=1
 
 ![Battle tank](./img/battle-tank-01_23b.jpg)
 
-Android. Танчики - 02. Рисуем сетку уровня. Делаем границы
+#### 02. Рисуем сетку уровня. Делаем границы
+6891844163e4ad8e0adf42cb
+
+Танки – нарисовали сетку и ограничили движение танка в пределах игрового поля
+
+https://wywiwyg.ru/learn_kotlin/BatlTank/pptx_html_folder/lessonTank_02/?page=1
+
+![Battle tank](./img/battle-tank-02_1.jpg)
+
+![Battle tank](./img/battle-tank-02_2.jpg)
+
+![Battle tank](./img/battle-tank-02_3.jpg)
+
+![Battle tank](./img/battle-tank-02_4.jpg)
+
+![Battle tank](./img/battle-tank-02_5.jpg)
+
+![Battle tank](./img/battle-tank-02_6.jpg)
+
+![Battle tank](./img/battle-tank-02_7.jpg)
+
+![Battle tank](./img/battle-tank-02_8.jpg)
+
+![Battle tank](./img/battle-tank-02_9.jpg)
+
+![Battle tank](./img/battle-tank-02_10.jpg)
+
+![Battle tank](./img/battle-tank-02_11.jpg)
+
+![Battle tank](./img/battle-tank-02_12.jpg)
+
+![Battle tank](./img/battle-tank-02_13.jpg)
+
+![Battle tank](./img/battle-tank-02_14.jpg)
+
+![Battle tank](./img/battle-tank-02_15.jpg)
+
+![Battle tank](./img/battle-tank-02_16.jpg)
+
+![Battle tank](./img/battle-tank-02_17.jpg)
+
+![Battle tank](./img/battle-tank-02_18.jpg)
+
+![Battle tank](./img/battle-tank-02_19.jpg)
+
+![Battle tank](./img/battle-tank-02_20.jpg)
+
 Android. Танчики - 03. Добавляем материалы уровня
 Android. Танчики - 04. Рисуем материалы на карте
 Android. Танчики - 05. Взаимодействие с препятствиями
