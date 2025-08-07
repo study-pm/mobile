@@ -241,6 +241,7 @@
   - [Игра "Танчики"](#игра-танчики)
     - [01. Первые движения. Картинка танка](#01-первые-движения-картинка-танка)
     - [02. Рисуем сетку уровня. Делаем границы](#02-рисуем-сетку-уровня-делаем-границы)
+    - [03. Добавляем материалы уровня](#03-добавляем-материалы-уровня)
   - [Файлы ресурсов для игры (картинки, звуки)](#файлы-ресурсов-для-игры-картинки-звуки)
   - [Видео - 01](#видео---01)
   - [Видео - all](#видео---all)
@@ -7021,7 +7022,70 @@ https://wywiwyg.ru/learn_kotlin/BatlTank/pptx_html_folder/lessonTank_02/?page=1
 
 ![Battle tank](./img/battle-tank-02_20.jpg)
 
-Android. Танчики - 03. Добавляем материалы уровня
+#### 03. Добавляем материалы уровня
+[68918cd963e4ad8e0adf42cf](https://wywiwyg.ru/learn_kotlin/BatlTank/pptx_html_folder/lessonTank_03)
+
+Танки – убираем сетку, добавляем материалы
+
+![Battle tank](./img/battle-tank-03_1.jpg)
+
+![Battle tank](./img/battle-tank-03_2.jpg)
+
+![Battle tank](./img/battle-tank-03_3.jpg)
+
+![Battle tank](./img/battle-tank-03_4.jpg)
+
+![Battle tank](./img/battle-tank-03_5.jpg)
+
+![Battle tank](./img/battle-tank-03_6.jpg)
+
+![Battle tank](./img/battle-tank-03_7.jpg)
+
+![Battle tank](./img/battle-tank-03_8.jpg)
+
+![Battle tank](./img/battle-tank-03_9.jpg)
+
+![Battle tank](./img/battle-tank-03_10.jpg)
+
+![Battle tank](./img/battle-tank-03_11.jpg)
+
+![Battle tank](./img/battle-tank-03_12.jpg)
+
+![Battle tank](./img/battle-tank-03_13.jpg)
+
+![Battle tank](./img/battle-tank-03_14.jpg)
+
+![Battle tank](./img/battle-tank-03_15.jpg)
+
+![Battle tank](./img/battle-tank-03_16.jpg)
+
+![Battle tank](./img/battle-tank-03_17.jpg)
+
+![Battle tank](./img/battle-tank-03_18.jpg)
+
+![Battle tank](./img/battle-tank-03_19.jpg)
+
+![Battle tank](./img/battle-tank-03_20.jpg)
+
+![Battle tank](./img/battle-tank-03_21.jpg)
+
+![Battle tank](./img/battle-tank-03_22.jpg)
+
+Если мы теперь проверим, как работает наша программа, то увидим следующее:
+
+Когда вызываем инструменты для создания игрового поля, то они появляются на игровом поле. Это неудобно, так как мы не сможем нарисовать препятствия там, где находятся 
+инструменты.
+
+Перепишем наше `Activity` с использованием другого контейнера — `ConstraintLayout`.
+
+![Battle tank](./img/battle-tank-03_23.jpg)
+
+![Battle tank](./img/battle-tank-03_24.jpg)
+
+![Battle tank](./img/battle-tank-03_25.jpg)
+
+![Battle tank](./img/battle-tank-03_26.jpg)
+
 Android. Танчики - 04. Рисуем материалы на карте
 Android. Танчики - 05. Взаимодействие с препятствиями
 Android. Танчики - 06. Взаимодействие танка с различными материалами
