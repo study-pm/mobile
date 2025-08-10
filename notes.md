@@ -243,6 +243,7 @@
     - [02. Рисуем сетку уровня. Делаем границы](#02-рисуем-сетку-уровня-делаем-границы)
     - [03. Добавляем материалы уровня](#03-добавляем-материалы-уровня)
     - [04. Рисуем материалы на карте](#04-рисуем-материалы-на-карте)
+    - [Android. Танчики - 05. Взаимодействие с препятствиями](#android-танчики---05-взаимодействие-с-препятствиями)
   - [Файлы ресурсов для игры (картинки, звуки)](#файлы-ресурсов-для-игры-картинки-звуки)
   - [Видео - 01](#видео---01)
   - [Видео - all](#видео---all)
@@ -7131,7 +7132,37 @@ https://wywiwyg.ru/learn_kotlin/BatlTank/pptx_html_folder/lessonTank_02/?page=1
 
 ![Battle tank](./img/battle-tank-04_18.jpg)
 
-Android. Танчики - 05. Взаимодействие с препятствиями
+#### Android. Танчики - 05. Взаимодействие с препятствиями
+[6895895763e4ad8e0adf4319](https://wywiwyg.ru/learn_kotlin/BatlTank/pptx_html_folder/lessonTank_05/?page=1)
+
+Танки – взаимодействие с препятствиями
+
+![Battle tank](./img/battle-tank-05_1.jpg)
+
+![Battle tank](./img/battle-tank-05_2.jpg)
+
+![Battle tank](./img/battle-tank-05_3.jpg)
+
+![Battle tank](./img/battle-tank-05_4.jpg)
+
+![Battle tank](./img/battle-tank-05_5.jpg)
+
+![Battle tank](./img/battle-tank-05_6.jpg)
+
+![Battle tank](./img/battle-tank-05_7.jpg)
+
+![Battle tank](./img/battle-tank-05_8.jpg)
+
+![Battle tank](./img/battle-tank-05_9.jpg)
+
+![Battle tank](./img/battle-tank-05_10.jpg)
+
+![Battle tank](./img/battle-tank-05_11.jpg)
+
+![Battle tank](./img/battle-tank-05_12.jpg)
+
+![Battle tank](./img/battle-tank-05_13.jpg)
+
 Android. Танчики - 06. Взаимодействие танка с различными материалами
 Android. Танчики - 07. Делаем танку снаряды
 Android. Танчики - 08. Движение снарядов
