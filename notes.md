@@ -273,6 +273,7 @@
   - [Реплика на игру "Камень-Ножницы-Бумага" (пять событий)"](#реплика-на-игру-камень-ножницы-бумага-пять-событий)
   - [Экзамен - вечерники](#экзамен---вечерники)
 - [22 ПРАКТИКА по теме "Компоновщики LinearLayout и ConstraintLayout"](#22-практика-по-теме-компоновщики-linearlayout-и-constraintlayout)
+  - [Разметка для карточки](#разметка-для-карточки)
 
 ## Общее
 [66df5d7ed048d373527220f7](https://e-learn.petrocollege.ru/course/view.php?id=7179#section-0)
@@ -7632,3 +7633,10 @@ https://wywiwyg.ru/learn_kotlin/MAD/second_semester/lecture-02/?page=1
 
 ## 22 ПРАКТИКА по теме "Компоновщики LinearLayout и ConstraintLayout"
 [68957f9163e4ad8e0adf4317](https://e-learn.petrocollege.ru/course/view.php?id=7179#section-22)
+
+### Разметка для карточки
+[689863fa63e4ad8e0adf435d](https://e-learn.petrocollege.ru/mod/assign/view.php?id=345181)
+
+Используя известные вам компоновщики создать макет для одной из картинок максимально приближенный к оригиналу.
+
+![Card layouts](./img/card.png)
