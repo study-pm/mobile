@@ -272,6 +272,7 @@
 - [13 Android. Камень, ножницы, бумага (5 событий)](#13-android-камень-ножницы-бумага-5-событий)
   - [Реплика на игру "Камень-Ножницы-Бумага" (пять событий)"](#реплика-на-игру-камень-ножницы-бумага-пять-событий)
   - [Экзамен - вечерники](#экзамен---вечерники)
+- [22 ПРАКТИКА по теме "Компоновщики LinearLayout и ConstraintLayout"](#22-практика-по-теме-компоновщики-linearlayout-и-constraintlayout)
 
 ## Общее
 [66df5d7ed048d373527220f7](https://e-learn.petrocollege.ru/course/view.php?id=7179#section-0)
@@ -7628,3 +7629,6 @@ https://wywiwyg.ru/learn_kotlin/MAD/second_semester/lecture-02/?page=1
 
 ### Экзамен - вечерники
 [6883c22163e4ad8e0adf4192](https://e-learn.petrocollege.ru/mod/assign/view.php?id=345180)
+
+## 22 ПРАКТИКА по теме "Компоновщики LinearLayout и ConstraintLayout"
+[68957f9163e4ad8e0adf4317](https://e-learn.petrocollege.ru/course/view.php?id=7179#section-22)
