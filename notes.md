@@ -244,6 +244,7 @@
     - [03. Добавляем материалы уровня](#03-добавляем-материалы-уровня)
     - [04. Рисуем материалы на карте](#04-рисуем-материалы-на-карте)
     - [05. Взаимодействие с препятствиями](#05-взаимодействие-с-препятствиями)
+    - [06. Взаимодействие танка с различными материалами](#06-взаимодействие-танка-с-различными-материалами)
   - [Файлы ресурсов для игры (картинки, звуки)](#файлы-ресурсов-для-игры-картинки-звуки)
   - [Видео - 01](#видео---01)
   - [Видео - all](#видео---all)
@@ -7165,7 +7166,39 @@ https://wywiwyg.ru/learn_kotlin/BatlTank/pptx_html_folder/lessonTank_02/?page=1
 
 ![Battle tank](./img/battle-tank-05_13.jpg)
 
-Android. Танчики - 06. Взаимодействие танка с различными материалами
+#### 06. Взаимодействие танка с различными материалами
+[689871f963e4ad8e0adf4361](https://wywiwyg.ru/learn_kotlin/BatlTank/pptx_html_folder/lessonTank_06/?page=1)
+
+Танки – стираем материалы, оптимизируем память
+
+![Battle tank](./img/battle-tank-06_1.jpg)
+
+![Battle tank](./img/battle-tank-06_2.jpg)
+
+![Battle tank](./img/battle-tank-06_3.jpg)
+
+![Battle tank](./img/battle-tank-06_4.jpg)
+
+![Battle tank](./img/battle-tank-06_5.jpg)
+
+![Battle tank](./img/battle-tank-06_6.jpg)
+
+![Battle tank](./img/battle-tank-06_7.jpg)
+
+![Battle tank](./img/battle-tank-06_8.jpg)
+
+![Battle tank](./img/battle-tank-06_9.jpg)
+
+![Battle tank](./img/battle-tank-06_10.jpg)
+
+![Battle tank](./img/battle-tank-06_11.jpg)
+
+![Battle tank](./img/battle-tank-06_12.jpg)
+
+![Battle tank](./img/battle-tank-06_13.jpg)
+
+![Battle tank](./img/battle-tank-06_14.jpg)
+
 Android. Танчики - 07. Делаем танку снаряды
 Android. Танчики - 08. Движение снарядов
 Android. Танчики - 09. Танк уничтожает кирпичи
