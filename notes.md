@@ -276,6 +276,7 @@
 - [22 ПРАКТИКА по теме "Компоновщики LinearLayout и ConstraintLayout"](#22-практика-по-теме-компоновщики-linearlayout-и-constraintlayout)
   - [Разметка для карточки](#разметка-для-карточки)
 - [23 03 Базовые UI-компоненты](#23-03-базовые-ui-компоненты)
+  - [ЛЕКЦИЯ - 03](#лекция---03)
 
 ## Общее
 [66df5d7ed048d373527220f7](https://e-learn.petrocollege.ru/course/view.php?id=7179#section-0)
@@ -7675,3 +7676,118 @@ https://wywiwyg.ru/learn_kotlin/MAD/second_semester/lecture-02/?page=1
 
 ## 23 03 Базовые UI-компоненты
 [689864e863e4ad8e0adf435f](https://e-learn.petrocollege.ru/course/view.php?id=7179#section-23)
+
+### ЛЕКЦИЯ - 03
+[6899d8bf63e4ad8e0adf4366](https://e-learn.petrocollege.ru/mod/url/view.php?id=345182)
+
+https://wywiwyg.ru/learn_kotlin/MAD/second_semester/lecture-03/?page=1
+
+![Basic UI Components](./img/basic_ui_components_01.jpg)
+
+![Basic UI Components](./img/basic_ui_components_02.jpg)
+
+![Basic UI Components](./img/basic_ui_components_03.jpg)
+
+![Basic UI Components](./img/basic_ui_components_04.jpg)
+
+![Basic UI Components](./img/basic_ui_components_05.jpg)
+
+![Basic UI Components](./img/basic_ui_components_06.jpg)
+
+![Basic UI Components](./img/basic_ui_components_07.jpg)
+
+![Basic UI Components](./img/basic_ui_components_08.jpg)
+
+![Basic UI Components](./img/basic_ui_components_09.jpg)
+
+![Basic UI Components](./img/basic_ui_components_10.jpg)
+
+![Basic UI Components](./img/basic_ui_components_11.jpg)
+
+![Basic UI Components](./img/basic_ui_components_12.jpg)
+
+![Basic UI Components](./img/basic_ui_components_13.jpg)
+
+![Basic UI Components](./img/basic_ui_components_14.jpg)
+
+![Basic UI Components](./img/basic_ui_components_15.jpg)
+
+![Basic UI Components](./img/basic_ui_components_16.jpg)
+
+![Basic UI Components](./img/basic_ui_components_17.jpg)
+
+![Basic UI Components](./img/basic_ui_components_18.jpg)
+
+![Basic UI Components](./img/basic_ui_components_19.jpg)
+
+![Basic UI Components](./img/basic_ui_components_20.jpg)
+
+![Basic UI Components](./img/basic_ui_components_21.jpg)
+
+![Basic UI Components](./img/basic_ui_components_22.jpg)
+
+![Basic UI Components](./img/basic_ui_components_23.jpg)
+
+![Basic UI Components](./img/basic_ui_components_24.jpg)
+
+![Basic UI Components](./img/basic_ui_components_25.jpg)
+
+![Basic UI Components](./img/basic_ui_components_26.jpg)
+
+![Basic UI Components](./img/basic_ui_components_27.jpg)
+
+![Basic UI Components](./img/basic_ui_components_28.jpg)
+
+![Basic UI Components](./img/basic_ui_components_29.jpg)
+
+![Basic UI Components](./img/basic_ui_components_30.jpg)
+
+![Basic UI Components](./img/basic_ui_components_31.jpg)
+
+![Basic UI Components](./img/basic_ui_components_32.jpg)
+
+![Basic UI Components](./img/basic_ui_components_33.jpg)
+
+![Basic UI Components](./img/basic_ui_components_34.jpg)
+
+![Basic UI Components](./img/basic_ui_components_35.jpg)
+
+![Basic UI Components](./img/basic_ui_components_36.jpg)
+
+![Basic UI Components](./img/basic_ui_components_37.jpg)
+
+![Basic UI Components](./img/basic_ui_components_38.jpg)
+
+![Basic UI Components](./img/basic_ui_components_39.jpg)
+
+![Basic UI Components](./img/basic_ui_components_40.jpg)
+
+![Basic UI Components](./img/basic_ui_components_41.jpg)
+
+![Basic UI Components](./img/basic_ui_components_42.jpg)
+
+![Basic UI Components](./img/basic_ui_components_43.jpg)
+
+![Basic UI Components](./img/basic_ui_components_44.jpg)
+
+![Basic UI Components](./img/basic_ui_components_45.jpg)
+
+![Basic UI Components](./img/basic_ui_components_46.jpg)
+
+![Basic UI Components](./img/basic_ui_components_47.jpg)
+
+![Basic UI Components](./img/basic_ui_components_48.jpg)
+
+![Basic UI Components](./img/basic_ui_components_49.jpg)
+
+![Basic UI Components](./img/basic_ui_components_50.jpg)
+
+![Basic UI Components](./img/basic_ui_components_51.jpg)
+
+![Basic UI Components](./img/basic_ui_components_52.jpg)
+
+![Basic UI Components](./img/basic_ui_components_53.jpg)
+
+![Basic UI Components](./img/basic_ui_components_54.jpg)
+
+![Basic UI Components](./img/basic_ui_components_55.jpg)
