@@ -275,6 +275,7 @@
   - [Экзамен - вечерники](#экзамен---вечерники)
 - [22 ПРАКТИКА по теме "Компоновщики LinearLayout и ConstraintLayout"](#22-практика-по-теме-компоновщики-linearlayout-и-constraintlayout)
   - [Разметка для карточки](#разметка-для-карточки)
+- [23 03 Базовые UI-компоненты](#23-03-базовые-ui-компоненты)
 
 ## Общее
 [66df5d7ed048d373527220f7](https://e-learn.petrocollege.ru/course/view.php?id=7179#section-0)
@@ -7671,3 +7672,6 @@ https://wywiwyg.ru/learn_kotlin/MAD/second_semester/lecture-02/?page=1
 Используя известные вам компоновщики создать макет для одной из картинок максимально приближенный к оригиналу.
 
 ![Card layouts](./img/card.png)
+
+## 23 03 Базовые UI-компоненты
+[689864e863e4ad8e0adf435f](https://e-learn.petrocollege.ru/course/view.php?id=7179#section-23)
