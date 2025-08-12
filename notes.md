@@ -245,6 +245,7 @@
     - [04. Рисуем материалы на карте](#04-рисуем-материалы-на-карте)
     - [05. Взаимодействие с препятствиями](#05-взаимодействие-с-препятствиями)
     - [06. Взаимодействие танка с различными материалами](#06-взаимодействие-танка-с-различными-материалами)
+    - [07. Делаем танку снаряды](#07-делаем-танку-снаряды)
   - [Файлы ресурсов для игры (картинки, звуки)](#файлы-ресурсов-для-игры-картинки-звуки)
   - [Видео - 01](#видео---01)
   - [Видео - all](#видео---all)
@@ -7201,7 +7202,71 @@ https://wywiwyg.ru/learn_kotlin/BatlTank/pptx_html_folder/lessonTank_02/?page=1
 
 ![Battle tank](./img/battle-tank-06_14.jpg)
 
-Android. Танчики - 07. Делаем танку снаряды
+#### 07. Делаем танку снаряды
+[689a24f463e4ad8e0adf4372](https://wywiwyg.ru/learn_kotlin/BatlTank/pptx_html_folder/lessonTank_07/?page=1)
+
+Танки – делаем танку снаряды
+
+![Battle tank](./img/battle-tank-07_1.jpg)
+
+![Battle tank](./img/battle-tank-07_2.jpg)
+
+![Battle tank](./img/battle-tank-07_3.jpg)
+
+![Battle tank](./img/battle-tank-07_4.jpg)
+
+![Battle tank](./img/battle-tank-07_5.jpg)
+
+![Battle tank](./img/battle-tank-07_6.jpg)
+
+![Battle tank](./img/battle-tank-07_7.jpg)
+
+![Battle tank](./img/battle-tank-07_8.jpg)
+
+![Battle tank](./img/battle-tank-07_9.jpg)
+
+![Battle tank](./img/battle-tank-07_10.jpg)
+
+![Battle tank](./img/battle-tank-07_11.jpg)
+
+![Battle tank](./img/battle-tank-07_12.jpg)
+
+![Battle tank](./img/battle-tank-07_13.jpg)
+
+![Battle tank](./img/battle-tank-07_14.jpg)
+
+![Battle tank](./img/battle-tank-07_15.jpg)
+
+![Battle tank](./img/battle-tank-07_16.jpg)
+
+![Battle tank](./img/battle-tank-07_17.jpg)
+
+![Battle tank](./img/battle-tank-07_18.jpg)
+
+![Battle tank](./img/battle-tank-07_19.jpg)
+
+![Battle tank](./img/battle-tank-07_20.jpg)
+
+![Battle tank](./img/battle-tank-07_21.jpg)
+
+![Battle tank](./img/battle-tank-07_22.jpg)
+
+![Battle tank](./img/battle-tank-07_23.jpg)
+
+![Battle tank](./img/battle-tank-07_24.jpg)
+
+![Battle tank](./img/battle-tank-07_25.jpg)
+
+![Battle tank](./img/battle-tank-07_26.jpg)
+
+![Battle tank](./img/battle-tank-07_27.jpg)
+
+![Battle tank](./img/battle-tank-07_28.jpg)
+
+![Battle tank](./img/battle-tank-07_29.jpg)
+
+![Battle tank](./img/battle-tank-07_30.jpg)
+
 Android. Танчики - 08. Движение снарядов
 Android. Танчики - 09. Танк уничтожает кирпичи
 Android. Танчики - 10. Снаряды пролетают над травой и разбиваются о бетон
