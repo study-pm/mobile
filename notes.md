@@ -279,6 +279,7 @@
 - [23 03 Базовые UI-компоненты](#23-03-базовые-ui-компоненты)
   - [ЛЕКЦИЯ - 03](#лекция---03)
 - [24 ПРАКТИКА по теме "Базовые UI-компоненты"](#24-практика-по-теме-базовые-ui-компоненты)
+  - [Разметка для финансов](#разметка-для-финансов)
 
 ## Общее
 [66df5d7ed048d373527220f7](https://e-learn.petrocollege.ru/course/view.php?id=7179#section-0)
@@ -7828,3 +7829,10 @@ https://wywiwyg.ru/learn_kotlin/MAD/second_semester/lecture-03/?page=1
 
 ## 24 ПРАКТИКА по теме "Базовые UI-компоненты"
 [6899e6ce63e4ad8e0adf4369](https://e-learn.petrocollege.ru/course/view.php?id=7179#section-24)
+
+### Разметка для финансов
+[689afc4a63e4ad8e0adf438b](https://e-learn.petrocollege.ru/mod/assign/view.php?id=345183)
+
+Используя известные вам компоновщики и базовые компоненты создать один из макетов максимально приближенный к картинке
+
+![Bank layout](./img/bank.png)
