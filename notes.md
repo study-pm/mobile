@@ -290,6 +290,7 @@
     - [`onPause()`](#onpause-2)
     - [`onStop()`](#onstop-1)
     - [`onDestroy()`](#ondestroy-1)
+  - [The Android Lifecycle cheat sheet](#the-android-lifecycle-cheat-sheet)
 
 ## Общее
 [66df5d7ed048d373527220f7](https://e-learn.petrocollege.ru/course/view.php?id=7179#section-0)
@@ -8113,3 +8114,28 @@ https://wywiwyg.ru/learn_kotlin/MAD/second_semester/lecture-04/?page=1
 Если активность прекращает работу, то `onDestroy()` — это последний коллбэк жизненного цикла активности. Если `onDestroy()` вызывается в результате изменения конфигурации, система немедленно создаёт новый экземпляр активности и затем вызывает `onCreate()` в новом экземпляре.
 
 Метод `onDestroy()` освобождает все ресурсы, которые ещё не были освобождены в методах ранее, такими как **`onStop()`**.
+
+### The Android Lifecycle cheat sheet
+[689cb8c763e4ad8e0adf43b9](https://e-learn.petrocollege.ru/mod/url/view.php?id=345185)
+
+Android is designed to empower users and let them use apps in a intuitive way. For example, users of an app might rotate the screen, respond to a notification, or switch to another task, and they should be able to continue using the app seamlessly after such an event.
+
+To provide this user experience, you should know how to manage component lifecycles. A component can be an Activity, a Fragment, a Service, the Application itself and even the underlying process. The component has a lifecycle, during which it transitions through states. Whenever a transition happens, the system notifies you via a lifecycle callback method.
+
+To help us explain how lifecycles work, we’ve defined a series of scenarios which are grouped according to the components that are present:
+
+[Part I: Activities — single activity lifecycle](https://medium.com/androiddevelopers/the-android-lifecycle-cheat-sheet-part-i-single-activities-e49fd3d202ab)
+
+[Part II: Multiple activities — navigation and back stack](https://medium.com/@JoseAlcerreca/the-android-lifecycle-cheat-sheet-part-ii-multiple-activities-a411fd139f24)
+
+[Part III: Fragments — activity and fragment lifecycle](https://medium.com/@JoseAlcerreca/the-android-lifecycle-cheat-sheet-part-iii-fragments-afc87d4f37fd)
+
+[Part IV: ViewModels, Translucent Activities and Launch Modes](https://medium.com/androiddevelopers/the-android-lifecycle-cheat-sheet-part-iv-49946659b094)
+
+The diagrams are also available as a [cheat sheet in PDF format](https://github.com/JoseAlcerreca/android-lifecycles) for quick reference.
+
+> Note: these diagrams apply to **Android P** / **Jetpack 1.0** behavior.
+
+The following scenarios showcase the default behavior of the components, unless otherwise noted.
+
+*If you find errors or you think something important is missing, report it in the comments.*
