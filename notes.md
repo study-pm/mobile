@@ -291,6 +291,11 @@
     - [`onStop()`](#onstop-1)
     - [`onDestroy()`](#ondestroy-1)
   - [The Android Lifecycle cheat sheet](#the-android-lifecycle-cheat-sheet)
+    - [Part I: Activities — single activity lifecycle](#part-i-activities--single-activity-lifecycle)
+      - [Single Activity — Scenario 1: App is finished and restarted](#single-activity--scenario-1-app-is-finished-and-restarted)
+      - [Single Activity — Scenario 2: User navigates away](#single-activity--scenario-2-user-navigates-away)
+      - [Single Activity — Scenario 3: Configuration changes](#single-activity--scenario-3-configuration-changes)
+      - [Single Activity — Scenario 4: App is paused by the system](#single-activity--scenario-4-app-is-paused-by-the-system)
 
 ## Общее
 [66df5d7ed048d373527220f7](https://e-learn.petrocollege.ru/course/view.php?id=7179#section-0)
@@ -8139,3 +8144,74 @@ The diagrams are also available as a [cheat sheet in PDF format](https://github.
 The following scenarios showcase the default behavior of the components, unless otherwise noted.
 
 *If you find errors or you think something important is missing, report it in the comments.*
+
+#### Part I: Activities — single activity lifecycle
+[689df33a63e4ad8e0adf43cf](https://medium.com/androiddevelopers/the-android-lifecycle-cheat-sheet-part-i-single-activities-e49fd3d202ab)
+
+##### Single Activity — Scenario 1: App is finished and restarted
+Triggered by:
+
+- The user presses the **Back button**, or
+- The `Activity.finish()` method is called
+
+The simplest scenario shows what happens when a single-activity application is started, finished and restarted by the user:
+
+![Scenario 1: App is finished and restarted](./img/1_U_j3OP74jrPFoNvO2i7XzQ.webp)
+
+*Scenario 1: App is finished and restarted*
+
+**Managing state**
+
+- [`onSaveInstanceState`](https://developer.android.com/reference/android/app/Activity.html#onSaveInstanceState(android.os.Bundle)) is not called (since the activity is finished, you don’t need to save state)
+- [`onCreate`](https://developer.android.com/reference/android/app/Activity.html#onCreate(android.os.Bundle)) doesn’t have a Bundle when the app is reopened, because the activity was finished and the state doesn’t need to be restored.
+
+##### Single Activity — Scenario 2: User navigates away
+Triggered by:
+
+- The user presses the **Home button**
+- The user switches to another app (via Overview menu, from a notification, accepting a call, etc.)
+
+![Scenario 2: User navigates away](./img/1_3qxYnT2vRwrQVORi9mfUhw.webp)
+
+*Scenario 2: User navigates away*
+
+==In this scenario the system will _stop_ the activity, but won’t immediately finish it.==
+
+**Managing state**
+
+When your activity enters the Stopped state, the **system uses onSaveInstanceState to save the app state in case the system kills the app’s process later on** (see below).
+
+Assuming the process isn’t killed, the activity instance is kept resident in memory, retaining all state. When the activity comes back to the foreground, the activity recalls this information. You don’t need to re-initialize components that were created earlier.
+
+##### Single Activity — Scenario 3: Configuration changes
+Triggered by:
+
+- Configuration changes, like a **rotation**
+- User resizes the window in multi-window mode
+
+![Scenario 3: Rotation and other configuration changes](./img/1_DCo7awxJ3KhnW88h365vhA.webp)
+
+*Scenario 3: Rotation and other configuration changes*
+
+**Managing state**
+
+Configuration changes like rotation or a window resize should let users continue exactly where they left off.
+
+- ==The activity is completely destroyed, but **the state is saved and restored for the new instance**.==
+- The Bundle in `onCreate` and `onRestoreInstanceState` is the same.
+
+##### Single Activity — Scenario 4: App is paused by the system
+Triggered by:
+
+- Enabling Multi-window mode (API 24+) and losing the focus
+- Another app partially covers the running app (a purchase dialog, a runtime permission dialog, a third-party login dialog…)
+- An intent chooser appears, such as a share dialog
+
+![Scenario 4: App is paused by the system](./img/1_j3blnCW082yMbQe5fkjMMg.webp)
+
+*Scenario 4: App is paused by the system*
+
+This scenario *doesn’t* apply to:
+
+- Dialogs in the same app. Showing an `AlertDialog` or a `DialogFragment` won’t pause the underlying activity.
+- Notifications. User receiving a new notification or pulling down the notification bar won’t pause the underlying activity.
