@@ -247,6 +247,7 @@
     - [06. Взаимодействие танка с различными материалами](#06-взаимодействие-танка-с-различными-материалами)
     - [07. Делаем танку снаряды](#07-делаем-танку-снаряды)
     - [08. Движение снарядов](#08-движение-снарядов)
+    - [09. Танк уничтожает кирпичи](#09-танк-уничтожает-кирпичи)
   - [Файлы ресурсов для игры (картинки, звуки)](#файлы-ресурсов-для-игры-картинки-звуки)
   - [Видео - 01](#видео---01)
   - [Видео - all](#видео---all)
@@ -7315,7 +7316,51 @@ https://wywiwyg.ru/learn_kotlin/BatlTank/pptx_html_folder/lessonTank_02/?page=1
 
 ![Battle tank](./img/battle-tank-08_9.jpg)
 
-Android. Танчики - 09. Танк уничтожает кирпичи
+#### 09. Танк уничтожает кирпичи
+[68a34f4763e4ad8e0adf43e2](https://wywiwyg.ru/learn_kotlin/BatlTank/pptx_html_folder/lessonTank_09)
+
+Танки – уничтожаем кирпичи
+
+![Battle tank](./img/battle-tank-09_1.jpg)
+
+![Battle tank](./img/battle-tank-09_2.jpg)
+
+![Battle tank](./img/battle-tank-09_3.jpg)
+
+![Battle tank](./img/battle-tank-09_4.jpg)
+
+![Battle tank](./img/battle-tank-09_5.jpg)
+
+![Battle tank](./img/battle-tank-09_6.jpg)
+
+![Battle tank](./img/battle-tank-09_7.jpg)
+
+![Battle tank](./img/battle-tank-09_8.jpg)
+
+![Battle tank](./img/battle-tank-09_9.jpg)
+
+![Battle tank](./img/battle-tank-09_10.jpg)
+
+![Battle tank](./img/battle-tank-09_11.jpg)
+
+![Battle tank](./img/battle-tank-09_12.jpg)
+
+![Battle tank](./img/battle-tank-09_13.jpg)
+
+![Battle tank](./img/battle-tank-09_14.jpg)
+
+![Battle tank](./img/battle-tank-09_15.jpg)
+
+![Battle tank](./img/battle-tank-09_16.jpg)
+
+![Battle tank](./img/battle-tank-09_17.jpg)
+
+![Battle tank](./img/battle-tank-09_18.jpg)
+
+![Battle tank](./img/battle-tank-09_19.jpg)
+
+![Battle tank](./img/battle-tank-09_20.jpg)
+
 Android. Танчики - 10. Снаряды пролетают над травой и разбиваются о бетон
 Android. Танчики - 11. Делаем базу для танков
 Android. Танчики - 12. Сохранение созданного уровня
