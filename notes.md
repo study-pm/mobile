@@ -296,6 +296,11 @@
       - [Single Activity — Scenario 2: User navigates away](#single-activity--scenario-2-user-navigates-away)
       - [Single Activity — Scenario 3: Configuration changes](#single-activity--scenario-3-configuration-changes)
       - [Single Activity — Scenario 4: App is paused by the system](#single-activity--scenario-4-app-is-paused-by-the-system)
+    - [Part II: Multiple activities](#part-ii-multiple-activities)
+      - [Back Stack — Scenario 1: Navigating between activities](#back-stack--scenario-1-navigating-between-activities)
+      - [Back Stack — Scenario 2: Activities in the back stack with configuration changes](#back-stack--scenario-2-activities-in-the-back-stack-with-configuration-changes)
+      - [Back Stack — Scenario 3: App’s process is killed](#back-stack--scenario-3-apps-process-is-killed)
+      - [Read also](#read-also)
 
 ## Общее
 [66df5d7ed048d373527220f7](https://e-learn.petrocollege.ru/course/view.php?id=7179#section-0)
@@ -8215,3 +8220,53 @@ This scenario *doesn’t* apply to:
 
 - Dialogs in the same app. Showing an `AlertDialog` or a `DialogFragment` won’t pause the underlying activity.
 - Notifications. User receiving a new notification or pulling down the notification bar won’t pause the underlying activity.
+
+#### Part II: Multiple activities
+[68a2fd6a63e4ad8e0adf43d5](https://medium.com/@JoseAlcerreca/the-android-lifecycle-cheat-sheet-part-ii-multiple-activities-a411fd139f24)
+
+> *Note that, when showing lifecycles for multiple components (activities, fragments, etc) in a diagram, grouped events that appear side by side run in parallel. The execution focus can switch from one parallel group of events to another at any time, so **the order of calls among parallel groups of events is not guaranteed**. However, order inside a group is guaranteed.*
+>
+> *The following scenarios don’t apply to activities and tasks that have a custom launch mode or task affinity defined. For more information, see [Tasks And Back Stack](https://developer.android.com/guide/components/activities/tasks-and-back-stack.html) on the Android developer website.*
+
+##### Back Stack — Scenario 1: Navigating between activities
+
+![Scenario 1: Navigating between activities](./img/1_Bt1fQmVtZc0ExHUlzhJO6Q.webp)
+
+*Scenario 1: Navigating between activities*
+
+In this scenario, when a new activity is started, activity 1 is [STOPPED](https://developer.android.com/guide/components/activities/activity-lifecycle.html#onstop) (but not destroyed), similar to a user navigating away (as if “Home” was pressed).
+
+When the Back button is pressed, activity 2 is destroyed and finished.
+
+**Managing state**
+
+Note that [`onSaveInstanceState`](https://developer.android.com/reference/android/app/Activity.html#onSaveInstanceState(android.os.Bundle)) is called, [but [`onRestoreInstanceState`](https://developer.android.com/reference/android/app/Activity.html#onRestoreInstanceState(android.os.Bundle,%20android.os.PersistableBundle)) is not](https://developer.android.com/reference/android/app/Activity.html#onRestoreInstanceState(android.os.Bundle,%20android.os.PersistableBundle)). ==If there is a configuration change when the second activity is active, the first activity will be destroyed and recreated only when it’s back in focus. That’s why saving an instance of the state is important.==
+
+If the system kills the app process to save resources, this is another scenario in which the state needs to be restored.
+
+##### Back Stack — Scenario 2: Activities in the back stack with configuration changes
+
+![Scenario 2: Activities in the back stack with configuration changes](./img/1_TaoqKwKSPur_2S__OzhdoQ.webp)
+
+*Scenario 2: Activities in the back stack with configuration changes*
+
+**Managing state**
+
+Saving state is not only important for the activity in the foreground. **All activities in the stack need to restore state after a configuration change** to recreate their UI.
+
+Also, the system can kill your app’s process at almost any time so you should be prepared to restore state in any situation.
+
+##### Back Stack — Scenario 3: App’s process is killed
+When the Android operating system needs resources, it kills apps in the background.
+
+![Scenario 3: App’s process is killed](./img/1_Au5PqGADz31UCfANL3ZRug.webp)
+
+*Scenario 3: App’s process is killed*
+
+**Managing state**
+
+Note that the state of the full back stack is saved but, in order to efficiently use resources, activities are only restored when they are recreated.
+
+##### Read also
+
+- [Who lives and who dies? Process priorities on Android](https://medium.com/google-developers/who-lives-and-who-dies-process-priorities-on-android-cb151f39044f)
