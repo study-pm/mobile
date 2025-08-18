@@ -301,6 +301,10 @@
       - [Back Stack — Scenario 2: Activities in the back stack with configuration changes](#back-stack--scenario-2-activities-in-the-back-stack-with-configuration-changes)
       - [Back Stack — Scenario 3: App’s process is killed](#back-stack--scenario-3-apps-process-is-killed)
       - [Read also](#read-also)
+    - [Part III: Fragments](#part-iii-fragments)
+      - [Scenario 1: Activity with Fragment starts and finishes](#scenario-1-activity-with-fragment-starts-and-finishes)
+      - [Scenario 2: Activity with Fragment is rotated](#scenario-2-activity-with-fragment-is-rotated)
+      - [Fragments — Scenario 3: Activity with retained Fragment is rotated](#fragments--scenario-3-activity-with-retained-fragment-is-rotated)
 
 ## Общее
 [66df5d7ed048d373527220f7](https://e-learn.petrocollege.ru/course/view.php?id=7179#section-0)
@@ -8270,3 +8274,40 @@ Note that the state of the full back stack is saved but, in order to efficiently
 ##### Read also
 
 - [Who lives and who dies? Process priorities on Android](https://medium.com/google-developers/who-lives-and-who-dies-process-priorities-on-android-cb151f39044f)
+
+#### Part III: Fragments
+[68a3014d63e4ad8e0adf43d7](https://medium.com/@JoseAlcerreca/the-android-lifecycle-cheat-sheet-part-iii-fragments-afc87d4f37fd)
+
+In this section we’ll cover the behavior of a fragment that is attached to an activity. Don’t confuse this scenario with that of a fragment added to the back stack (see [Tasks and Back Stack](https://medium.com/google-developers/tasks-and-the-back-stack-dbb7c3b0f6d4) for more information on fragment transactions and the back stack).
+
+##### Scenario 1: Activity with Fragment starts and finishes
+
+![Scenario 1: Activity with Fragment starts and finishes](./img/1_ALMDBkuAAZ28BJ2abmvniA.webp)
+
+*Scenario 1: Activity with Fragment starts and finishes*
+
+==Note that it’s guaranteed that the Activity’s `onCreate` is executed before the Fragment’s==. However, callbacks shown side by side — such as `onStart` and `onResume` — are executed in parallel and can therefore be called in either order. For example, the system might execute the Activity’s `onStart` method before the Fragment’s `onStart` method, but then execute the *Fragment’s* `onResume` method before the Activity’s `onResume` method.
+
+*Be careful to manage the timing of the respective execution sequences so that you avoid race conditions.*
+
+##### Scenario 2: Activity with Fragment is rotated
+
+![Scenario 2: Activity with Fragment is rotated](./img/1_ukapaC23cOJSPUeZ0bUdCA.webp)
+
+*Scenario 2: Activity with Fragment is rotated*
+
+**State management**
+
+Fragment state is saved and restored in very similar fashion to activity state. ==The difference is that there’s no `onRestoreInstanceState` in fragments, but the Bundle is available in the fragment’s `onCreate`, `onCreateView` and `onActivityCreated`.==
+
+Fragments can be retained, which means that the same instance is used on configuration change. As the next scenario shows, this changes the diagram slightly.
+
+##### Fragments — Scenario 3: Activity with retained Fragment is rotated
+
+![Scenario 3: Activity with retained Fragment is rotated](./img/1_hK_YRdty1GoafABfug-r4g.webp)
+
+*Scenario 3: Activity with retained Fragment is rotated*
+
+The fragment is not destroyed nor created after the rotation because the same fragment instance is used after the activity is recreated. The state bundle is still available in `onActivityCreated`.
+
+==Using retained fragments is not recommended unless they are used to store data across configuration changes (in a non-UI fragment).== This is what the [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel.html) class from the Architecture Components library uses internally, but with a simpler API.
