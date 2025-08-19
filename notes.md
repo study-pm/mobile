@@ -309,6 +309,10 @@
       - [Scenario 1: Activity with Fragment starts and finishes](#scenario-1-activity-with-fragment-starts-and-finishes)
       - [Scenario 2: Activity with Fragment is rotated](#scenario-2-activity-with-fragment-is-rotated)
       - [Fragments — Scenario 3: Activity with retained Fragment is rotated](#fragments--scenario-3-activity-with-retained-fragment-is-rotated)
+    - [Part IV: ViewModels, Translucent Activities and Launch Modes](#part-iv-viewmodels-translucent-activities-and-launch-modes)
+      - [ViewModels](#viewmodels)
+      - [Translucent Activities](#translucent-activities)
+      - [Launch Modes](#launch-modes)
 
 ## Общее
 [66df5d7ed048d373527220f7](https://e-learn.petrocollege.ru/course/view.php?id=7179#section-0)
@@ -8419,3 +8423,57 @@ Fragments can be retained, which means that the same instance is used on configu
 The fragment is not destroyed nor created after the rotation because the same fragment instance is used after the activity is recreated. The state bundle is still available in `onActivityCreated`.
 
 ==Using retained fragments is not recommended unless they are used to store data across configuration changes (in a non-UI fragment).== This is what the [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel.html) class from the Architecture Components library uses internally, but with a simpler API.
+
+#### Part IV: ViewModels, Translucent Activities and Launch Modes
+[68a318a963e4ad8e0adf43da](https://medium.com/androiddevelopers/the-android-lifecycle-cheat-sheet-part-iv-49946659b094)
+
+##### ViewModels
+The lifecycle of `ViewModels` is quite simple: they have only one callback: `onCleared`. However, there’s a difference between scoping to an activity or to a fragment:
+
+![ViewModel scoping](./img/1_InXHWv6E6bLpOAXbTRZ9Zg.webp)
+
+*ViewModel scoping*
+
+Note that the initialization happens whenever you obtain the `ViewModel`, which is normally done in `onCreate`.
+
+⬇️ [Download ViewModels diagram](https://github.com/JoseAlcerreca/android-lifecycles/blob/a5dfd030a70989ad2496965f182e5fa296e6221a/cheatsheetviewmodelsvg.pdf)
+
+##### Translucent Activities
+Translucent activities have translucent (usually transparent) backgrounds so the user can still see what’s underneath.
+
+==When the property `android:windowIsTranslucent` is applied to an activity’s theme, the diagram changes slightly: the background activity is never stopped, only paused, so it can continue receiving UI updates:==
+
+![Comparison between regular and translucent activities](./img/1_e53GrDAmNgD9WbiI8lgIFw.webp)
+
+*Comparison between regular and translucent activities*
+
+Also, when coming back to a task, both activities are restored and started, and only the translucent is resumed:
+
+![Pressing home and coming back to an app with a translucent activity](./img/1_zXVUFwBl5tfBlGxhaUfHQw.webp)
+
+*Pressing home and coming back to an app with a translucent activity*
+
+⬇️ [Download Translucent activities diagram](https://github.com/JoseAlcerreca/android-lifecycles/blob/a5dfd030a70989ad2496965f182e5fa296e6221a/cheatsheettranslucent.pdf)
+
+##### Launch Modes
+The recommended way to deal with tasks and the back stack is, basically: ***don’t*** — you should adopt the default behavior. For more details, read Ian Lake’s post about this topic: [Tasks and Back Stack](https://medium.com/androiddevelopers/tasks-and-the-back-stack-dbb7c3b0f6d4).
+
+If you *really need to use* [`SINGLE_TOP`](https://developer.android.com/guide/topics/manifest/activity-element#lmode), here’s its diagram:
+
+![Single Top behavior](./img/1_y4f7Txiv_bqjm5PfrGtSWg.webp)
+
+*Single Top behavior*
+
+For the sake of comparison, here’s what [`singleTask`](https://developer.android.com/guide/topics/manifest/activity-element#lmode) would look like (but you probably shouldn’t use it):
+
+![Single Task](./img/1_IOhNkOHU5SOglqpS-FEdEw.webp)
+
+*Single Task*
+
+Note: If you use Jetpack’s [Navigation Architecture Component](https://developer.android.com/topic/libraries/architecture/navigation/), you will benefit from Single Top support and automatic synthetic back stack.
+
+⬇️ [Download launch modes diagram](https://github.com/JoseAlcerreca/android-lifecycles/blob/a5dfd030a70989ad2496965f182e5fa296e6221a/cheatsheetmodes.pdf)
+
+Here's the diagram that shows how Activities, Fragments and FragmentManager are connected to each other:
+
+![Activities, Fragments and FragmentManager](./img/lUtGxVO.png)
